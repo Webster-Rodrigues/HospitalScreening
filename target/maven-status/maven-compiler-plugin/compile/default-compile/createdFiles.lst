@@ -1,0 +1,4 @@
+Entities\enums\Status.class
+Entities\Paciente.class
+DataEntities\Queue.class
+DataEntities\Stack.class
