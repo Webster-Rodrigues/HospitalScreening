@@ -27,7 +27,7 @@ public class Stack {
         return this.array[this.top--];
     }
     
-    public int peak(){
+    public int peek(){
         if(this.top == -1){
             throw new IllegalStateException("Não foi possível mostrar item! Pilha vazia");
         }
