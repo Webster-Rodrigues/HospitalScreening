@@ -1,63 +1,64 @@
 
 package Entities;
-import DataEntities.Queues;
+import DataEntities.StackArryList;
+import DataEntities.Symptoms;
 import Entities.enums.Status;
 
 
 public class Patient {
-    private String nome;
-    private String sexo;
-    private int idade;
-    private String telefone;
+    private String name;
+    private String sex;
+    private int age;
+    private String phone;
     private String RG;
     private Status status;
-    private Queues  filaSintomas;
+    private StackArryList <Symptoms> stackSymptoms;
     
     public Patient(){
         
     }
     
     public Patient(String nome, String sexo, int idade, String telefone, String RG, Status status){
-        this.nome = nome;
-        this.sexo = sexo;
-        this.idade = idade;
-        this.telefone = telefone;
+        this.name = nome;
+        this.sex = sexo;
+        this.age = idade;
+        this.phone = telefone;
         this.RG = RG;
         this.status = status;
-        Queues filaSintomas = new Queues();
+        StackArryList <Symptoms> stackSymptoms = new StackArryList();
         
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSexo() {
-        return sexo;
+    public String getSex() {
+        return sex;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
-    public int getIdade() {
-        return idade;
+    public int getAge() {
+        return age;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getRG() {
@@ -75,15 +76,20 @@ public class Patient {
     public void setStatus(Status status) {
         this.status = status;
     }
-    
-     public int getPriority(Status status) {
-        return status.ordinal(); 
+
+    public StackArryList getStackSymptoms() {
+        return stackSymptoms;
     }
+
+    public void setStackSymptoms(StackArryList stackSymptoms) {
+        this.stackSymptoms = stackSymptoms;
+    }
+
     
     
-    
-    
-     
+    /*public void setPriority(Patient patient){
+        
+    }*/
 
     
     

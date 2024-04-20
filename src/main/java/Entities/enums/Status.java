@@ -13,8 +13,5 @@ public enum Status {
         return ordinal(); 
     }
 
-    public Object poll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
+  
 }
