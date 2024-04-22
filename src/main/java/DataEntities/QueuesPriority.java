@@ -36,11 +36,10 @@ public class QueuesPriority {
         if (!queue.isEmpty()) {
             Patient patient = queue.poll();
             System.out.println("Atendendo paciente: " + patient.getName());
+            return; // Pare de atender pacientes após atender o primeiro da fila de maior prioridade
         }
-        else{
-            System.out.println("Fila vazia!!");
-        }
-      }
+    }
+    System.out.println("Todas as filas estão vazias!!");
     }
     
     

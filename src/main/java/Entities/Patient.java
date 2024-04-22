@@ -12,22 +12,22 @@ public class Patient {
     private String phone;
     private String RG;
     private Status status;
-    private StackArryList <Symptoms> stackSymptoms;
+    private StackArryList stackSymptoms;
     
     public Patient(){
         
     }
     
-    public Patient(String nome, String sexo, int idade, String telefone, String RG, Status status){
-        this.name = nome;
-        this.sex = sexo;
-        this.age = idade;
-        this.phone = telefone;
-        this.RG = RG;
-        this.status = status;
-        StackArryList <Symptoms> stackSymptoms = new StackArryList();
-        
-    }
+    public Patient(String name, String sex, int age, String phone, String RG, Status status, StackArryList stackSymptoms) {
+    this.name = name;
+    this.sex = sex;
+    this.age = age;
+    this.phone = phone;
+    this.RG = RG;
+    this.status = status;
+    this.stackSymptoms = stackSymptoms; 
+}
+
 
     public String getName() {
         return name;
@@ -90,8 +90,11 @@ public class Patient {
     /*public void setPriority(Patient patient){
         
     }*/
-
     
+    @Override
+    public String toString(){
+        return "Nome: " + name + ", Idade " + age + ", Status: " + status; 
+    }
     
     
     

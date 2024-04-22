@@ -1,28 +1,29 @@
 
 package DataEntities;
 
+import Entities.enums.SymptomsStatus;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StackArryList<T> {
-    private List<T> elements;
+public class StackArryList {
+    private List<Symptoms> elements;
 
     public StackArryList() {
         this.elements = new ArrayList<>();
     }
 
-    public void push(T element) {
-        elements.add(element);
+    public void push(Symptoms symptoms) {
+        elements.add(symptoms);
     }
 
-    public T pop() {
+    public Symptoms pop() {
         if (isEmpty()) {
             throw new IllegalStateException("A pilha está vazia");
         }
         return elements.remove(elements.size() - 1);
     }
 
-    public T peek() {
+    public Symptoms peek() {
         if (isEmpty()) {
             throw new IllegalStateException("A pilha está vazia");
         }
