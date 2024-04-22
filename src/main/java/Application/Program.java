@@ -28,7 +28,7 @@ public class Program {
         filaSintomas.push(sm2);
         filaSintomas.push(sm7);
         filaSintomas.push(sm4);
-        Patient patient = new Patient("Leo", "Feminino", 20, "1123", "4156165", Status.URGENTE, filaSintomas);
+        Patient patient = new Patient("Leo", "Masculino", 20, "1123", "4156165", Status.URGENTE, filaSintomas);
         
         filaSintomas1.push(sm1);
         filaSintomas1.push(sm4);
@@ -42,28 +42,65 @@ public class Program {
         filaSintomas2.push(sm4);
         Patient patient2 = new Patient("Lucas", "Masculino", 29, "12549590", "544491", Status.POUCO_URGENTE, filaSintomas2);
         
+        Patient patient3 = new Patient("Allan", "Masculino", 29, "12549590", "544491", Status.URGENTE, filaSintomas2);
+   
+        Patient patient4 = new Patient("Alice", "Feminino", 20, "1123", "4156165", Status.EMERGENCIA, filaSintomas);
+        
+        
+        
+        
+        
         QueuesPriority qp = new QueuesPriority();
         qp.addPatient(patient);
         qp.addPatient(patient1);
         qp.addPatient(patient2);
+        qp.addPatient(patient3);
+        qp.addPatient(patient4);
         
         
         System.out.println("Print da lista completa");
         qp.displayQueues();
         
         
-        System.out.println("Atendendo o paciente B"); 
+        System.out.println("Atendendo o paciente ---André---"); 
         qp.servePatient();
         
         
         System.out.println("Print da lista completa");
         qp.displayQueues();
         
-        System.out.println("Atendendo o paciente A"); 
+        System.out.println("Atendendo o paciente ---Alice---"); 
+        qp.servePatient();
+        
+        
+        System.out.println("Atendendo o paciente ---Leo---"); 
+        qp.servePatient();
+        
+        
+        System.out.println("Atendendo o paciente ---Allan---"); 
+        qp.servePatient();
+        
+        
+        System.out.println("Atendendo o paciente ---Lucas---"); 
         qp.servePatient();
         
         System.out.println("Print da lista completa");
         qp.displayQueues();
+        
+        System.out.println("Print pilha de sintomas");
+        filaSintomas.displayStack();
+        
+        System.out.println("Print pilha de sintomas1");
+        filaSintomas1.displayStack();
+        
+        System.out.println("Print pilha de sintomas2");
+        filaSintomas2.displayStack();
+        System.out.println();
+        
+        
+        System.out.println("Teste de visualização de lista individual ---Leo---: ");
+        patient.displayStackPatient();
+        
         
         
                

@@ -38,5 +38,15 @@ public class StackArryList {
         return elements.size();
     }
     
+    public Symptoms displayStack(){
+        for(Symptoms symptoms : elements){
+            if(!isEmpty()){
+                System.out.println(symptoms);
+            }
+        }
+       return null; 
+       
+    }
+    
     
 }

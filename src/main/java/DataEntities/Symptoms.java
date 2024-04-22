@@ -30,6 +30,10 @@ public class Symptoms {
         this.status = status;
     }
     
+    @Override
+    public String toString(){
+        return "Sintoma: " + nameSymptoms + ", Categoria: " + status;
+    }
 
     
 }

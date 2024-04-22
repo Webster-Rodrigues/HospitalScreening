@@ -3,6 +3,7 @@ package Entities;
 import DataEntities.StackArryList;
 import DataEntities.Symptoms;
 import Entities.enums.Status;
+import java.util.Objects;
 
 
 public class Patient {
@@ -85,6 +86,29 @@ public class Patient {
         this.stackSymptoms = stackSymptoms;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 73 * hash + Objects.hashCode(this.RG);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Patient other = (Patient) obj;
+        return Objects.equals(this.RG, other.RG);
+    }
+
+    
     
     
     /*public void setPriority(Patient patient){
@@ -97,6 +121,9 @@ public class Patient {
     }
     
     
-    
+   public void displayStackPatient(){
+        stackSymptoms.displayStack();
+        
+    }
     
 }
