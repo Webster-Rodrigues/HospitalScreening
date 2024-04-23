@@ -24,27 +24,27 @@ public class Program {
         Symptoms sm6 = new Symptoms("ASMA", SymptomsStatus.NORMAL);
         Symptoms sm7 = new Symptoms("PERNA QUEBRADA", SymptomsStatus.GRAVISSIMO);
         
-        filaSintomas.push(sm1);
-        filaSintomas.push(sm2);
-        filaSintomas.push(sm7);
-        filaSintomas.push(sm4);
+        filaSintomas.push(sm1);//GRAVISSIMO
+        filaSintomas.push(sm2);//NORMAL
+        filaSintomas.push(sm7);//GRAVISSIMO
+        filaSintomas.push(sm4);//GRAVE
         Patient patient = new Patient("Leo", "Masculino", 20, "1123", "4156165", Status.URGENTE, filaSintomas);
         
-        filaSintomas1.push(sm1);
-        filaSintomas1.push(sm4);
-        filaSintomas1.push(sm7);
-        filaSintomas1.push(sm6);
+        filaSintomas1.push(sm1);//GRAVISSIMO
+        filaSintomas1.push(sm7);//GRAVISSIMO
+        filaSintomas1.push(sm7);//GRAVISSIMO
+        filaSintomas1.push(sm7);//GRAVISSIMO
         Patient patient1 = new Patient("André", "Masculino", 50, "12590", "541691", Status.EMERGENCIA, filaSintomas1);
         
         filaSintomas2.push(sm1);
         filaSintomas2.push(sm2);
         filaSintomas2.push(sm7);
         filaSintomas2.push(sm4);
-        Patient patient2 = new Patient("Lucas", "Masculino", 29, "12549590", "544491", Status.POUCO_URGENTE, filaSintomas2);
+        Patient patient2 = new Patient("Lucas", "Masculino", 29, "12549590", "5491", Status.POUCO_URGENTE, filaSintomas2);
         
-        Patient patient3 = new Patient("Allan", "Masculino", 29, "12549590", "544491", Status.URGENTE, filaSintomas2);
+        Patient patient3 = new Patient("Allan", "Masculino", 29, "12549590", "5111491", Status.URGENTE, filaSintomas2);
    
-        Patient patient4 = new Patient("Alice", "Feminino", 20, "1123", "4156165", Status.EMERGENCIA, filaSintomas);
+        Patient patient4 = new Patient("Alice", "Feminino", 20, "1123", "4165", Status.EMERGENCIA, filaSintomas);
         
         
         
@@ -101,6 +101,9 @@ public class Program {
         System.out.println("Teste de visualização de lista individual ---Leo---: ");
         patient.displayStackPatient();
         
+        
+        System.out.println(filaSintomas.countSymptomsStatus());
+        System.out.println(filaSintomas1.countSymptomsStatus());
         
         
                

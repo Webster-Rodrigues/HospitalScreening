@@ -3,6 +3,7 @@ package Entities;
 import DataEntities.StackArryList;
 import DataEntities.Symptoms;
 import Entities.enums.Status;
+import Entities.enums.SymptomsStatus;
 import java.util.Objects;
 
 
@@ -107,13 +108,8 @@ public class Patient {
         final Patient other = (Patient) obj;
         return Objects.equals(this.RG, other.RG);
     }
-
     
     
-    
-    /*public void setPriority(Patient patient){
-        
-    }*/
     
     @Override
     public String toString(){

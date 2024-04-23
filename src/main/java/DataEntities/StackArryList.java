@@ -3,7 +3,9 @@ package DataEntities;
 
 import Entities.enums.SymptomsStatus;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StackArryList {
     private List<Symptoms> elements;
@@ -43,10 +45,27 @@ public class StackArryList {
             if(!isEmpty()){
                 System.out.println(symptoms);
             }
+            else{
+                throw new IllegalStateException("A pilha está vazia");
+            }
         }
        return null; 
        
     }
     
+    public Map<SymptomsStatus, Integer> countSymptomsStatus() {
+        Map<SymptomsStatus, Integer> statusCounter = new HashMap<>();
+        
+        for(SymptomsStatus status : SymptomsStatus.values()){
+            statusCounter.put(status, 0);
+        }
+        
+        for(Symptoms symptoms : elements){
+            int count  = statusCounter.get(symptoms.getStatus());
+            statusCounter.put(symptoms.getStatus(), count + 1);
+        }
+        
+        return statusCounter;
+    }
     
 }
