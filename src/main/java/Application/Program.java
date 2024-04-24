@@ -37,8 +37,8 @@ public class Program {
         Patient patient1 = new Patient("André", "Masculino", 50, "12590", "541691", Status.EMERGENCIA, filaSintomas1);
         
         filaSintomas2.push(sm1);
-        filaSintomas2.push(sm2);
-        filaSintomas2.push(sm7);
+        filaSintomas2.push(sm4);
+        filaSintomas2.push(sm4);
         filaSintomas2.push(sm4);
         Patient patient2 = new Patient("Lucas", "Masculino", 29, "12549590", "5491", Status.POUCO_URGENTE, filaSintomas2);
         
@@ -104,6 +104,21 @@ public class Program {
         
         System.out.println(filaSintomas.countSymptomsStatus());
         System.out.println(filaSintomas1.countSymptomsStatus());
+        
+        
+        System.out.println(filaSintomas.maxSymptomsStatus());
+        System.out.println(filaSintomas1.maxSymptomsStatus());
+        System.out.println(filaSintomas2.maxSymptomsStatus());
+        
+        
+        System.out.println(filaSintomas.setStatusPatient());
+        System.out.println(filaSintomas1.setStatusPatient());
+        System.out.println(filaSintomas2.setStatusPatient());
+       
+        StackArryList filaSintomasss = new StackArryList();
+        System.out.println(filaSintomasss.setStatusPatient());
+        
+        
         
         
                

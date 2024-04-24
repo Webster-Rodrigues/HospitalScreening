@@ -1,4 +1,3 @@
-
 package DataEntities;
 
 import Entities.enums.SymptomsStatus;
@@ -8,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class StackArryList {
+
     private List<Symptoms> elements;
 
     public StackArryList() {
@@ -39,33 +39,53 @@ public class StackArryList {
     public int size() {
         return elements.size();
     }
-    
-    public Symptoms displayStack(){
-        for(Symptoms symptoms : elements){
-            if(!isEmpty()){
+
+    public Symptoms displayStack() {
+        for (Symptoms symptoms : elements) {
+            if (!isEmpty()) {
                 System.out.println(symptoms);
-            }
-            else{
+            } else {
                 throw new IllegalStateException("A pilha está vazia");
             }
         }
-       return null; 
-       
+        return null;
+
     }
-    
+
     public Map<SymptomsStatus, Integer> countSymptomsStatus() {
         Map<SymptomsStatus, Integer> statusCounter = new HashMap<>();
-        
-        for(SymptomsStatus status : SymptomsStatus.values()){
+
+        for (SymptomsStatus status : SymptomsStatus.values()) {
             statusCounter.put(status, 0);
         }
-        
-        for(Symptoms symptoms : elements){
-            int count  = statusCounter.get(symptoms.getStatus());
+
+        for (Symptoms symptoms : elements) {
+            int count = statusCounter.get(symptoms.getStatus());
             statusCounter.put(symptoms.getStatus(), count + 1);
         }
-        
+
         return statusCounter;
     }
-    
+
+    public int maxSymptomsStatus() {
+        int max = 0;
+        max = countSymptomsStatus().values().stream().max(Integer::compare).get();
+        return max;
+    }
+
+    public SymptomsStatus setStatusPatient() {
+        Map<SymptomsStatus, Integer> statusCounter = countSymptomsStatus();
+        int maxOccurrences = maxSymptomsStatus();
+
+        for (Map.Entry<SymptomsStatus, Integer> entry : statusCounter.entrySet()) {
+            SymptomsStatus status = entry.getKey();
+            int occurrences = entry.getValue();
+
+            if (occurrences == maxOccurrences) {
+                return status;
+            }
+        }
+        return null;
+    }
+
 }
