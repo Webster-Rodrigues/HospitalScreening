@@ -2,9 +2,11 @@
 package Application;
 
 import DataEntities.QueuesPriority;
+import DataEntities.QueuesPriorityStatus;
 import DataEntities.StackArryList;
 import DataEntities.Symptoms;
 import Entities.Patient;
+import Entities.enums.PriorityStatus;
 import Entities.enums.Status;
 import Entities.enums.SymptomsStatus;
 
@@ -28,64 +30,69 @@ public class Program {
         filaSintomas.push(sm2);//NORMAL
         filaSintomas.push(sm7);//GRAVISSIMO
         filaSintomas.push(sm4);//GRAVE
-        Patient patient = new Patient("Leo", "Masculino", 20, "1123", "4156165", Status.URGENTE, filaSintomas);
+        Patient patient = new Patient("Leo", "Masculino", 20, "1123", "4156165", Status.URGENTE, PriorityStatus.IDOSO, filaSintomas);
         
         filaSintomas1.push(sm1);//GRAVISSIMO
         filaSintomas1.push(sm7);//GRAVISSIMO
         filaSintomas1.push(sm7);//GRAVISSIMO
         filaSintomas1.push(sm7);//GRAVISSIMO
-        Patient patient1 = new Patient("André", "Masculino", 50, "12590", "541691", Status.EMERGENCIA, filaSintomas1);
+        Patient patient1 = new Patient("André", "Masculino", 50, "12590", "541691", Status.EMERGENCIA, PriorityStatus.COMUM, filaSintomas1);
         
         filaSintomas2.push(sm1);
         filaSintomas2.push(sm4);
         filaSintomas2.push(sm4);
         filaSintomas2.push(sm4);
-        Patient patient2 = new Patient("Lucas", "Masculino", 29, "12549590", "5491", Status.POUCO_URGENTE, filaSintomas2);
+        Patient patient2 = new Patient("Lucas", "Masculino", 29, "12549590", "5491", Status.POUCO_URGENTE,  PriorityStatus.COMUM, filaSintomas2);
         
-        Patient patient3 = new Patient("Allan", "Masculino", 29, "12549590", "5111491", Status.URGENTE, filaSintomas2);
+        Patient patient3 = new Patient("Allan", "Masculino", 29, "12549590", "5111491", Status.URGENTE,  PriorityStatus.COMUM, filaSintomas2);
    
-        Patient patient4 = new Patient("Alice", "Feminino", 20, "1123", "4165", Status.EMERGENCIA, filaSintomas);
+        Patient patient4 = new Patient("Alice", "Feminino", 20, "1123", "4165", Status.EMERGENCIA,  PriorityStatus.GRAVIDA, filaSintomas);
+        
+        
+        Patient patient5 = new Patient("Laura", "Feminino", 20, "1123", "4165", Status.URGENTE,  PriorityStatus.GRAVIDA, filaSintomas1);
         
         
         
-        
-        
+        QueuesPriorityStatus qps = new QueuesPriorityStatus();
         QueuesPriority qp = new QueuesPriority();
-        qp.addPatient(patient);
-        qp.addPatient(patient1);
-        qp.addPatient(patient2);
-        qp.addPatient(patient3);
-        qp.addPatient(patient4);
+        qp.enqueue(patient);
+        qp.enqueue(patient1);
+        qp.enqueue(patient2);
+        qp.enqueue(patient3);
+        qp.enqueue(patient4);
+
         
-        
+        qps.addPatient(qp);
         System.out.println("Print da lista completa");
-        qp.displayQueues();
+        qp.displayQueue();
+        qps.displayQueues();
         
         
         System.out.println("Atendendo o paciente ---André---"); 
-        qp.servePatient();
+        qps.servePatient();
         
         
         System.out.println("Print da lista completa");
-        qp.displayQueues();
+        qps.displayQueues();
         
         System.out.println("Atendendo o paciente ---Alice---"); 
-        qp.servePatient();
+        qps.servePatient();
         
         
         System.out.println("Atendendo o paciente ---Leo---"); 
-        qp.servePatient();
+        qps.servePatient();
         
         
         System.out.println("Atendendo o paciente ---Allan---"); 
-        qp.servePatient();
+        qps.servePatient();
         
         
         System.out.println("Atendendo o paciente ---Lucas---"); 
-        qp.servePatient();
+        qps.servePatient();
+        
         
         System.out.println("Print da lista completa");
-        qp.displayQueues();
+        qps.displayQueues();
         
         System.out.println("Print pilha de sintomas");
         filaSintomas.displayStack();

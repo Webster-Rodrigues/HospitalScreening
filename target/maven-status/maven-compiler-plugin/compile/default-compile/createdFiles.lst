@@ -1,7 +1,6 @@
 Entities\enums\Status.class
 Entities\Patient.class
-Application\Program.class
-DataEntities\QueuesPriority.class
 DataEntities\StackArryList.class
 Entities\enums\SymptomsStatus.class
 DataEntities\Symptoms.class
+DataEntities\CustomQueueShape.class

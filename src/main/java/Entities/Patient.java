@@ -1,35 +1,37 @@
-
 package Entities;
+
+import DataEntities.IntValue;
 import DataEntities.StackArryList;
-import DataEntities.Symptoms;
+import Entities.enums.PriorityStatus;
 import Entities.enums.Status;
-import Entities.enums.SymptomsStatus;
 import java.util.Objects;
 
+public class Patient implements IntValue {
 
-public class Patient {
     private String name;
     private String sex;
     private int age;
     private String phone;
     private String RG;
     private Status status;
+    private PriorityStatus priorityStatus;
     private StackArryList stackSymptoms;
-    
-    public Patient(){
-        
-    }
-    
-    public Patient(String name, String sex, int age, String phone, String RG, Status status, StackArryList stackSymptoms) {
-    this.name = name;
-    this.sex = sex;
-    this.age = age;
-    this.phone = phone;
-    this.RG = RG;
-    this.status = status;
-    this.stackSymptoms = stackSymptoms; 
-}
 
+    public Patient() {
+
+    }
+
+    public Patient(String name, String sex, int age, String phone, String RG, Status status, PriorityStatus prioritystatus, StackArryList stackSymptoms) {
+        this.name = name;
+        this.sex = sex;
+        this.age = age;
+        this.phone = phone;
+        this.RG = RG;
+        this.status = status;
+        this.priorityStatus = prioritystatus;
+        this.stackSymptoms = stackSymptoms;
+    } 
+    
 
     public String getName() {
         return name;
@@ -51,6 +53,14 @@ public class Patient {
         return age;
     }
 
+    public PriorityStatus getPriorityStatus() {
+        return priorityStatus;
+    }
+
+    public void setPrioritystatus(PriorityStatus prioritystatus) {
+        this.priorityStatus = prioritystatus;
+    }
+    
     public void setAge(int age) {
         this.age = age;
     }
@@ -87,6 +97,7 @@ public class Patient {
         this.stackSymptoms = stackSymptoms;
     }
 
+   
     @Override
     public int hashCode() {
         int hash = 7;
@@ -108,18 +119,25 @@ public class Patient {
         final Patient other = (Patient) obj;
         return Objects.equals(this.RG, other.RG);
     }
-    
-    
-    
+
     @Override
-    public String toString(){
-        return "Nome: " + name + ", Idade " + age + ", Status: " + status; 
+    public String toString() {
+        return "Nome: " + name + ", Idade " + age + ", Status: " + status;
     }
     
-    
-   public void displayStackPatient(){
+    public void displayStackPatient() {
         stackSymptoms.displayStack();
-        
+
+    }
+
+    @Override
+    public int getValue() {
+        return priorityStatus.ordinal();
     }
     
+    /*@Override
+    public int getValueStatus() {
+        return this.status.ordinal();
+    }*/
+
 }
