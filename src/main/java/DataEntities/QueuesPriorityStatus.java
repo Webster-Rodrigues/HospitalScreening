@@ -20,9 +20,8 @@ public class QueuesPriorityStatus {
 
     public void addPatient(CustomQueue<Patient> customQueue) {
         for (Patient patient : customQueue) {
-             queues.get(patient.getStatus()).offer(patient);
+            queues.get(patient.getStatus()).offer(patient);
         }
-
     }
 
     public boolean isEmpity(Status status) {
@@ -45,8 +44,7 @@ public class QueuesPriorityStatus {
         for (Queue<Patient> patient : queues.values()) {
             if (!queues.isEmpty()) {
                 System.out.println(patient);
-            } 
-            else {
+            } else {
                 throw new IllegalStateException("A fila está vazia");
             }
         }
@@ -64,6 +62,7 @@ public class QueuesPriorityStatus {
         return null;
     }
 
+
     /*public boolean validateRG(String RG) {
         for (Status status : Status.values()) {
             Queue<Patient> queue = queues.get(status);
@@ -78,5 +77,5 @@ public class QueuesPriorityStatus {
         }
         return false;
     }
-*/
+     */
 }

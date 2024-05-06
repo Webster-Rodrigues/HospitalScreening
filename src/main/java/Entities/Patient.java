@@ -31,7 +31,6 @@ public class Patient implements IntValue {
         this.priorityStatus = prioritystatus;
         this.stackSymptoms = stackSymptoms;
     } 
-    
 
     public String getName() {
         return name;
@@ -123,8 +122,8 @@ public class Patient implements IntValue {
     @Override
     public String toString() {
         return "Nome: " + name + ", Idade " + age + ", Status: " + status;
-    }
-    
+    }  
+
     public void displayStackPatient() {
         stackSymptoms.displayStack();
 

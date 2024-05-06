@@ -30,6 +30,7 @@ public class Program {
         filaSintomas.push(sm2);//NORMAL
         filaSintomas.push(sm7);//GRAVISSIMO
         filaSintomas.push(sm4);//GRAVE
+
         Patient patient = new Patient("Leo", "Masculino", 20, "1123", "4156165", Status.URGENTE, PriorityStatus.IDOSO, filaSintomas);
         
         filaSintomas1.push(sm1);//GRAVISSIMO
@@ -45,7 +46,7 @@ public class Program {
         Patient patient2 = new Patient("Lucas", "Masculino", 29, "12549590", "5491", Status.POUCO_URGENTE,  PriorityStatus.COMUM, filaSintomas2);
         
         Patient patient3 = new Patient("Allan", "Masculino", 29, "12549590", "5111491", Status.URGENTE,  PriorityStatus.COMUM, filaSintomas2);
-   
+        
         Patient patient4 = new Patient("Alice", "Feminino", 20, "1123", "4165", Status.EMERGENCIA,  PriorityStatus.GRAVIDA, filaSintomas);
         
         
@@ -60,7 +61,6 @@ public class Program {
         qp.enqueue(patient2);
         qp.enqueue(patient3);
         qp.enqueue(patient4);
-
         
         qps.addPatient(qp);
         System.out.println("Print da lista completa");
@@ -124,11 +124,7 @@ public class Program {
        
         StackArryList filaSintomasss = new StackArryList();
         System.out.println(filaSintomasss.setStatusPatient());
-        
-        
-        
-        
-               
+              
         
         
     }
