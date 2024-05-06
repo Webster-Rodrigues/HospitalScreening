@@ -1,6 +1,7 @@
 
 package DataEntities;
 import java.util.function.Consumer;
+import java.util.function.ToIntFunction;
 
 public interface CustomQueueShape <T>{
     
@@ -9,9 +10,12 @@ public interface CustomQueueShape <T>{
     T dequeue();
     boolean isEmpty();
     void displayQueue();
-    void comparatorQueue();
+    void comparatorQueue(ToIntFunction<? super T> keyExtractor);
     int size();
+    @Override
+    String toString();
     T get(int index);
    void set(int index, T element);
    void forEach(Consumer<? super T> action);
+   void clear();
 }

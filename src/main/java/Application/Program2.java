@@ -10,8 +10,8 @@ public class Program2 {
     public static void main(String[] args) {
         QueuesPriority queuesPriority = new QueuesPriority();
 
-       /* 
-
+     
+/*
         queuesPriority.enqueue(new Patient("Ana", PriorityStatus.IDOSO));
         queuesPriority.enqueue(new Patient("João", PriorityStatus.CRIANCA));
         queuesPriority.enqueue(new Patient("Maria", PriorityStatus.COMUM));
@@ -20,8 +20,8 @@ public class Program2 {
         queuesPriority.enqueue(new Patient("Carlos", PriorityStatus.COMUM));
         queuesPriority.enqueue(new Patient("Laura", PriorityStatus.CRIANCA));
         queuesPriority.enqueue(new Patient("Fernanda", PriorityStatus.GRAVIDA));
-*/
-        System.out.println("Fila antes do bucketSort:");
+
+  */    System.out.println("Fila antes do bucketSort:");
         queuesPriority.displayQueue();
         System.out.println();
 

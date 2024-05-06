@@ -10,7 +10,7 @@ import java.util.function.ToIntFunction;
 
 public class CustomQueue<T extends IntValue> implements CustomQueueShape<T>, Comparator<T>, Iterable<T> {
 
-    private List<T> customQueue;
+    List<T> customQueue;
 
     public CustomQueue() {
          customQueue = new ArrayList<>();
@@ -67,9 +67,8 @@ public class CustomQueue<T extends IntValue> implements CustomQueueShape<T>, Com
         return Comparator.super.thenComparingInt(keyExtractor); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
     
-    @Override
-    public void comparatorQueue(){
-        customQueue.sort(Comparator.comparingInt(T::getValue));
+    public void comparatorQueue(ToIntFunction<? super T> keyExtractor) {
+        customQueue.sort(Comparator.comparingInt(keyExtractor));
     }
     
     @Override
@@ -98,6 +97,16 @@ public class CustomQueue<T extends IntValue> implements CustomQueueShape<T>, Com
         return customQueue.iterator();
     }
 
+    @Override
+    public void clear(){
+        customQueue.clear();
+    }
+    
+    @Override
+    public String toString(){
+        return customQueue.toString();
+    }
+    
     
 
 }

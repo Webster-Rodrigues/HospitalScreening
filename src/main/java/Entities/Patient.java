@@ -32,6 +32,13 @@ public class Patient implements IntValue {
         this.stackSymptoms = stackSymptoms;
     } 
 
+    /*public Patient(String name, PriorityStatus priorityStatus) {
+        this.name = name;
+        this.priorityStatus = priorityStatus;
+    }*/
+    
+    
+
     public String getName() {
         return name;
     }
@@ -121,7 +128,7 @@ public class Patient implements IntValue {
 
     @Override
     public String toString() {
-        return "Nome: " + name + ", Idade " + age + ", Status: " + status;
+        return "Nome: " + name + ", Idade " + age + ", Status: " + status + ", Status de Prioridade: " + priorityStatus;
     }  
 
     public void displayStackPatient() {
@@ -134,9 +141,4 @@ public class Patient implements IntValue {
         return priorityStatus.ordinal();
     }
     
-    /*@Override
-    public int getValueStatus() {
-        return this.status.ordinal();
-    }*/
-
 }

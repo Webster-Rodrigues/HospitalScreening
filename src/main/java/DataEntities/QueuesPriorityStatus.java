@@ -1,26 +1,27 @@
 package DataEntities;
 
-import java.util.Queue;
 import Entities.Patient;
 import Entities.enums.Status;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.PriorityQueue;
 
-public class QueuesPriorityStatus {
 
-    private Map<Status, Queue<Patient>> queues = new HashMap<>();
+public class QueuesPriorityStatus{
+
+    private Map<Status, CustomQueue<Patient>> queues = new HashMap<>();
 
     public QueuesPriorityStatus() {
-        for (Status status : Status.values()) {
-            queues.put(status, new PriorityQueue<>(Comparator.comparingInt(s -> s.getStatus().ordinal())));
-        }
+    for (Status status : Status.values()) {
+        queues.put(status, new CustomQueue<Patient>());
+        CustomQueue<Patient> queue = queues.get(status);
+        queue.comparatorQueue(patient -> patient.getStatus().ordinal());
     }
+}
 
-    public void addPatient(CustomQueue<Patient> customQueue) {
+
+    public void addPatient(QueuesPriority customQueue) {
         for (Patient patient : customQueue) {
-            queues.get(patient.getStatus()).offer(patient);
+            queues.get(patient.getStatus()).enqueue(patient);
         }
     }
 
@@ -29,19 +30,19 @@ public class QueuesPriorityStatus {
     }
 
     public void servePatient() {
-        for (Status status : Status.values()) {
-            Queue<Patient> queue = queues.get(status);
-            if (!queue.isEmpty()) {
-                Patient patient = queue.poll();
-                System.out.println("Atendendo paciente: " + patient.getName());
-                return;
-            }
+    for (Status status : Status.values()) {
+        CustomQueue<Patient> queue = queues.get(status);
+        if (!queue.isEmpty()) {
+            Patient patient = queue.dequeue();
+            System.out.println("Atendendo paciente: " + patient.getName());
+            return;
         }
-        throw new IllegalStateException("Todas as filas estão vazias!!");
     }
+    throw new IllegalStateException("Todas as filas estão vazias!!");
+}
 
     public void displayQueues() {
-        for (Queue<Patient> patient : queues.values()) {
+        for (CustomQueue<Patient> patient : queues.values()) {
             if (!queues.isEmpty()) {
                 System.out.println(patient);
             } else {
@@ -50,7 +51,7 @@ public class QueuesPriorityStatus {
         }
     }
 
-    public Patient findPatient(Status status, String RG) {
+    /*public Patient findPatient(Status status, String RG) {
         Queue<Patient> queue = queues.get(status);
         if (queue != null && !queue.isEmpty()) {
             for (Patient patient : queue) {
@@ -63,7 +64,7 @@ public class QueuesPriorityStatus {
     }
 
 
-    /*public boolean validateRG(String RG) {
+    public boolean validateRG(String RG) {
         for (Status status : Status.values()) {
             Queue<Patient> queue = queues.get(status);
             if (queue != null && !queue.isEmpty()) {

@@ -31,53 +31,63 @@ public class Program {
         filaSintomas.push(sm7);//GRAVISSIMO
         filaSintomas.push(sm4);//GRAVE
 
-        Patient patient = new Patient("Leo", "Masculino", 20, "1123", "4156165", Status.URGENTE, PriorityStatus.IDOSO, filaSintomas);
         
         filaSintomas1.push(sm1);//GRAVISSIMO
         filaSintomas1.push(sm7);//GRAVISSIMO
         filaSintomas1.push(sm7);//GRAVISSIMO
         filaSintomas1.push(sm7);//GRAVISSIMO
-        Patient patient1 = new Patient("André", "Masculino", 50, "12590", "541691", Status.EMERGENCIA, PriorityStatus.COMUM, filaSintomas1);
         
         filaSintomas2.push(sm1);
         filaSintomas2.push(sm4);
         filaSintomas2.push(sm4);
         filaSintomas2.push(sm4);
-        Patient patient2 = new Patient("Lucas", "Masculino", 29, "12549590", "5491", Status.POUCO_URGENTE,  PriorityStatus.COMUM, filaSintomas2);
         
-        Patient patient3 = new Patient("Allan", "Masculino", 29, "12549590", "5111491", Status.URGENTE,  PriorityStatus.COMUM, filaSintomas2);
-        
-        Patient patient4 = new Patient("Alice", "Feminino", 20, "1123", "4165", Status.EMERGENCIA,  PriorityStatus.GRAVIDA, filaSintomas);
-        
-        
-        Patient patient5 = new Patient("Laura", "Feminino", 20, "1123", "4165", Status.URGENTE,  PriorityStatus.GRAVIDA, filaSintomas1);
-        
+        Patient patient1 = new Patient("André", "Masculino", 50, "12590", "456", Status.EMERGENCIA, PriorityStatus.COMUM, filaSintomas1);
+        Patient patient4 = new Patient("Alice", "Feminino", 20, "25646", "147", Status.EMERGENCIA,  PriorityStatus.GRAVIDA, filaSintomas);
+        Patient patient6 = new Patient("Luiza", "Feminino", 20, "25646", "179", Status.EMERGENCIA,  PriorityStatus.IDOSO, filaSintomas);
+        Patient patient = new Patient("Leo", "Masculino", 20, "1123", "123", Status.URGENTE, PriorityStatus.IDOSO, filaSintomas);
+        Patient patient3 = new Patient("Allan", "Masculino", 29, "12590", "1011", Status.URGENTE,  PriorityStatus.COMUM, filaSintomas);
+        Patient patient5 = new Patient("Laura", "Feminino", 20, "1100023", "258", Status.URGENTE,  PriorityStatus.GRAVIDA, filaSintomas1);
+        Patient patient2 = new Patient("Lucas", "Masculino", 29, "12549590", "789", Status.POUCO_URGENTE,  PriorityStatus.COMUM, filaSintomas2);
+        Patient patient7 = new Patient("Vitória", "Masculino", 29, "12549590", "78", Status.POUCO_URGENTE,  PriorityStatus.GRAVIDA, filaSintomas2);
+        Patient patient8 = new Patient("Jõao", "Masculino", 29, "12549590", "89", Status.POUCO_URGENTE,  PriorityStatus.IDOSO, filaSintomas2);
         
         
         QueuesPriorityStatus qps = new QueuesPriorityStatus();
         QueuesPriority qp = new QueuesPriority();
-        qp.enqueue(patient);
         qp.enqueue(patient1);
-        qp.enqueue(patient2);
-        qp.enqueue(patient3);
         qp.enqueue(patient4);
+        qp.enqueue(patient6);
+        qp.enqueue(patient);
+        qp.enqueue(patient3);
+        qp.enqueue(patient5);
+        qp.enqueue(patient2);
+        qp.enqueue(patient7);
+        qp.enqueue(patient8);
+        
+        System.out.println("ANTES QP completa");
+        qp.displayQueue();
+        
+        qp.bucketSort(qp);
+        System.out.println("ORDENADA QP completa");
+        qp.displayQueue();
         
         qps.addPatient(qp);
-        System.out.println("Print da lista completa");
-        qp.displayQueue();
+        System.out.println("Print QPS completa");
         qps.displayQueues();
+       
+        System.out.println("Atendendo o paciente ---Alice---"); 
+        qps.servePatient();
+        
+        System.out.println("Atendendo o paciente ---Luiza---"); 
+        qps.servePatient();
         
         
         System.out.println("Atendendo o paciente ---André---"); 
         qps.servePatient();
         
-        
-        System.out.println("Print da lista completa");
-        qps.displayQueues();
-        
-        System.out.println("Atendendo o paciente ---Alice---"); 
+        System.out.println("Atendendo o paciente ---Laura---"); 
         qps.servePatient();
-        
         
         System.out.println("Atendendo o paciente ---Leo---"); 
         qps.servePatient();
@@ -86,15 +96,19 @@ public class Program {
         System.out.println("Atendendo o paciente ---Allan---"); 
         qps.servePatient();
         
+        System.out.println("Atendendo o paciente ---Vitória---"); 
+        qps.servePatient();
+        
+        System.out.println("Atendendo o paciente ---João---"); 
+        qps.servePatient();
+        
         
         System.out.println("Atendendo o paciente ---Lucas---"); 
         qps.servePatient();
         
+    
         
-        System.out.println("Print da lista completa");
-        qps.displayQueues();
-        
-        System.out.println("Print pilha de sintomas");
+        /*System.out.println("Print pilha de sintomas");
         filaSintomas.displayStack();
         
         System.out.println("Print pilha de sintomas1");
@@ -124,7 +138,7 @@ public class Program {
        
         StackArryList filaSintomasss = new StackArryList();
         System.out.println(filaSintomasss.setStatusPatient());
-              
+       */       
         
         
     }

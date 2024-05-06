@@ -1,6 +1,13 @@
 Entities\enums\Status.class
-Entities\Patient.class
+Application\Program2.class
+DataEntities\QueuesPriorityStatus.class
+Application\Program.class
+DataEntities\QueuesPriority.class
 DataEntities\StackArryList.class
-Entities\enums\SymptomsStatus.class
-DataEntities\Symptoms.class
+Entities\enums\PriorityStatus.class
+DataEntities\CustomQueue.class
 DataEntities\CustomQueueShape.class
+Entities\Patient.class
+Entities\enums\SymptomsStatus.class
+DataEntities\IntValue.class
+DataEntities\Symptoms.class
