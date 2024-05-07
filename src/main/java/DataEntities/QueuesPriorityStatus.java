@@ -20,9 +20,11 @@ public class QueuesPriorityStatus{
 
 
     public void addPatient(QueuesPriority customQueue) {
+        customQueue.bucketSort(customQueue);
         for (Patient patient : customQueue) {
             queues.get(patient.getStatus()).enqueue(patient);
         }
+        customQueue.clear();
     }
 
     public boolean isEmpity(Status status) {
@@ -51,8 +53,8 @@ public class QueuesPriorityStatus{
         }
     }
 
-    /*public Patient findPatient(Status status, String RG) {
-        Queue<Patient> queue = queues.get(status);
+    public Patient findPatient(Status status, String RG) {
+        CustomQueue<Patient> queue = queues.get(status);
         if (queue != null && !queue.isEmpty()) {
             for (Patient patient : queue) {
                 if (patient.getRG().equals(RG)) {
@@ -62,7 +64,7 @@ public class QueuesPriorityStatus{
         }
         return null;
     }
-
+/*
 
     public boolean validateRG(String RG) {
         for (Status status : Status.values()) {

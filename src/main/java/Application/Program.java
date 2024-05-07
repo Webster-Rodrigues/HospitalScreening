@@ -43,14 +43,14 @@ public class Program {
         filaSintomas2.push(sm4);
         
         Patient patient1 = new Patient("André", "Masculino", 50, "12590", "456", Status.EMERGENCIA, PriorityStatus.COMUM, filaSintomas1);
-        Patient patient4 = new Patient("Alice", "Feminino", 20, "25646", "147", Status.EMERGENCIA,  PriorityStatus.GRAVIDA, filaSintomas);
         Patient patient6 = new Patient("Luiza", "Feminino", 20, "25646", "179", Status.EMERGENCIA,  PriorityStatus.IDOSO, filaSintomas);
+        Patient patient4 = new Patient("Alice", "Feminino", 20, "25646", "147", Status.EMERGENCIA,  PriorityStatus.GRAVIDA, filaSintomas);
         Patient patient = new Patient("Leo", "Masculino", 20, "1123", "123", Status.URGENTE, PriorityStatus.IDOSO, filaSintomas);
+        Patient patient2 = new Patient("Lucas", "Masculino", 29, "12549590", "789", Status.POUCO_URGENTE,  PriorityStatus.COMUM, filaSintomas2);
         Patient patient3 = new Patient("Allan", "Masculino", 29, "12590", "1011", Status.URGENTE,  PriorityStatus.COMUM, filaSintomas);
         Patient patient5 = new Patient("Laura", "Feminino", 20, "1100023", "258", Status.URGENTE,  PriorityStatus.GRAVIDA, filaSintomas1);
-        Patient patient2 = new Patient("Lucas", "Masculino", 29, "12549590", "789", Status.POUCO_URGENTE,  PriorityStatus.COMUM, filaSintomas2);
+        Patient patient8 = new Patient("Jõao", "Masculino", 29, "12549590", "78", Status.POUCO_URGENTE,  PriorityStatus.IDOSO, filaSintomas2);
         Patient patient7 = new Patient("Vitória", "Masculino", 29, "12549590", "78", Status.POUCO_URGENTE,  PriorityStatus.GRAVIDA, filaSintomas2);
-        Patient patient8 = new Patient("Jõao", "Masculino", 29, "12549590", "89", Status.POUCO_URGENTE,  PriorityStatus.IDOSO, filaSintomas2);
         
         
         QueuesPriorityStatus qps = new QueuesPriorityStatus();
@@ -68,9 +68,9 @@ public class Program {
         System.out.println("ANTES QP completa");
         qp.displayQueue();
         
-        qp.bucketSort(qp);
-        System.out.println("ORDENADA QP completa");
-        qp.displayQueue();
+        //qp.bucketSort(qp);
+        //System.out.println("ORDENADA QP completa");
+        //qp.displayQueue();
         
         qps.addPatient(qp);
         System.out.println("Print QPS completa");
@@ -99,14 +99,34 @@ public class Program {
         System.out.println("Atendendo o paciente ---Vitória---"); 
         qps.servePatient();
         
-        System.out.println("Atendendo o paciente ---João---"); 
+        System.out.println("Atendendo o paciente ---João está utilizando RG já cadastrado---"); 
         qps.servePatient();
         
         
         System.out.println("Atendendo o paciente ---Lucas---"); 
+        //qps.servePatient();
+        
+        System.out.println("Print QPS completa");
+        qps.displayQueues();
+        
+        System.out.println("QP completa");
+        qp.displayQueue();
+        
+        Patient patient001 = new Patient("Dora", "Feminino", 40, "12549590", "783", Status.POUCO_URGENTE,  PriorityStatus.GRAVIDA, filaSintomas2);
+        qp.enqueue(patient001);
+        qps.addPatient(qp);
+        
+        
+        System.out.println("Atendendo o paciente ---Dora---"); 
         qps.servePatient();
         
-    
+        System.out.println("QP completa");
+        qp.displayQueue();
+        
+        
+        qps.addPatient(qp);
+        System.out.println("Print QPS completa");
+        qps.displayQueues();
         
         /*System.out.println("Print pilha de sintomas");
         filaSintomas.displayStack();

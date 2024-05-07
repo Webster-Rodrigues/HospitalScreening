@@ -7,17 +7,16 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.ToIntFunction;
 
-
 public class CustomQueue<T extends IntValue> implements CustomQueueShape<T>, Comparator<T>, Iterable<T> {
 
     List<T> customQueue;
 
     public CustomQueue() {
-         customQueue = new ArrayList<>();
+        customQueue = new ArrayList<>();
     }
-    
-   @Override
-   public void enqueue(T element) {
+
+    @Override
+    public void enqueue(T element) {
         customQueue.add(element);
     }
 
@@ -29,12 +28,11 @@ public class CustomQueue<T extends IntValue> implements CustomQueueShape<T>, Com
         }
         return customQueue.remove(0);
     }
-    
 
     public boolean isEmpty() {
         return customQueue.isEmpty();
     }
-    
+
     @Override
     public T peek() {
         if (isEmpty()) {
@@ -43,7 +41,7 @@ public class CustomQueue<T extends IntValue> implements CustomQueueShape<T>, Com
         }
         return customQueue.get(0);
     }
-    
+
     @Override
     public void displayQueue() {
         if (isEmpty()) {
@@ -66,47 +64,60 @@ public class CustomQueue<T extends IntValue> implements CustomQueueShape<T>, Com
     public Comparator<T> thenComparingInt(ToIntFunction<? super T> keyExtractor) {
         return Comparator.super.thenComparingInt(keyExtractor); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-    
+
     public void comparatorQueue(ToIntFunction<? super T> keyExtractor) {
         customQueue.sort(Comparator.comparingInt(keyExtractor));
     }
-    
+
     @Override
-    public int size(){
+    public int size() {
         return customQueue.size();
     }
-    
+
     @Override
-    public T get(int index){
+    public T get(int index) {
         return customQueue.get(index);
     }
-    
+
     @Override
-    public void set(int index, T element){
+    public void set(int index, T element) {
         customQueue.set(index, element);
     }
-    
-    
+
     @Override
-   public void forEach(Consumer<? super T> action){
-       customQueue.forEach(action);
-   }
-   
-   @Override
+    public void forEach(Consumer<? super T> action) {
+        customQueue.forEach(action);
+    }
+
+    @Override
     public Iterator<T> iterator() {
         return customQueue.iterator();
     }
 
     @Override
-    public void clear(){
+    public void clear() {
         customQueue.clear();
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return customQueue.toString();
     }
-    
-    
+
+    @Override
+    public boolean equals(Object o) {
+        return customQueue.equals(o);
+    }
+
+    /*@Override
+    public boolean validateRG(String RG) {
+        for (T element : customQueue) {
+            if (element.equals(RG)) {
+                return true;
+            }
+        }
+        return false;
+
+    }*/
 
 }

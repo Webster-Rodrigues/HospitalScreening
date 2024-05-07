@@ -18,4 +18,7 @@ public interface CustomQueueShape <T>{
    void set(int index, T element);
    void forEach(Consumer<? super T> action);
    void clear();
+    @Override
+   boolean equals(Object o);
+   //boolean validateRG(String Rg);
 }
