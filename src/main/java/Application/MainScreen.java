@@ -26,6 +26,7 @@ public class MainScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scpPatientDashboard = new javax.swing.JScrollPane();
         btnServePatient = new javax.swing.JButton();
         btnScreening = new javax.swing.JButton();
         BkgroundScreen = new javax.swing.JLabel();
@@ -33,8 +34,11 @@ public class MainScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        getContentPane().add(scpPatientDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, 390, 450));
+
         btnServePatient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnChamar.png"))); // NOI18N
         btnServePatient.setContentAreaFilled(false);
+        btnServePatient.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnServePatient.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnServePatientMouseEntered(evt);
@@ -52,6 +56,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         btnScreening.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnTriagem.png"))); // NOI18N
         btnScreening.setContentAreaFilled(false);
+        btnScreening.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnScreening.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnScreeningMouseEntered(evt);
@@ -128,5 +133,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel BkgroundScreen;
     private javax.swing.JButton btnScreening;
     private javax.swing.JButton btnServePatient;
+    private javax.swing.JScrollPane scpPatientDashboard;
     // End of variables declaration//GEN-END:variables
 }

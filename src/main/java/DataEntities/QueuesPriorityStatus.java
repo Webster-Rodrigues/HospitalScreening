@@ -64,8 +64,7 @@ public class QueuesPriorityStatus{
         }
         return null;
     }
-
-
+    
     /*public boolean validateRG(String RG) {
         for (Status status : Status.values()) {
             CustomQueue<Patient> queue = queues.get(status);

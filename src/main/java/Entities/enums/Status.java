@@ -7,11 +7,6 @@ public enum Status {
     URGENTE,
     POUCO_URGENTE,
     NAO_URGENTE;
-    
-    
-    public int getPriority() {
-        return ordinal(); 
-    }
 
   
 }

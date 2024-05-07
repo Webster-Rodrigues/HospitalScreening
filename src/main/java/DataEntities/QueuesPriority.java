@@ -17,8 +17,7 @@ public class QueuesPriority extends CustomQueue<Patient> {
             if (!validateRG(element.getRG())) {
                 customQueue.add(element);
             }
-        }
-        catch (IllegalStateException e) {
+        } catch (IllegalStateException e) {
             throw new IllegalStateException("RG já cadastrado!! Não foi possível cadastrar paciente.");
         }
 
@@ -84,5 +83,7 @@ public class QueuesPriority extends CustomQueue<Patient> {
             }
         }
     }
+    
+    
 
 }

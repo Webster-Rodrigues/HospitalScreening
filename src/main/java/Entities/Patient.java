@@ -4,6 +4,9 @@ import DataEntities.IntValue;
 import DataEntities.StackArryList;
 import Entities.enums.PriorityStatus;
 import Entities.enums.Status;
+import Entities.enums.SymptomsStatus;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Patient implements IntValue {
@@ -12,6 +15,7 @@ public class Patient implements IntValue {
     private String sex;
     private int age;
     private String phone;
+    private boolean isPregnant;
     private String RG;
     private Status status;
     private PriorityStatus priorityStatus;
@@ -30,14 +34,16 @@ public class Patient implements IntValue {
         this.status = status;
         this.priorityStatus = prioritystatus;
         this.stackSymptoms = stackSymptoms;
-    } 
+    }
 
-    /*public Patient(String name, PriorityStatus priorityStatus) {
+    public Patient(String name, String sex, int age, String phone, String RG, StackArryList stackSymptoms) {
         this.name = name;
-        this.priorityStatus = priorityStatus;
-    }*/
-    
-    
+        this.sex = sex;
+        this.age = age;
+        this.phone = phone;
+        this.RG = RG;
+        this.stackSymptoms = stackSymptoms;
+    }
 
     public String getName() {
         return name;
@@ -66,7 +72,7 @@ public class Patient implements IntValue {
     public void setPrioritystatus(PriorityStatus prioritystatus) {
         this.priorityStatus = prioritystatus;
     }
-    
+
     public void setAge(int age) {
         this.age = age;
     }
@@ -103,7 +109,14 @@ public class Patient implements IntValue {
         this.stackSymptoms = stackSymptoms;
     }
 
-   
+    public boolean isIsPregnant() {
+        return isPregnant;
+    }
+
+    public void setIsPregnant(boolean isPregnant) {
+        this.isPregnant = isPregnant;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -129,7 +142,7 @@ public class Patient implements IntValue {
     @Override
     public String toString() {
         return "Nome: " + name + ", Idade " + age + ", Status: " + status + ", Status de Prioridade: " + priorityStatus;
-    }  
+    }
 
     public void displayStackPatient() {
         stackSymptoms.displayStack();
@@ -140,5 +153,58 @@ public class Patient implements IntValue {
     public int getValue() {
         return priorityStatus.ordinal();
     }
-    
+
+    public void setPriority(Patient patient) {
+
+    }
+
+    public PriorityStatus calculatePriority() {
+        if (age <= 12) {
+            return PriorityStatus.CRIANCA;
+        } else if (age >= 60) {
+            return PriorityStatus.IDOSO;
+        } else if (isPregnant) {
+            return PriorityStatus.GRAVIDA;
+        }
+        return PriorityStatus.COMUM;
+    }
+
+    private static final Map<SymptomsStatus, Status> statusMap = new HashMap<>();
+
+    static {
+        statusMap.put(SymptomsStatus.GRAVISSIMO, Status.EMERGENCIA);
+        statusMap.put(SymptomsStatus.GRAVE, Status.MUITO_URGENTE);
+        statusMap.put(SymptomsStatus.NORMAL, Status.URGENTE);
+        statusMap.put(SymptomsStatus.LEVE, Status.POUCO_URGENTE);
+        statusMap.put(SymptomsStatus.MUITO_LEVE, Status.NAO_URGENTE);
+    }
+
+    public Status mapSymptomsToStatus(SymptomsStatus symptomsStatus) {
+        return statusMap.get(symptomsStatus);
+    }
+
+    public void setStatusPatients(Patient patient) {
+        SymptomsStatus symptomsFreq = patient.getStackSymptoms().showFrequentSymptom();
+        int countFreqSymptoms = patient.getStackSymptoms().maxSymptomsStatus();
+        Status patientStatus;
+        if (patient.getStackSymptoms().checkSymptomsCritical()) {
+            symptomsFreq = SymptomsStatus.GRAVISSIMO;
+            patientStatus = mapSymptomsToStatus(symptomsFreq);
+        } else if (patient.getStackSymptoms().checkSymptomsSerious()) {
+            symptomsFreq = SymptomsStatus.GRAVE;
+            patientStatus = mapSymptomsToStatus(symptomsFreq);
+        } else if (countFreqSymptoms >= 3 && symptomsFreq == SymptomsStatus.GRAVE) {
+            patientStatus = mapSymptomsToStatus(nextSymptomsStatus(symptomsFreq));
+        } else {
+            patientStatus = mapSymptomsToStatus(symptomsFreq);
+        }
+        patient.setStatus(patientStatus);
+    }
+
+    private SymptomsStatus nextSymptomsStatus(SymptomsStatus currentStatus) {
+        int currentIndex = currentStatus.ordinal();
+        int nextIndex = (currentIndex + 1) % SymptomsStatus.values().length;
+        return SymptomsStatus.values()[nextIndex];
+    }
+
 }

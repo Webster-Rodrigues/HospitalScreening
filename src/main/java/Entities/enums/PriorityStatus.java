@@ -7,8 +7,5 @@ public enum PriorityStatus {
     CRIANCA,
     COMUM;
     
-    
-    public int getPriority() {
-        return ordinal(); 
-    }
+   
 }

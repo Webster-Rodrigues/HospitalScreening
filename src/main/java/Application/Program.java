@@ -67,10 +67,7 @@ public class Program {
         
         System.out.println("ANTES QP completa");
         qp.displayQueue();
-        
-        //qp.bucketSort(qp);
-        //System.out.println("ORDENADA QP completa");
-        //qp.displayQueue();
+  
         
         qps.addPatients(qp);
         System.out.println("Print QPS completa");
@@ -141,10 +138,11 @@ public class Program {
         
         System.out.println("Teste de visualização de lista individual ---Leo---: ");
         patient.displayStackPatient();
-        
+        */
         
         System.out.println(filaSintomas.countSymptomsStatus());
         System.out.println(filaSintomas1.countSymptomsStatus());
+        System.out.println(filaSintomas2.countSymptomsStatus());
         
         
         System.out.println(filaSintomas.maxSymptomsStatus());
@@ -152,13 +150,9 @@ public class Program {
         System.out.println(filaSintomas2.maxSymptomsStatus());
         
         
-        System.out.println(filaSintomas.setStatusPatient());
-        System.out.println(filaSintomas1.setStatusPatient());
-        System.out.println(filaSintomas2.setStatusPatient());
-       
-        StackArryList filaSintomasss = new StackArryList();
-        System.out.println(filaSintomasss.setStatusPatient());
-       */       
+        System.out.println(filaSintomas.showFrequentSymptom());
+        System.out.println(filaSintomas1.showFrequentSymptom());
+        System.out.println(filaSintomas2.showFrequentSymptom());        
         
         
     }

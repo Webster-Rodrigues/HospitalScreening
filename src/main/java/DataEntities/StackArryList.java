@@ -73,7 +73,7 @@ public class StackArryList {
         return max;
     }
 
-    public SymptomsStatus setStatusPatient() {
+    public SymptomsStatus showFrequentSymptom() {
         Map<SymptomsStatus, Integer> statusCounter = countSymptomsStatus();
         int maxOccurrences = maxSymptomsStatus();
 
@@ -86,6 +86,26 @@ public class StackArryList {
             }
         }
         return null;
+    }
+
+    public boolean checkSymptomsSerious() {
+        for (Symptoms symptoms : elements) {
+            SymptomsStatus status = symptoms.getStatus();
+            if (status == SymptomsStatus.GRAVE) {
+                return true;
+            }
+        }
+        return false; 
+    }
+    
+    public boolean checkSymptomsCritical() {
+        for (Symptoms symptoms : elements) {
+            SymptomsStatus status = symptoms.getStatus();
+            if (status == SymptomsStatus.GRAVISSIMO) {
+                return true;
+            }
+        }
+        return false; 
     }
 
 }
