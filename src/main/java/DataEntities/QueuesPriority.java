@@ -10,22 +10,20 @@ public class QueuesPriority extends CustomQueue<Patient> {
     public QueuesPriority() {
         super();
     }
-    
-    
+
     @Override
     public void enqueue(Patient element) {
-        
-        try{
-            if(!validateRG(element.getRG())){
-            customQueue.add(element);
+        try {
+            if (!validateRG(element.getRG())) {
+                customQueue.add(element);
+            }
         }
-        }
-        catch(IllegalStateException e){
+        catch (IllegalStateException e) {
             throw new IllegalStateException("RG já cadastrado!! Não foi possível cadastrar paciente.");
         }
-        
+
     }
-    
+
     public boolean validateRG(String RG) {
         for (Patient patient : customQueue) {
             if (patient.getRG().equals(RG)) {

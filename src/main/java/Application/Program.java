@@ -72,7 +72,7 @@ public class Program {
         //System.out.println("ORDENADA QP completa");
         //qp.displayQueue();
         
-        qps.addPatient(qp);
+        qps.addPatients(qp);
         System.out.println("Print QPS completa");
         qps.displayQueues();
        
@@ -112,9 +112,9 @@ public class Program {
         System.out.println("QP completa");
         qp.displayQueue();
         
-        Patient patient001 = new Patient("Dora", "Feminino", 40, "12549590", "783", Status.POUCO_URGENTE,  PriorityStatus.GRAVIDA, filaSintomas2);
+        Patient patient001 = new Patient("Dora", "Feminino", 40, "12549590", "78", Status.POUCO_URGENTE,  PriorityStatus.GRAVIDA, filaSintomas2);
         qp.enqueue(patient001);
-        qps.addPatient(qp);
+        qps.addPatients(qp);
         
         
         System.out.println("Atendendo o paciente ---Dora---"); 
@@ -124,7 +124,7 @@ public class Program {
         qp.displayQueue();
         
         
-        qps.addPatient(qp);
+        qps.addPatients(qp);
         System.out.println("Print QPS completa");
         qps.displayQueues();
         

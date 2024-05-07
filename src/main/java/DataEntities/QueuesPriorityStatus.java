@@ -19,7 +19,7 @@ public class QueuesPriorityStatus{
 }
 
 
-    public void addPatient(QueuesPriority customQueue) {
+    public void addPatients(QueuesPriority customQueue) {
         customQueue.bucketSort(customQueue);
         for (Patient patient : customQueue) {
             queues.get(patient.getStatus()).enqueue(patient);
@@ -64,11 +64,11 @@ public class QueuesPriorityStatus{
         }
         return null;
     }
-/*
 
-    public boolean validateRG(String RG) {
+
+    /*public boolean validateRG(String RG) {
         for (Status status : Status.values()) {
-            Queue<Patient> queue = queues.get(status);
+            CustomQueue<Patient> queue = queues.get(status);
             if (queue != null && !queue.isEmpty()) {
                 for (Patient patient : queue) {
                     if (patient.getRG().equals(RG)) {
