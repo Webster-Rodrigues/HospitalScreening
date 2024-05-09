@@ -12,15 +12,16 @@ public class QueuesPriority extends CustomQueue<Patient> {
     }
 
     @Override
-    public void enqueue(Patient element) {
+    public void enqueue(Patient patient) {
         try {
-            if (!validateRG(element.getRG())) {
-                customQueue.add(element);
+            if (!validateRG(patient.getRG())) {
+                //patient.calculatePriority();
+                //patient.setStatusPatients(patient);
+                customQueue.add(patient);
             }
         } catch (IllegalStateException e) {
             throw new IllegalStateException("RG já cadastrado!! Não foi possível cadastrar paciente.");
         }
-
     }
 
     public boolean validateRG(String RG) {
@@ -83,6 +84,13 @@ public class QueuesPriority extends CustomQueue<Patient> {
             }
         }
     }
+    
+    public void priorityPatients() {
+         for(Patient patient: customQueue){
+             patient.calculatePriority();
+             patient.setStatusPatients(patient);
+         }
+     }
     
     
 

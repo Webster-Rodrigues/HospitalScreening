@@ -1,5 +1,7 @@
 package Application;
 
+import DataEntities.QueuesPriority;
+import DataEntities.QueuesPriorityStatus;
 import DataEntities.StackArryList;
 import DataEntities.Symptoms;
 import Entities.Patient;
@@ -32,8 +34,8 @@ public class Program2 {
 
         filaSintomas1.push(sm9);
         filaSintomas1.push(sm10);//MUITO LEVE
-        filaSintomas1.push(sm1);
-        //filaSintomas1.push(sm7);
+        //filaSintomas1.push(sm3);
+        //filaSintomas1.push(sm1);
 
         filaSintomas2.push(sm8);
         filaSintomas2.push(sm7); //LEVE
@@ -55,23 +57,34 @@ public class Program2 {
         //filaSintomas5.push(sm7);
         //filaSintomas5.push(sm4);
 
-        Patient pt1 = new Patient("André", "Masculino", 50, "12590", "456", filaSintomas1);
-        Patient pt2 = new Patient("Luiza", "Feminino", 20, "25646", "179", filaSintomas2);
-        Patient pt3 = new Patient("Alice", "Feminino", 20, "25646", "147", filaSintomas3);
-        Patient pt4 = new Patient("Leo", "Masculino", 20, "1123", "123", filaSintomas4);
-        Patient pt5 = new Patient("Lucas", "Masculino", 29, "12549590", "789", filaSintomas5);
+        Patient pt1 = new Patient("André", "Masculino", 60,false , "456", filaSintomas1);
+        Patient pt2 = new Patient("Luiza", "Feminino", 20, true,  "179", filaSintomas2);
+        Patient pt3 = new Patient("Alice", "Feminino", 20,false,  "147", filaSintomas3);
+        Patient pt4 = new Patient("Leo", "Masculino",6,false,  "123", filaSintomas4);
+        Patient pt5 = new Patient("Lucas", "Masculino", 29, false, "789", filaSintomas5);
         
-        List<Patient> test = new ArrayList();
-        test.add(pt1);
-        test.add(pt2);
-        test.add(pt3);
-        test.add(pt4);
-        test.add(pt5);
+        QueuesPriority qp = new QueuesPriority();
+        QueuesPriorityStatus qps = new QueuesPriorityStatus();
+        qp.enqueue(pt1);
+        qp.enqueue(pt2);
+        qp.enqueue(pt3);
+        qp.enqueue(pt4);
+        qp.enqueue(pt5);
         
-        for(Patient pt : test){
+        qp.priorityPatients();
+        qp.displayQueue();
+        
+        /*for(Patient pt : test){
             pt.setStatusPatients(pt);
             System.out.println("O status do paciente: " + pt.getName() + ", Foi definido como: " + pt.getStatus());
         }
+        System.out.println();
+        for(Patient pt : test){
+            pt.calculatePriority();
+            System.out.println("A prioridade do paciente: " + pt.getName() + ", Foi definida como: " + pt.getPriorityStatus());
+        }*/
+        
+        
 
     }
 

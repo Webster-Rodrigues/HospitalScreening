@@ -14,7 +14,6 @@ public class Patient implements IntValue {
     private String name;
     private String sex;
     private int age;
-    private String phone;
     private boolean isPregnant;
     private String RG;
     private Status status;
@@ -25,22 +24,21 @@ public class Patient implements IntValue {
 
     }
 
-    public Patient(String name, String sex, int age, String phone, String RG, Status status, PriorityStatus prioritystatus, StackArryList stackSymptoms) {
+    public Patient(String name, String sex, int age, String RG, Status status, PriorityStatus prioritystatus, StackArryList stackSymptoms) {
         this.name = name;
         this.sex = sex;
         this.age = age;
-        this.phone = phone;
         this.RG = RG;
         this.status = status;
         this.priorityStatus = prioritystatus;
         this.stackSymptoms = stackSymptoms;
     }
 
-    public Patient(String name, String sex, int age, String phone, String RG, StackArryList stackSymptoms) {
+    public Patient(String name, String sex, int age, boolean isPregnant, String RG, StackArryList stackSymptoms) {
         this.name = name;
         this.sex = sex;
         this.age = age;
-        this.phone = phone;
+        this.isPregnant = isPregnant;
         this.RG = RG;
         this.stackSymptoms = stackSymptoms;
     }
@@ -75,14 +73,6 @@ public class Patient implements IntValue {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getRG() {
@@ -157,18 +147,20 @@ public class Patient implements IntValue {
     public void setPriority(Patient patient) {
 
     }
-
-    public PriorityStatus calculatePriority() {
+    
+    public void calculatePriority() {
         if (age <= 12) {
-            return PriorityStatus.CRIANCA;
+            setPrioritystatus(PriorityStatus.CRIANCA);
         } else if (age >= 60) {
-            return PriorityStatus.IDOSO;
+            setPrioritystatus(PriorityStatus.IDOSO);
         } else if (isPregnant) {
-            return PriorityStatus.GRAVIDA;
+            setPrioritystatus(PriorityStatus.GRAVIDA);
+        } else {
+            setPrioritystatus(PriorityStatus.COMUM);
         }
-        return PriorityStatus.COMUM;
     }
-
+    
+    
     private static final Map<SymptomsStatus, Status> statusMap = new HashMap<>();
 
     static {

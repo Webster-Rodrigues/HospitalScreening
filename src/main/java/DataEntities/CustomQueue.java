@@ -47,9 +47,8 @@ public class CustomQueue<T extends IntValue> implements CustomQueueShape<T>, Com
         if (isEmpty()) {
             System.out.println("A fila está vazia!");
         } else {
-            System.out.print("Elementos da fila: ");
             for (T element : customQueue) {
-                System.out.print(element + " ");
+                System.out.print(element + " \n");
             }
             System.out.println();
         }
