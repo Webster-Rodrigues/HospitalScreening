@@ -92,6 +92,4 @@ public class QueuesPriority extends CustomQueue<Patient> {
          }
      }
     
-    
-
 }

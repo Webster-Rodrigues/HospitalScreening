@@ -26,21 +26,144 @@ public class ScreeningScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        txtDate = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
+        jcbPainLevel = new javax.swing.JComboBox<>();
+        jcbPregnant = new javax.swing.JComboBox<>();
+        txtTemperature = new javax.swing.JTextField();
+        sldTemp = new javax.swing.JSlider();
+        boxSevere2 = new javax.swing.JCheckBox();
+        boxSevere3 = new javax.swing.JCheckBox();
+        boxSevere4 = new javax.swing.JCheckBox();
+        boxSevere1 = new javax.swing.JCheckBox();
+        boxSevere5 = new javax.swing.JCheckBox();
+        boxSevere6 = new javax.swing.JCheckBox();
+        boxSevere7 = new javax.swing.JCheckBox();
+        boxSevere8 = new javax.swing.JCheckBox();
+        boxSevere9 = new javax.swing.JCheckBox();
+        boxSevere10 = new javax.swing.JCheckBox();
+        boxSevere11 = new javax.swing.JCheckBox();
+        BkgroundScreen = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 726, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 522, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(txtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 220, 130, 30));
+
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 400, 30));
+
+        jcbPainLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbPainLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 190, 30));
+
+        jcbPregnant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbPregnant, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 310, 130, 30));
+        getContentPane().add(txtTemperature, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 140, 30));
+        getContentPane().add(sldTemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 130, 20));
+        getContentPane().add(boxSevere2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 487, 20, 40));
+        getContentPane().add(boxSevere3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 520, 20, 40));
+        getContentPane().add(boxSevere4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, 20, 40));
+
+        boxSevere1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxSevere1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boxSevere1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 455, 20, 40));
+
+        boxSevere5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxSevere5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boxSevere5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 580, 20, 40));
+
+        boxSevere6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxSevere6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boxSevere6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 704, 20, 40));
+
+        boxSevere7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxSevere7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boxSevere7, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 662, 20, 40));
+
+        boxSevere8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxSevere8ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boxSevere8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 456, 20, 40));
+
+        boxSevere9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxSevere9ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boxSevere9, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 489, 20, 40));
+
+        boxSevere10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxSevere10ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boxSevere10, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 522, 20, 40));
+
+        boxSevere11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxSevere11ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boxSevere11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 672, 20, 40));
+
+        BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaTriagem.png"))); // NOI18N
+        getContentPane().add(BkgroundScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1093, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameActionPerformed
+
+    private void boxSevere1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxSevere1ActionPerformed
+
+    private void boxSevere5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxSevere5ActionPerformed
+
+    private void boxSevere6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxSevere6ActionPerformed
+
+    private void boxSevere7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxSevere7ActionPerformed
+
+    private void boxSevere8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxSevere8ActionPerformed
+
+    private void boxSevere9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxSevere9ActionPerformed
+
+    private void boxSevere10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxSevere10ActionPerformed
+
+    private void boxSevere11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxSevere11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +201,23 @@ public class ScreeningScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BkgroundScreen;
+    private javax.swing.JCheckBox boxSevere1;
+    private javax.swing.JCheckBox boxSevere10;
+    private javax.swing.JCheckBox boxSevere11;
+    private javax.swing.JCheckBox boxSevere2;
+    private javax.swing.JCheckBox boxSevere3;
+    private javax.swing.JCheckBox boxSevere4;
+    private javax.swing.JCheckBox boxSevere5;
+    private javax.swing.JCheckBox boxSevere6;
+    private javax.swing.JCheckBox boxSevere7;
+    private javax.swing.JCheckBox boxSevere8;
+    private javax.swing.JCheckBox boxSevere9;
+    private javax.swing.JComboBox<String> jcbPainLevel;
+    private javax.swing.JComboBox<String> jcbPregnant;
+    private javax.swing.JSlider sldTemp;
+    private javax.swing.JTextField txtDate;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtTemperature;
     // End of variables declaration//GEN-END:variables
 }

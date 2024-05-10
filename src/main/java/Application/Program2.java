@@ -5,11 +5,8 @@ import DataEntities.QueuesPriorityStatus;
 import DataEntities.StackArryList;
 import DataEntities.Symptoms;
 import Entities.Patient;
-import Entities.enums.PriorityStatus;
-import Entities.enums.Status;
 import Entities.enums.SymptomsStatus;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Program2 {
 

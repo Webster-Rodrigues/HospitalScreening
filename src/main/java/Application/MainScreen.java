@@ -33,7 +33,6 @@ public class MainScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         getContentPane().add(scpPatientDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, 390, 450));
 
         btnServePatient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnChamar.png"))); // NOI18N
@@ -65,6 +64,11 @@ public class MainScreen extends javax.swing.JFrame {
                 btnScreeningMouseExited(evt);
             }
         });
+        btnScreening.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnScreeningActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnScreening, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 120, 40));
 
         BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/imgFundo.png"))); // NOI18N
@@ -75,7 +79,7 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnServePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServePatientActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnServePatientActionPerformed
 
     private void btnServePatientMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnServePatientMouseEntered
@@ -94,9 +98,10 @@ public class MainScreen extends javax.swing.JFrame {
         btnScreening.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnTriagem.png")));
     }//GEN-LAST:event_btnScreeningMouseExited
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnScreeningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScreeningActionPerformed
+        new ScreeningScreen().setVisible(true);
+    }//GEN-LAST:event_btnScreeningActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
