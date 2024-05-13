@@ -1,5 +1,8 @@
 package Application;
 
+import DataEntities.StackArryList;
+import DataEntities.Symptoms;
+import Entities.enums.SymptomsStatus;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,6 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
 public class ScreeningScreen extends javax.swing.JFrame {
+
+    private StackArryList stackSymptoms;
 
     public ScreeningScreen() {
         formatDatetxt();
@@ -48,7 +53,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
         txtName = new javax.swing.JTextField();
         cbxPainLevel = new javax.swing.JComboBox<>();
-        cbxPregnant = new javax.swing.JComboBox<>();
+        cbxPregnant = new javax.swing.JComboBox<String>();
         txtTemperature = new javax.swing.JTextField();
         sldTemp = new javax.swing.JSlider();
         boxSevere2 = new javax.swing.JCheckBox();
@@ -68,6 +73,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
         btnRegister = new javax.swing.JButton();
         ftxtRG = new javax.swing.JFormattedTextField(formatRGtxt());
         BkgroundScreen = new javax.swing.JLabel();
+        jScrollBar1 = new javax.swing.JScrollBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -91,8 +97,26 @@ public class ScreeningScreen extends javax.swing.JFrame {
         txtTemperature.setBorder(null);
         getContentPane().add(txtTemperature, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 140, 30));
         getContentPane().add(sldTemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 130, 20));
+
+        boxSevere2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxSevere2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(boxSevere2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 487, 20, 40));
+
+        boxSevere3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxSevere3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(boxSevere3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 520, 20, 40));
+
+        boxSevere4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxSevere4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(boxSevere4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, 20, 40));
 
         boxSevere1.addActionListener(new java.awt.event.ActionListener() {
@@ -206,6 +230,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
         BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaTriagem.png"))); // NOI18N
         getContentPane().add(BkgroundScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1093, -1));
+        getContentPane().add(jScrollBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -216,35 +241,43 @@ public class ScreeningScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void boxSevere1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere1ActionPerformed
-        // TODO add your handling code here:
+        Symptoms sympt = new Symptoms("Convulsão", SymptomsStatus.GRAVISSIMO);
+        stackSymptoms.push(sympt);
     }//GEN-LAST:event_boxSevere1ActionPerformed
 
     private void boxSevere5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere5ActionPerformed
-        // TODO add your handling code here:
+        Symptoms sympt = new Symptoms("", SymptomsStatus.GRAVISSIMO);
+        stackSymptoms.push(sympt);
     }//GEN-LAST:event_boxSevere5ActionPerformed
 
     private void boxSevere6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere6ActionPerformed
-        // TODO add your handling code here:
+        Symptoms sympt = new Symptoms("Vômito persistente", SymptomsStatus.NORMAL);
+        stackSymptoms.push(sympt);
     }//GEN-LAST:event_boxSevere6ActionPerformed
 
     private void boxSevere7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere7ActionPerformed
-        // TODO add your handling code here:
+        Symptoms sympt = new Symptoms("Náuseas", SymptomsStatus.LEVE);
+        stackSymptoms.push(sympt);
     }//GEN-LAST:event_boxSevere7ActionPerformed
 
     private void boxSevere8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere8ActionPerformed
-        // TODO add your handling code here:
+        Symptoms sympt = new Symptoms("Hemorragia incontrolável", SymptomsStatus.GRAVE);
+        stackSymptoms.push(sympt);
     }//GEN-LAST:event_boxSevere8ActionPerformed
 
     private void boxSevere9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere9ActionPerformed
-        // TODO add your handling code here:
+        Symptoms sympt = new Symptoms("Alteração do estado de consciência", SymptomsStatus.GRAVE);
+        stackSymptoms.push(sympt);
     }//GEN-LAST:event_boxSevere9ActionPerformed
 
     private void boxSevere10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere10ActionPerformed
-        // TODO add your handling code here:
+        Symptoms sympt = new Symptoms("Trauma craniano severo", SymptomsStatus.GRAVE);
+        stackSymptoms.push(sympt);
     }//GEN-LAST:event_boxSevere10ActionPerformed
 
     private void boxSevere11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere11ActionPerformed
-        // TODO add your handling code here:
+        Symptoms sympt = new Symptoms("Pequena hemorragia", SymptomsStatus.NORMAL);
+        stackSymptoms.push(sympt);
     }//GEN-LAST:event_boxSevere11ActionPerformed
 
     private void ftxtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtDateActionPerformed
@@ -252,7 +285,12 @@ public class ScreeningScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_ftxtDateActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        // TODO add your handling code here:
+        String name = txtName.getText();
+        String sex = cbxSex.getSelectedItem().toString();
+        String date = ftxtDate.getText();
+        String isPregnant = cbxPregnant.getSelectedItem().toString();
+        String RG = ftxtRG.getText();
+
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnRegisterMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseEntered
@@ -283,8 +321,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
                 ftxtDate.setFocusLostBehavior(JFormattedTextField.PERSIST);
                 ftxtDate.setText("");
                 ftxtDate.setValue(null);
-            } 
-            else {
+            } else {
                 ftxtDate.setValue(sdf.format(date));
             }
 
@@ -309,6 +346,21 @@ public class ScreeningScreen extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_ftxtRGFocusLost
+
+    private void boxSevere2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere2ActionPerformed
+        Symptoms sympt = new Symptoms("Respiração ineficaz", SymptomsStatus.GRAVISSIMO);
+        stackSymptoms.push(sympt);
+    }//GEN-LAST:event_boxSevere2ActionPerformed
+
+    private void boxSevere3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere3ActionPerformed
+        Symptoms sympt = new Symptoms("Choque", SymptomsStatus.GRAVISSIMO);
+        stackSymptoms.push(sympt);
+    }//GEN-LAST:event_boxSevere3ActionPerformed
+
+    private void boxSevere4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere4ActionPerformed
+        Symptoms sympt = new Symptoms("Não responde a estímulos", SymptomsStatus.GRAVISSIMO);
+        stackSymptoms.push(sympt);
+    }//GEN-LAST:event_boxSevere4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,6 +417,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxSex;
     private javax.swing.JFormattedTextField ftxtDate;
     private javax.swing.JFormattedTextField ftxtRG;
+    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JSlider sldTemp;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtTemperature;

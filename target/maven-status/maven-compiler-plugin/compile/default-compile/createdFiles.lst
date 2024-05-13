@@ -7,7 +7,6 @@ DataEntities\CustomQueue.class
 Application\MainScreen$4.class
 Application\ScreeningScreen$8.class
 Application\ScreeningScreen$1.class
-DataEntities\QueuesPriorityStatus.class
 DataEntities\QueuesPriority.class
 Application\MainScreen.class
 DataEntities\CustomQueueShape.class
@@ -27,7 +26,6 @@ DataEntities\Symptoms.class
 Application\ScreeningScreen$2.class
 Application\MainScreen$1.class
 Application\ScreeningScreen$12.class
-Application\Program.class
 Application\ScreeningScreen.class
 Entities\enums\PriorityStatus.class
 Application\ScreeningScreen$15.class

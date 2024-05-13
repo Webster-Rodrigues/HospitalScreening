@@ -108,15 +108,8 @@ public class CustomQueue<T extends IntValue> implements CustomQueueShape<T>, Com
         return customQueue.equals(o);
     }
 
-    /*@Override
-    public boolean validateRG(String RG) {
-        for (T element : customQueue) {
-            if (element.equals(RG)) {
-                return true;
-            }
-        }
-        return false;
-
-    }*/
-
+    @Override
+    public int hashCode(){
+        return customQueue.hashCode();
+    }
 }

@@ -1,14 +1,21 @@
 package Application;
 
+import ConversionTools.conversions;
 import DataEntities.QueuesPriority;
 import DataEntities.StackArryList;
 import DataEntities.Symptoms;
 import Entities.Patient;
 import Entities.enums.SymptomsStatus;
 
+
+
 public class Program2 {
 
     public static void main(String[] args) {
+        conversions calculator = new conversions();
+        String dateOfBirth = "21/04/2003"; 
+        int age = calculator.conversionForAge(dateOfBirth);
+        System.out.println("Idade: " + age);
 
         StackArryList filaSintomas1 = new StackArryList();
         StackArryList filaSintomas2 = new StackArryList();
