@@ -1,6 +1,6 @@
 package Application;
 
-import DataEntities.StackArryList;
+import DataEntities.QueueSymptoms;
 import DataEntities.Symptoms;
 import Entities.enums.SymptomsStatus;
 import java.awt.Color;
@@ -13,7 +13,7 @@ import javax.swing.text.MaskFormatter;
 
 public class ScreeningScreen extends javax.swing.JFrame {
 
-    private StackArryList stackSymptoms;
+    private QueueSymptoms listSymptoms;
 
     public ScreeningScreen() {
         formatDatetxt();
@@ -242,42 +242,42 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
     private void boxSevere1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere1ActionPerformed
         Symptoms sympt = new Symptoms("Convulsão", SymptomsStatus.GRAVISSIMO);
-        stackSymptoms.push(sympt);
+        listSymptoms.enqueue(sympt);
     }//GEN-LAST:event_boxSevere1ActionPerformed
 
     private void boxSevere5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere5ActionPerformed
         Symptoms sympt = new Symptoms("", SymptomsStatus.GRAVISSIMO);
-        stackSymptoms.push(sympt);
+        listSymptoms.enqueue(sympt);
     }//GEN-LAST:event_boxSevere5ActionPerformed
 
     private void boxSevere6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere6ActionPerformed
         Symptoms sympt = new Symptoms("Vômito persistente", SymptomsStatus.NORMAL);
-        stackSymptoms.push(sympt);
+        listSymptoms.enqueue(sympt);
     }//GEN-LAST:event_boxSevere6ActionPerformed
 
     private void boxSevere7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere7ActionPerformed
         Symptoms sympt = new Symptoms("Náuseas", SymptomsStatus.LEVE);
-        stackSymptoms.push(sympt);
+        listSymptoms.enqueue(sympt);
     }//GEN-LAST:event_boxSevere7ActionPerformed
 
     private void boxSevere8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere8ActionPerformed
         Symptoms sympt = new Symptoms("Hemorragia incontrolável", SymptomsStatus.GRAVE);
-        stackSymptoms.push(sympt);
+        listSymptoms.enqueue(sympt);
     }//GEN-LAST:event_boxSevere8ActionPerformed
 
     private void boxSevere9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere9ActionPerformed
         Symptoms sympt = new Symptoms("Alteração do estado de consciência", SymptomsStatus.GRAVE);
-        stackSymptoms.push(sympt);
+        listSymptoms.enqueue(sympt);
     }//GEN-LAST:event_boxSevere9ActionPerformed
 
     private void boxSevere10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere10ActionPerformed
         Symptoms sympt = new Symptoms("Trauma craniano severo", SymptomsStatus.GRAVE);
-        stackSymptoms.push(sympt);
+        listSymptoms.enqueue(sympt);
     }//GEN-LAST:event_boxSevere10ActionPerformed
 
     private void boxSevere11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere11ActionPerformed
         Symptoms sympt = new Symptoms("Pequena hemorragia", SymptomsStatus.NORMAL);
-        stackSymptoms.push(sympt);
+        listSymptoms.enqueue(sympt);
     }//GEN-LAST:event_boxSevere11ActionPerformed
 
     private void ftxtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtDateActionPerformed
@@ -349,17 +349,17 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
     private void boxSevere2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere2ActionPerformed
         Symptoms sympt = new Symptoms("Respiração ineficaz", SymptomsStatus.GRAVISSIMO);
-        stackSymptoms.push(sympt);
+        listSymptoms.enqueue(sympt);
     }//GEN-LAST:event_boxSevere2ActionPerformed
 
     private void boxSevere3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere3ActionPerformed
         Symptoms sympt = new Symptoms("Choque", SymptomsStatus.GRAVISSIMO);
-        stackSymptoms.push(sympt);
+        listSymptoms.enqueue(sympt);
     }//GEN-LAST:event_boxSevere3ActionPerformed
 
     private void boxSevere4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere4ActionPerformed
         Symptoms sympt = new Symptoms("Não responde a estímulos", SymptomsStatus.GRAVISSIMO);
-        stackSymptoms.push(sympt);
+        listSymptoms.enqueue(sympt);
     }//GEN-LAST:event_boxSevere4ActionPerformed
 
     /**

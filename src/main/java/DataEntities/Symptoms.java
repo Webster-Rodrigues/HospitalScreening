@@ -3,7 +3,7 @@ package DataEntities;
 
 import Entities.enums.SymptomsStatus;
 
-public class Symptoms {
+public class Symptoms implements IntValue{
     
     private String nameSymptoms;
     private SymptomsStatus status;
@@ -34,6 +34,10 @@ public class Symptoms {
     public String toString(){
         return "Sintoma: " + nameSymptoms + ", Categoria: " + status;
     }
-
+    
+    @Override
+    public int getValue(){
+        return status.ordinal();
+    }
     
 }

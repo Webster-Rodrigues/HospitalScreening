@@ -1,57 +1,29 @@
+
 package DataEntities;
 
 import Entities.enums.SymptomsStatus;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
-public class StackArryList {
-
-    private List<Symptoms> elements;
-
-    public StackArryList() {
-        this.elements = new ArrayList<>();
+public class QueueSymptoms extends CustomQueue<Symptoms> {
+    
+    public QueueSymptoms(){
+        super();
     }
-
-    public void push(Symptoms symptoms) {
-        elements.add(symptoms);
-    }
-
-    public Symptoms pop() {
-        if (isEmpty()) {
-            throw new IllegalStateException("A pilha está vazia");
+    
+    @Override
+    public void enqueue(Symptoms symptoms) {
+        if(customQueue.equals(symptoms)){
+            JOptionPane.showMessageDialog(null, "Sintoma já adicionado a lista!!");
+            return;
         }
-        return elements.remove(elements.size() - 1);
-    }
-
-    public Symptoms peek() {
-        if (isEmpty()) {
-            throw new IllegalStateException("A pilha está vazia");
+        else{
+            customQueue.add(symptoms);
         }
-        return elements.get(elements.size() - 1);
     }
-
-    public boolean isEmpty() {
-        return elements.isEmpty();
-    }
-
-    public int size() {
-        return elements.size();
-    }
-
-    public Symptoms displayStack() {
-        for (Symptoms symptoms : elements) {
-            if (!isEmpty()) {
-                System.out.println(symptoms);
-            } else {
-                throw new IllegalStateException("A pilha está vazia");
-            }
-        }
-        return null;
-
-    }
-
+    
+    
     public Map<SymptomsStatus, Integer> countSymptomsStatus() {
         Map<SymptomsStatus, Integer> statusCounter = new HashMap<>();
 
@@ -59,7 +31,7 @@ public class StackArryList {
             statusCounter.put(status, 0);
         }
 
-        for (Symptoms symptoms : elements) {
+        for (Symptoms symptoms : customQueue) {
             int count = statusCounter.get(symptoms.getStatus());
             statusCounter.put(symptoms.getStatus(), count + 1);
         }
@@ -89,7 +61,7 @@ public class StackArryList {
     }
 
     public boolean checkSymptomsSerious() {
-        for (Symptoms symptoms : elements) {
+        for (Symptoms symptoms : customQueue) {
             SymptomsStatus status = symptoms.getStatus();
             if (status == SymptomsStatus.GRAVE) {
                 return true;
@@ -99,7 +71,7 @@ public class StackArryList {
     }
     
     public boolean checkSymptomsCritical() {
-        for (Symptoms symptoms : elements) {
+        for (Symptoms symptoms : customQueue) {
             SymptomsStatus status = symptoms.getStatus();
             if (status == SymptomsStatus.GRAVISSIMO) {
                 return true;
@@ -107,5 +79,5 @@ public class StackArryList {
         }
         return false; 
     }
-
+    
 }

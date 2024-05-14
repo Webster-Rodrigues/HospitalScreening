@@ -1,7 +1,7 @@
 package Entities;
 
 import DataEntities.IntValue;
-import DataEntities.StackArryList;
+import DataEntities.QueueSymptoms;
 import Entities.enums.PriorityStatus;
 import Entities.enums.Status;
 import Entities.enums.SymptomsStatus;
@@ -18,29 +18,29 @@ public class Patient implements IntValue {
     private String RG;
     private Status status;
     private PriorityStatus priorityStatus;
-    private StackArryList stackSymptoms;
+    private QueueSymptoms listSymptoms;
 
     public Patient() {
 
     }
 
-    public Patient(String name, String sex, int age, String RG, Status status, PriorityStatus prioritystatus, StackArryList stackSymptoms) {
+    public Patient(String name, String sex, int age, String RG, Status status, PriorityStatus prioritystatus, QueueSymptoms listSymptoms) {
         this.name = name;
         this.sex = sex;
         this.age = age;
         this.RG = RG;
         this.status = status;
         this.priorityStatus = prioritystatus;
-        this.stackSymptoms = stackSymptoms;
+        this.listSymptoms = listSymptoms;
     }
 
-    public Patient(String name, String sex, int age, boolean isPregnant, String RG, StackArryList stackSymptoms) {
+    public Patient(String name, String sex, int age, boolean isPregnant, String RG, QueueSymptoms listSymptoms) {
         this.name = name;
         this.sex = sex;
         this.age = age;
         this.isPregnant = isPregnant;
         this.RG = RG;
-        this.stackSymptoms = stackSymptoms;
+        this.listSymptoms = listSymptoms;
     }
 
     public String getName() {
@@ -91,14 +91,15 @@ public class Patient implements IntValue {
         this.status = status;
     }
 
-    public StackArryList getStackSymptoms() {
-        return stackSymptoms;
+    public QueueSymptoms getListSymptoms() {
+        return listSymptoms;
     }
 
-    public void setStackSymptoms(StackArryList stackSymptoms) {
-        this.stackSymptoms = stackSymptoms;
+    public void setListSymptoms(QueueSymptoms listSymptoms) {
+        this.listSymptoms = listSymptoms;
     }
 
+    
     public boolean isIsPregnant() {
         return isPregnant;
     }
@@ -135,7 +136,7 @@ public class Patient implements IntValue {
     }
 
     public void displayStackPatient() {
-        stackSymptoms.displayStack();
+        listSymptoms.displayQueue();
 
     }
 
@@ -176,13 +177,13 @@ public class Patient implements IntValue {
     }
 
     public void setStatusPatients(Patient patient) {
-        SymptomsStatus symptomsFreq = patient.getStackSymptoms().showFrequentSymptom();
-        int countFreqSymptoms = patient.getStackSymptoms().maxSymptomsStatus();
+        SymptomsStatus symptomsFreq = patient.getListSymptoms().showFrequentSymptom();
+        int countFreqSymptoms = patient.getListSymptoms().maxSymptomsStatus();
         Status patientStatus;
-        if (patient.getStackSymptoms().checkSymptomsCritical()) {
+        if (patient.getListSymptoms().checkSymptomsCritical()) {
             symptomsFreq = SymptomsStatus.GRAVISSIMO;
             patientStatus = mapSymptomsToStatus(symptomsFreq);
-        } else if (patient.getStackSymptoms().checkSymptomsSerious()) {
+        } else if (patient.getListSymptoms().checkSymptomsSerious()) {
             symptomsFreq = SymptomsStatus.GRAVE;
             patientStatus = mapSymptomsToStatus(symptomsFreq);
         } else if (countFreqSymptoms >= 3 && symptomsFreq == SymptomsStatus.GRAVE) {

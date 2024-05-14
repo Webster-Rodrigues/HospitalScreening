@@ -1,8 +1,8 @@
 package Application;
 
 import ConversionTools.conversions;
+import DataEntities.QueueSymptoms;
 import DataEntities.QueuesPriority;
-import DataEntities.StackArryList;
 import DataEntities.Symptoms;
 import Entities.Patient;
 import Entities.enums.SymptomsStatus;
@@ -17,11 +17,11 @@ public class Program2 {
         int age = calculator.conversionForAge(dateOfBirth);
         System.out.println("Idade: " + age);
 
-        StackArryList filaSintomas1 = new StackArryList();
-        StackArryList filaSintomas2 = new StackArryList();
-        StackArryList filaSintomas3 = new StackArryList();
-        StackArryList filaSintomas4 = new StackArryList();
-        StackArryList filaSintomas5 = new StackArryList();
+        QueueSymptoms filaSintomas1 = new QueueSymptoms();
+        QueueSymptoms filaSintomas2 = new QueueSymptoms();
+        QueueSymptoms filaSintomas3 = new QueueSymptoms();
+        QueueSymptoms filaSintomas4 = new QueueSymptoms();
+        QueueSymptoms filaSintomas5 = new QueueSymptoms();
 
         Symptoms sm1 = new Symptoms("AVC", SymptomsStatus.GRAVISSIMO);
         Symptoms sm2 = new Symptoms("PERNA QUEBRADA", SymptomsStatus.GRAVISSIMO);
@@ -34,28 +34,28 @@ public class Program2 {
         Symptoms sm9 = new Symptoms("Indisposição", SymptomsStatus.MUITO_LEVE);
         Symptoms sm10 = new Symptoms("DOR MUSCULAR", SymptomsStatus.MUITO_LEVE);
 
-        filaSintomas1.push(sm9);
-        filaSintomas1.push(sm10);//MUITO LEVE
+        filaSintomas1.enqueue(sm9);
+        filaSintomas1.enqueue(sm10);//MUITO LEVE
         //filaSintomas1.push(sm3);
         //filaSintomas1.push(sm1);
 
-        filaSintomas2.push(sm8);
-        filaSintomas2.push(sm7); //LEVE
+        filaSintomas2.enqueue(sm8);
+        filaSintomas2.enqueue(sm7); //LEVE
         //filaSintomas2.push(sm4);
         //filaSintomas2.push(sm4);
 
-        filaSintomas3.push(sm6);
-        filaSintomas3.push(sm5);//NORMAL
+        filaSintomas3.enqueue(sm6);
+        filaSintomas3.enqueue(sm5);//NORMAL
         //filaSintomas3.push(sm7);
         //filaSintomas3.push(sm4);
 
-        filaSintomas4.push(sm4);
-        filaSintomas4.push(sm3);//GRAVE
+        filaSintomas4.enqueue(sm4);
+        filaSintomas4.enqueue(sm3);//GRAVE
         //filaSintomas4.push(sm7);
         //filaSintomas4.push(sm4);
 
-        filaSintomas5.push(sm2);
-        filaSintomas5.push(sm1);//GRAVISSÍMO
+        filaSintomas5.enqueue(sm2);
+        filaSintomas5.enqueue(sm1);//GRAVISSÍMO
         //filaSintomas5.push(sm7);
         //filaSintomas5.push(sm4);
 
