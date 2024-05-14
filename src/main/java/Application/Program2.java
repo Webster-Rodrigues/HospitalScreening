@@ -3,15 +3,24 @@ package Application;
 import ConversionTools.conversions;
 import DataEntities.QueueSymptoms;
 import DataEntities.QueuesPriority;
-import DataEntities.Symptoms;
 import Entities.Patient;
+import Entities.Symptoms;
+import Entities.Temp;
 import Entities.enums.SymptomsStatus;
+
 
 
 
 public class Program2 {
 
     public static void main(String[] args) {
+        Temp tempp = new Temp();
+        
+        double test = 47.5;
+        tempp.defineSymptom(test);
+        
+        System.out.println(tempp);
+        
         
         conversions calculator = new conversions();
         String dateOfBirth = "21/04/2003"; 
@@ -113,8 +122,8 @@ public class Program2 {
         System.out.println("Atendendo o paciente ---Allan---");
         qp.dequeue();
 
-        /*
-        Patient patient001 = new Patient("Dora", "Feminino", 40,"179", Status.POUCO_URGENTE,  PriorityStatus.GRAVIDA, filaSintomas2);
+        
+        /*Patient patient001 = new Patient("Dora", "Feminino", 40,"179", Status.POUCO_URGENTE,  PriorityStatus.GRAVIDA, filaSintomas2);
         qp.enqueue(patient001);
         qps.addPatients(qp);
         

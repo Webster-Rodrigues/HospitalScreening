@@ -1,5 +1,6 @@
 package DataEntities;
 
+import Entities.Symptoms;
 import Entities.enums.SymptomsStatus;
 import java.util.HashMap;
 import java.util.Map;

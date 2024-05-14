@@ -1,6 +1,7 @@
 
-package DataEntities;
+package Entities;
 
+import DataEntities.IntValue;
 import Entities.enums.SymptomsStatus;
 
 public class Symptoms implements IntValue{
@@ -8,6 +9,10 @@ public class Symptoms implements IntValue{
     private String nameSymptoms;
     private SymptomsStatus status;
     
+    
+    public  Symptoms(){
+        
+    }
     
     public Symptoms(String nameSymptoms, SymptomsStatus status){
         this.nameSymptoms = nameSymptoms;

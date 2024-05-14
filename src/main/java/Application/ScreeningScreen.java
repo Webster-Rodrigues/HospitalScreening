@@ -3,8 +3,9 @@ package Application;
 import ConversionTools.conversions;
 import DataEntities.QueueSymptoms;
 import DataEntities.QueuesPriority;
-import DataEntities.Symptoms;
+import Entities.Symptoms;
 import Entities.Patient;
+import Entities.Temp;
 import Entities.enums.SymptomsStatus;
 import java.awt.Color;
 import java.text.ParseException;
@@ -50,6 +51,29 @@ public class ScreeningScreen extends javax.swing.JFrame {
             return null;
         }
     }
+    
+    private void clearUserChoices(){
+        txtName.setText("");
+        jlTemp.setText("36.6");
+        ftxtDate.setValue(null);
+        ftxtRG.setValue(null);
+        cbxPainLevel.setSelectedItem(null);
+        cbxSex.setSelectedItem(null);
+        cbxPregnant.setSelectedItem(null);
+        listSymptoms.clear();
+        boxSevere1.setSelected(false);
+        boxSevere2.setSelected(false);
+        boxSevere3.setSelected(false);
+        boxSevere4.setSelected(false);
+        boxSevere5.setSelected(false);
+        boxSevere6.setSelected(false);
+        boxSevere7.setSelected(false);
+        boxSevere8.setSelected(false);
+        boxSevere9.setSelected(false);
+        boxSevere10.setSelected(false);
+        boxSevere11.setSelected(false);
+        
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -58,7 +82,6 @@ public class ScreeningScreen extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         cbxPainLevel = new javax.swing.JComboBox<>();
         cbxPregnant = new javax.swing.JComboBox<String>();
-        txtTemperature = new javax.swing.JTextField();
         sldTemp = new javax.swing.JSlider();
         boxSevere2 = new javax.swing.JCheckBox();
         boxSevere3 = new javax.swing.JCheckBox();
@@ -76,8 +99,8 @@ public class ScreeningScreen extends javax.swing.JFrame {
         btnReturn = new javax.swing.JButton();
         btnRegister = new javax.swing.JButton();
         ftxtRG = new javax.swing.JFormattedTextField(formatRGtxt());
+        jlTemp = new javax.swing.JLabel();
         BkgroundScreen = new javax.swing.JLabel();
-        jScrollBar1 = new javax.swing.JScrollBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -98,8 +121,15 @@ public class ScreeningScreen extends javax.swing.JFrame {
         cbxPregnant.setBorder(null);
         getContentPane().add(cbxPregnant, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 310, 130, 30));
 
-        txtTemperature.setBorder(null);
-        getContentPane().add(txtTemperature, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 140, 30));
+        sldTemp.setMaximum(455);
+        sldTemp.setMinimum(205);
+        sldTemp.setValue(365);
+        sldTemp.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        sldTemp.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sldTempStateChanged(evt);
+            }
+        });
         getContentPane().add(sldTemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 130, 20));
 
         boxSevere2.addActionListener(new java.awt.event.ActionListener() {
@@ -237,9 +267,14 @@ public class ScreeningScreen extends javax.swing.JFrame {
         });
         getContentPane().add(ftxtRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 360, 130, 30));
 
+        jlTemp.setFont(new java.awt.Font("Sitka Subheading", 0, 24)); // NOI18N
+        jlTemp.setForeground(new java.awt.Color(0, 0, 0));
+        jlTemp.setText(" 36.5");
+        jlTemp.setToolTipText("");
+        getContentPane().add(jlTemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 70, 30));
+
         BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaTriagem.png"))); // NOI18N
         getContentPane().add(BkgroundScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1093, -1));
-        getContentPane().add(jScrollBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -329,18 +364,24 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         conversions conversionTools = new conversions();
+        Temp temp = new Temp();
 
         String name = txtName.getText();
         String sex = cbxSex.getSelectedItem().toString();
         String date = ftxtDate.getText();
         String userChoice = cbxPregnant.getSelectedItem().toString();
         String RG = ftxtRG.getText();
+        double temperature = Double.valueOf(jlTemp.getText());
+        temp.defineSymptom(temperature);
+        listSymptoms.enqueue(temp);
 
         int age = conversionTools.conversionForAge(date);
         boolean isPregnant = conversionTools.conversionPregnant(userChoice);
 
         Patient patient = new Patient(name, sex, age, isPregnant, RG, listSymptoms);
         qp.enqueue(patient);
+        
+        clearUserChoices();
 
     }//GEN-LAST:event_btnRegisterActionPerformed
 
@@ -428,7 +469,16 @@ public class ScreeningScreen extends javax.swing.JFrame {
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         qp.priorityPatients();
         qp.displayQueue();
+        for(Patient pt : qp){
+            listSymptoms.displayQueue();
+        }
+        
     }//GEN-LAST:event_btnReturnActionPerformed
+
+    private void sldTempStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldTempStateChanged
+        double value = sldTemp.getValue()/10.0;
+        jlTemp.setText(String.valueOf(value));
+    }//GEN-LAST:event_sldTempStateChanged
 
     /**
      * @param args the command line arguments
@@ -485,9 +535,8 @@ public class ScreeningScreen extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxSex;
     private javax.swing.JFormattedTextField ftxtDate;
     private javax.swing.JFormattedTextField ftxtRG;
-    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JLabel jlTemp;
     private javax.swing.JSlider sldTemp;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtTemperature;
     // End of variables declaration//GEN-END:variables
 }

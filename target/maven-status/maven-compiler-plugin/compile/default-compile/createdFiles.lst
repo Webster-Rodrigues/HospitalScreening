@@ -1,7 +1,9 @@
 Application\ScreeningScreen$7.class
 Application\ScreeningScreen$13.class
+Entities\Temp.class
 Application\ScreeningScreen$16.class
 Application\ScreeningScreen$4.class
+Entities\Symptoms.class
 DataEntities\CustomQueue.class
 Application\MainScreen$4.class
 ConversionTools\conversions.class
@@ -9,6 +11,7 @@ Application\ScreeningScreen$8.class
 Application\ScreeningScreen$19.class
 Application\ScreeningScreen$1.class
 Application\ScreeningScreen$17.class
+TempStatus.class
 DataEntities\QueuesPriority.class
 Application\MainScreen.class
 DataEntities\CustomQueueShape.class
@@ -18,6 +21,7 @@ Application\MainScreen$3.class
 Application\ScreeningScreen$18.class
 Entities\enums\Status.class
 Application\Program2.class
+Application\ScreeningScreen$21.class
 Application\ScreeningScreen$9.class
 Application\ScreeningScreen$11.class
 Application\MainScreen$5.class
@@ -25,7 +29,6 @@ Application\ScreeningScreen$5.class
 Application\MainScreen$2.class
 Entities\enums\SymptomsStatus.class
 Application\ScreeningScreen$14.class
-DataEntities\Symptoms.class
 Application\ScreeningScreen$2.class
 Application\MainScreen$1.class
 Application\ScreeningScreen$12.class
