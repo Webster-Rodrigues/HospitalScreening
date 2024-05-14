@@ -24,16 +24,6 @@ public class Patient implements IntValue {
 
     }
 
-    public Patient(String name, String sex, int age, String RG, Status status, PriorityStatus prioritystatus, QueueSymptoms listSymptoms) {
-        this.name = name;
-        this.sex = sex;
-        this.age = age;
-        this.RG = RG;
-        this.status = status;
-        this.priorityStatus = prioritystatus;
-        this.listSymptoms = listSymptoms;
-    }
-
     public Patient(String name, String sex, int age, boolean isPregnant, String RG, QueueSymptoms listSymptoms) {
         this.name = name;
         this.sex = sex;

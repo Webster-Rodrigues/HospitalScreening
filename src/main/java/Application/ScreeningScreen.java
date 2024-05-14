@@ -1,7 +1,10 @@
 package Application;
 
+import ConversionTools.conversions;
 import DataEntities.QueueSymptoms;
+import DataEntities.QueuesPriority;
 import DataEntities.Symptoms;
+import Entities.Patient;
 import Entities.enums.SymptomsStatus;
 import java.awt.Color;
 import java.text.ParseException;
@@ -13,7 +16,8 @@ import javax.swing.text.MaskFormatter;
 
 public class ScreeningScreen extends javax.swing.JFrame {
 
-    private QueueSymptoms listSymptoms;
+    private QueueSymptoms listSymptoms = new QueueSymptoms();
+    public QueuesPriority qp = new QueuesPriority();
 
     public ScreeningScreen() {
         formatDatetxt();
@@ -201,6 +205,11 @@ public class ScreeningScreen extends javax.swing.JFrame {
                 btnReturnMouseExited(evt);
             }
         });
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 600, 270, 70));
 
         btnRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnRegistrar.png"))); // NOI18N
@@ -242,42 +251,76 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
     private void boxSevere1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere1ActionPerformed
         Symptoms sympt = new Symptoms("Convulsão", SymptomsStatus.GRAVISSIMO);
-        listSymptoms.enqueue(sympt);
+        if (boxSevere1.isSelected()) {
+            listSymptoms.enqueue(sympt);
+        } else {
+            listSymptoms.remove(sympt);
+        }
+
     }//GEN-LAST:event_boxSevere1ActionPerformed
 
     private void boxSevere5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere5ActionPerformed
         Symptoms sympt = new Symptoms("", SymptomsStatus.GRAVISSIMO);
-        listSymptoms.enqueue(sympt);
+        if (boxSevere5.isSelected()) {
+            listSymptoms.enqueue(sympt);
+        } else {
+            listSymptoms.remove(sympt);
+        }
     }//GEN-LAST:event_boxSevere5ActionPerformed
 
     private void boxSevere6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere6ActionPerformed
         Symptoms sympt = new Symptoms("Vômito persistente", SymptomsStatus.NORMAL);
-        listSymptoms.enqueue(sympt);
+        if (boxSevere6.isSelected()) {
+            listSymptoms.enqueue(sympt);
+        } else {
+            listSymptoms.remove(sympt);
+        }
     }//GEN-LAST:event_boxSevere6ActionPerformed
 
     private void boxSevere7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere7ActionPerformed
         Symptoms sympt = new Symptoms("Náuseas", SymptomsStatus.LEVE);
-        listSymptoms.enqueue(sympt);
+        if (boxSevere7.isSelected()) {
+            listSymptoms.enqueue(sympt);
+        } else {
+            listSymptoms.remove(sympt);
+        }
     }//GEN-LAST:event_boxSevere7ActionPerformed
 
     private void boxSevere8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere8ActionPerformed
         Symptoms sympt = new Symptoms("Hemorragia incontrolável", SymptomsStatus.GRAVE);
-        listSymptoms.enqueue(sympt);
+        if (boxSevere8.isSelected()) {
+            listSymptoms.enqueue(sympt);
+        } else {
+            listSymptoms.remove(sympt);
+        }
     }//GEN-LAST:event_boxSevere8ActionPerformed
 
     private void boxSevere9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere9ActionPerformed
         Symptoms sympt = new Symptoms("Alteração do estado de consciência", SymptomsStatus.GRAVE);
-        listSymptoms.enqueue(sympt);
+        if (boxSevere9.isSelected()) {
+            listSymptoms.enqueue(sympt);
+        } else {
+            listSymptoms.remove(sympt);
+        }
     }//GEN-LAST:event_boxSevere9ActionPerformed
 
     private void boxSevere10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere10ActionPerformed
         Symptoms sympt = new Symptoms("Trauma craniano severo", SymptomsStatus.GRAVE);
-        listSymptoms.enqueue(sympt);
+        if (boxSevere10.isSelected()) {
+            listSymptoms.enqueue(sympt);
+        } else {
+            listSymptoms.remove(sympt);
+        }
     }//GEN-LAST:event_boxSevere10ActionPerformed
 
     private void boxSevere11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere11ActionPerformed
         Symptoms sympt = new Symptoms("Pequena hemorragia", SymptomsStatus.NORMAL);
-        listSymptoms.enqueue(sympt);
+        if (boxSevere11.isSelected()) {
+            listSymptoms.enqueue(sympt);
+        } else {
+            listSymptoms.remove(sympt);
+        }
+
     }//GEN-LAST:event_boxSevere11ActionPerformed
 
     private void ftxtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtDateActionPerformed
@@ -285,11 +328,19 @@ public class ScreeningScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_ftxtDateActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        conversions conversionTools = new conversions();
+
         String name = txtName.getText();
         String sex = cbxSex.getSelectedItem().toString();
         String date = ftxtDate.getText();
-        String isPregnant = cbxPregnant.getSelectedItem().toString();
+        String userChoice = cbxPregnant.getSelectedItem().toString();
         String RG = ftxtRG.getText();
+
+        int age = conversionTools.conversionForAge(date);
+        boolean isPregnant = conversionTools.conversionPregnant(userChoice);
+
+        Patient patient = new Patient(name, sex, age, isPregnant, RG, listSymptoms);
+        qp.enqueue(patient);
 
     }//GEN-LAST:event_btnRegisterActionPerformed
 
@@ -349,18 +400,35 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
     private void boxSevere2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere2ActionPerformed
         Symptoms sympt = new Symptoms("Respiração ineficaz", SymptomsStatus.GRAVISSIMO);
-        listSymptoms.enqueue(sympt);
+        if (boxSevere2.isSelected()) {
+            listSymptoms.enqueue(sympt);
+        } else {
+            listSymptoms.remove(sympt);
+        }
     }//GEN-LAST:event_boxSevere2ActionPerformed
 
     private void boxSevere3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere3ActionPerformed
         Symptoms sympt = new Symptoms("Choque", SymptomsStatus.GRAVISSIMO);
-        listSymptoms.enqueue(sympt);
+        if (boxSevere3.isSelected()) {
+            listSymptoms.enqueue(sympt);
+        } else {
+            listSymptoms.remove(sympt);
+        }
     }//GEN-LAST:event_boxSevere3ActionPerformed
 
     private void boxSevere4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere4ActionPerformed
         Symptoms sympt = new Symptoms("Não responde a estímulos", SymptomsStatus.GRAVISSIMO);
-        listSymptoms.enqueue(sympt);
+        if (boxSevere4.isSelected()) {
+            listSymptoms.enqueue(sympt);
+        } else {
+            listSymptoms.remove(sympt);
+        }
     }//GEN-LAST:event_boxSevere4ActionPerformed
+
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+        qp.priorityPatients();
+        qp.displayQueue();
+    }//GEN-LAST:event_btnReturnActionPerformed
 
     /**
      * @param args the command line arguments

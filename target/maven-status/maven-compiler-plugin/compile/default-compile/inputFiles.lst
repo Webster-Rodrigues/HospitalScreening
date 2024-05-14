@@ -4,10 +4,11 @@ C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\DataEntities\
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Entities\enums\Status.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Application\Program2.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\DataEntities\IntValue.java
+C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\ConversionTools\conversions.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Entities\enums\PriorityStatus.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Entities\Patient.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Entities\enums\SymptomsStatus.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Application\ScreeningScreen.java
-C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\DataEntities\StackArryList.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\DataEntities\QueuesPriority.java
+C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\DataEntities\QueueSymptoms.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\DataEntities\Symptoms.java

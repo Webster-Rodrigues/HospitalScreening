@@ -12,6 +12,7 @@ import Entities.enums.SymptomsStatus;
 public class Program2 {
 
     public static void main(String[] args) {
+        
         conversions calculator = new conversions();
         String dateOfBirth = "21/04/2003"; 
         int age = calculator.conversionForAge(dateOfBirth);

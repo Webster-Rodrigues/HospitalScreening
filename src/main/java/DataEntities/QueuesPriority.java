@@ -18,13 +18,13 @@ public class QueuesPriority extends CustomQueue<Patient> {
 
     @Override
     public void enqueue(Patient patient) {
-        try {
-            if (!validateRG(patient.getRG())) {
-                customQueue.add(patient);
-                isModified = true;
-            }
-        } catch (IllegalStateException e) {
-            throw new IllegalStateException("RG já cadastrado! Tente novamente com um RG válido.");
+        if (!validateRG(patient.getRG())) {
+            customQueue.add(patient);
+            isModified = true;
+            JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Esse RG já está sendo usado. Por favo tente novamente com um RG válido!");
         }
     }
 

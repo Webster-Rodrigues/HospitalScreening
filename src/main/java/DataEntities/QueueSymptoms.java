@@ -1,29 +1,24 @@
-
 package DataEntities;
 
 import Entities.enums.SymptomsStatus;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.JOptionPane;
 
 public class QueueSymptoms extends CustomQueue<Symptoms> {
-    
-    public QueueSymptoms(){
+
+    public QueueSymptoms() {
         super();
     }
-    
+
     @Override
     public void enqueue(Symptoms symptoms) {
-        if(customQueue.equals(symptoms)){
-            JOptionPane.showMessageDialog(null, "Sintoma já adicionado a lista!!");
-            return;
-        }
-        else{
+        if (customQueue.equals(symptoms)) {
+            throw new IllegalStateException("Sintoma já adicionado a lista!!");
+        } else {
             customQueue.add(symptoms);
         }
     }
-    
-    
+
     public Map<SymptomsStatus, Integer> countSymptomsStatus() {
         Map<SymptomsStatus, Integer> statusCounter = new HashMap<>();
 
@@ -67,9 +62,9 @@ public class QueueSymptoms extends CustomQueue<Symptoms> {
                 return true;
             }
         }
-        return false; 
+        return false;
     }
-    
+
     public boolean checkSymptomsCritical() {
         for (Symptoms symptoms : customQueue) {
             SymptomsStatus status = symptoms.getStatus();
@@ -77,7 +72,7 @@ public class QueueSymptoms extends CustomQueue<Symptoms> {
                 return true;
             }
         }
-        return false; 
+        return false;
     }
-    
+
 }

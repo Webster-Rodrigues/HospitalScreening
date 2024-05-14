@@ -112,4 +112,10 @@ public class CustomQueue<T extends IntValue> implements CustomQueueShape<T>, Com
     public int hashCode(){
         return customQueue.hashCode();
     }
+    
+    @Override
+    public boolean remove(Object o ){
+        return customQueue.remove(o);        
+    }
+    
 }
