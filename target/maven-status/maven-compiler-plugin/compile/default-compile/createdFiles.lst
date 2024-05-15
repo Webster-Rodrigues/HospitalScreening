@@ -3,15 +3,17 @@ Application\ScreeningScreen$13.class
 Entities\Temp.class
 Application\ScreeningScreen$16.class
 Application\ScreeningScreen$4.class
+Entities\TypePains.class
 Entities\Symptoms.class
 DataEntities\CustomQueue.class
 Application\MainScreen$4.class
+Entities\enums\PainStatus.class
 ConversionTools\conversions.class
+Application\ScreeningScreen$22.class
 Application\ScreeningScreen$8.class
 Application\ScreeningScreen$19.class
 Application\ScreeningScreen$1.class
 Application\ScreeningScreen$17.class
-TempStatus.class
 DataEntities\QueuesPriority.class
 Application\MainScreen.class
 DataEntities\CustomQueueShape.class
@@ -32,6 +34,7 @@ Application\ScreeningScreen$14.class
 Application\ScreeningScreen$2.class
 Application\MainScreen$1.class
 Application\ScreeningScreen$12.class
+Entities\enums\TempStatus.class
 Application\ScreeningScreen.class
 Entities\enums\PriorityStatus.class
 Application\ScreeningScreen$15.class

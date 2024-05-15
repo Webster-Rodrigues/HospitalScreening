@@ -1,29 +1,35 @@
 package Application;
 
 import ConversionTools.conversions;
+import DataEntities.CustomQueue;
 import DataEntities.QueueSymptoms;
 import DataEntities.QueuesPriority;
 import Entities.Symptoms;
 import Entities.Patient;
 import Entities.Temp;
+import Entities.TypePains;
 import Entities.enums.SymptomsStatus;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
 public class ScreeningScreen extends javax.swing.JFrame {
 
-    private QueueSymptoms listSymptoms = new QueueSymptoms();
-    public QueuesPriority qp = new QueuesPriority();
+    public QueuesPriority qp;
 
     public ScreeningScreen() {
+
         formatDatetxt();
         formatRGtxt();
         initComponents();
+
+        qp = new QueuesPriority();
 
         cbxPregnant.setBackground(new Color(0, 0, 0, 0));
         cbxPainLevel.setBackground(new Color(0, 0, 0, 0));
@@ -51,8 +57,8 @@ public class ScreeningScreen extends javax.swing.JFrame {
             return null;
         }
     }
-    
-    private void clearUserChoices(){
+
+    private void clearUserChoices() {
         txtName.setText("");
         jlTemp.setText("36.6");
         ftxtDate.setValue(null);
@@ -60,7 +66,6 @@ public class ScreeningScreen extends javax.swing.JFrame {
         cbxPainLevel.setSelectedItem(null);
         cbxSex.setSelectedItem(null);
         cbxPregnant.setSelectedItem(null);
-        listSymptoms.clear();
         boxSevere1.setSelected(false);
         boxSevere2.setSelected(false);
         boxSevere3.setSelected(false);
@@ -72,7 +77,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
         boxSevere9.setSelected(false);
         boxSevere10.setSelected(false);
         boxSevere11.setSelected(false);
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -115,6 +120,11 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
         cbxPainLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sem Dores", "Dores Leves", "Dores Moderadas", "Dores Severas" }));
         cbxPainLevel.setBorder(null);
+        cbxPainLevel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxPainLevelActionPerformed(evt);
+            }
+        });
         getContentPane().add(cbxPainLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 190, 30));
 
         cbxPregnant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
@@ -285,76 +295,72 @@ public class ScreeningScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void boxSevere1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere1ActionPerformed
-        Symptoms sympt = new Symptoms("Convulsão", SymptomsStatus.GRAVISSIMO);
-        if (boxSevere1.isSelected()) {
-            listSymptoms.enqueue(sympt);
-        } else {
-            listSymptoms.remove(sympt);
-        }
 
     }//GEN-LAST:event_boxSevere1ActionPerformed
 
-    private void boxSevere5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere5ActionPerformed
-        Symptoms sympt = new Symptoms("", SymptomsStatus.GRAVISSIMO);
-        if (boxSevere5.isSelected()) {
-            listSymptoms.enqueue(sympt);
-        } else {
-            listSymptoms.remove(sympt);
+    public void addCheckBoxs(QueueSymptoms listSymptoms) {
+        ArrayList<JCheckBox> checkboxes = new ArrayList<>();
+        checkboxes.add(boxSevere1);
+        checkboxes.add(boxSevere2);
+        checkboxes.add(boxSevere3);
+        checkboxes.add(boxSevere4);
+        checkboxes.add(boxSevere5);
+        checkboxes.add(boxSevere6);
+        checkboxes.add(boxSevere7);
+        checkboxes.add(boxSevere8);
+        checkboxes.add(boxSevere9);
+        checkboxes.add(boxSevere10);
+        checkboxes.add(boxSevere11);
+
+        CustomQueue<Symptoms> symptomsList = new CustomQueue<>();
+        symptomsList.enqueue(new Symptoms("Vias aéreas comprometidas", SymptomsStatus.GRAVISSIMO));
+        symptomsList.enqueue(new Symptoms("Respiração ineficaz", SymptomsStatus.GRAVISSIMO));
+        symptomsList.enqueue(new Symptoms("Choque", SymptomsStatus.GRAVISSIMO));
+        symptomsList.enqueue(new Symptoms("Não responde a estímulos", SymptomsStatus.GRAVISSIMO));
+        symptomsList.enqueue(new Symptoms("Convulsão", SymptomsStatus.GRAVISSIMO));
+        symptomsList.enqueue(new Symptoms("Pequena hemorragia", SymptomsStatus.NORMAL));
+        symptomsList.enqueue(new Symptoms("Náuseas", SymptomsStatus.LEVE));
+        symptomsList.enqueue(new Symptoms("Hemorragia incontrolável", SymptomsStatus.GRAVE));
+        symptomsList.enqueue(new Symptoms("Alteração do estado de consciência", SymptomsStatus.GRAVE));
+        symptomsList.enqueue(new Symptoms("Trauma craniano severo", SymptomsStatus.GRAVE));
+        symptomsList.enqueue(new Symptoms("Vômito persistente", SymptomsStatus.NORMAL));
+
+        for (int i = 0; i < checkboxes.size(); i++) {
+            JCheckBox checkbox = checkboxes.get(i);
+            if (checkbox.isSelected()) {
+                Symptoms symptom = symptomsList.get(i);
+                listSymptoms.enqueue(symptom);
+            }
         }
+    }
+
+    private void boxSevere5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere5ActionPerformed
+     
     }//GEN-LAST:event_boxSevere5ActionPerformed
 
     private void boxSevere6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere6ActionPerformed
-        Symptoms sympt = new Symptoms("Vômito persistente", SymptomsStatus.NORMAL);
-        if (boxSevere6.isSelected()) {
-            listSymptoms.enqueue(sympt);
-        } else {
-            listSymptoms.remove(sympt);
-        }
+       
     }//GEN-LAST:event_boxSevere6ActionPerformed
 
     private void boxSevere7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere7ActionPerformed
-        Symptoms sympt = new Symptoms("Náuseas", SymptomsStatus.LEVE);
-        if (boxSevere7.isSelected()) {
-            listSymptoms.enqueue(sympt);
-        } else {
-            listSymptoms.remove(sympt);
-        }
+       
     }//GEN-LAST:event_boxSevere7ActionPerformed
 
     private void boxSevere8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere8ActionPerformed
-        Symptoms sympt = new Symptoms("Hemorragia incontrolável", SymptomsStatus.GRAVE);
-        if (boxSevere8.isSelected()) {
-            listSymptoms.enqueue(sympt);
-        } else {
-            listSymptoms.remove(sympt);
-        }
+      
     }//GEN-LAST:event_boxSevere8ActionPerformed
 
     private void boxSevere9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere9ActionPerformed
-        Symptoms sympt = new Symptoms("Alteração do estado de consciência", SymptomsStatus.GRAVE);
-        if (boxSevere9.isSelected()) {
-            listSymptoms.enqueue(sympt);
-        } else {
-            listSymptoms.remove(sympt);
-        }
+
+      
     }//GEN-LAST:event_boxSevere9ActionPerformed
 
     private void boxSevere10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere10ActionPerformed
-        Symptoms sympt = new Symptoms("Trauma craniano severo", SymptomsStatus.GRAVE);
-        if (boxSevere10.isSelected()) {
-            listSymptoms.enqueue(sympt);
-        } else {
-            listSymptoms.remove(sympt);
-        }
+    
     }//GEN-LAST:event_boxSevere10ActionPerformed
 
     private void boxSevere11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere11ActionPerformed
-        Symptoms sympt = new Symptoms("Pequena hemorragia", SymptomsStatus.NORMAL);
-        if (boxSevere11.isSelected()) {
-            listSymptoms.enqueue(sympt);
-        } else {
-            listSymptoms.remove(sympt);
-        }
+        
 
     }//GEN-LAST:event_boxSevere11ActionPerformed
 
@@ -365,6 +371,8 @@ public class ScreeningScreen extends javax.swing.JFrame {
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         conversions conversionTools = new conversions();
         Temp temp = new Temp();
+        TypePains tps = new TypePains();
+        QueueSymptoms listSymptoms1 = new QueueSymptoms();
 
         String name = txtName.getText();
         String sex = cbxSex.getSelectedItem().toString();
@@ -373,15 +381,20 @@ public class ScreeningScreen extends javax.swing.JFrame {
         String RG = ftxtRG.getText();
         double temperature = Double.valueOf(jlTemp.getText());
         temp.defineSymptom(temperature);
-        listSymptoms.enqueue(temp);
+        listSymptoms1.enqueue(temp);
+        
+        addCheckBoxs(listSymptoms1);
+
+        String pain = cbxPainLevel.getSelectedItem().toString();
+        tps.defineSymptom(pain);
+        listSymptoms1.enqueue(tps);
 
         int age = conversionTools.conversionForAge(date);
         boolean isPregnant = conversionTools.conversionPregnant(userChoice);
 
-        Patient patient = new Patient(name, sex, age, isPregnant, RG, listSymptoms);
+        Patient patient = new Patient(name, sex, age, isPregnant, RG, listSymptoms1);
         qp.enqueue(patient);
-        
-        clearUserChoices();
+        qp.priorityPatients();
 
     }//GEN-LAST:event_btnRegisterActionPerformed
 
@@ -440,45 +453,33 @@ public class ScreeningScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_ftxtRGFocusLost
 
     private void boxSevere2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere2ActionPerformed
-        Symptoms sympt = new Symptoms("Respiração ineficaz", SymptomsStatus.GRAVISSIMO);
-        if (boxSevere2.isSelected()) {
-            listSymptoms.enqueue(sympt);
-        } else {
-            listSymptoms.remove(sympt);
-        }
+       
     }//GEN-LAST:event_boxSevere2ActionPerformed
 
     private void boxSevere3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere3ActionPerformed
-        Symptoms sympt = new Symptoms("Choque", SymptomsStatus.GRAVISSIMO);
-        if (boxSevere3.isSelected()) {
-            listSymptoms.enqueue(sympt);
-        } else {
-            listSymptoms.remove(sympt);
-        }
+        
     }//GEN-LAST:event_boxSevere3ActionPerformed
 
     private void boxSevere4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere4ActionPerformed
-        Symptoms sympt = new Symptoms("Não responde a estímulos", SymptomsStatus.GRAVISSIMO);
-        if (boxSevere4.isSelected()) {
-            listSymptoms.enqueue(sympt);
-        } else {
-            listSymptoms.remove(sympt);
-        }
+       
     }//GEN-LAST:event_boxSevere4ActionPerformed
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        qp.priorityPatients();
         qp.displayQueue();
-        for(Patient pt : qp){
-            listSymptoms.displayQueue();
+        for (Patient pt : qp) {
+            pt.getListSymptoms().displayQueue();
         }
-        
+
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void sldTempStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldTempStateChanged
-        double value = sldTemp.getValue()/10.0;
+        double value = sldTemp.getValue() / 10.0;
         jlTemp.setText(String.valueOf(value));
     }//GEN-LAST:event_sldTempStateChanged
+
+    private void cbxPainLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPainLevelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxPainLevelActionPerformed
 
     /**
      * @param args the command line arguments

@@ -6,6 +6,7 @@ import DataEntities.QueuesPriority;
 import Entities.Patient;
 import Entities.Symptoms;
 import Entities.Temp;
+import Entities.TypePains;
 import Entities.enums.SymptomsStatus;
 
 
@@ -14,9 +15,16 @@ import Entities.enums.SymptomsStatus;
 public class Program2 {
 
     public static void main(String[] args) {
+        TypePains tp = new TypePains();
+        String st = "Dores Severas";
+        
+        
+        tp.defineSymptom(st);
+        System.out.println(tp);
+        
         Temp tempp = new Temp();
         
-        double test = 47.5;
+        double test = 39.6;
         tempp.defineSymptom(test);
         
         System.out.println(tempp);
@@ -59,13 +67,13 @@ public class Program2 {
         //filaSintomas3.push(sm7);
         //filaSintomas3.push(sm4);
 
-        filaSintomas4.enqueue(sm4);
-        filaSintomas4.enqueue(sm3);//GRAVE
+        filaSintomas4.enqueue(tempp);
+        //filaSintomas4.enqueue(sm3);//GRAVE
         //filaSintomas4.push(sm7);
         //filaSintomas4.push(sm4);
 
-        filaSintomas5.enqueue(sm2);
-        filaSintomas5.enqueue(sm1);//GRAVISSÍMO
+        filaSintomas5.enqueue(tp);
+        //filaSintomas5.enqueue(sm1);//GRAVISSÍMO
         //filaSintomas5.push(sm7);
         //filaSintomas5.push(sm4);
 
@@ -97,6 +105,7 @@ public class Program2 {
 
         System.out.println("Atendendo o paciente ---Alice---");
         qp.dequeue();
+        qp.displayQueue();
 
         System.out.println("Atendendo o paciente ---Luiza---");
         qp.dequeue();
