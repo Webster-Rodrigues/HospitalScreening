@@ -17,6 +17,8 @@ public class MainScreen extends javax.swing.JFrame {
     public MainScreen() {
         initComponents();
 
+        qp = new QueuesPriority();
+
     }
 
     public MainScreen(QueuesPriority qp) {
@@ -34,7 +36,6 @@ public class MainScreen extends javax.swing.JFrame {
             labelsPatient.setText(patient.toString());
             panel.add(labelsPatient);
         }
-
         patientsDashboard.setViewportView(panel);
     }
 
@@ -116,10 +117,8 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnServePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServePatientActionPerformed
-        qp.displayQueue();
-        for (Patient pt : qp) {
-            pt.getListSymptoms().displayQueue();
-        }
+        qp.dequeue();
+        patientsDashboard.revalidate();
     }//GEN-LAST:event_btnServePatientActionPerformed
 
     private void btnServePatientMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnServePatientMouseEntered
@@ -139,9 +138,13 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnScreeningMouseExited
 
     private void btnScreeningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScreeningActionPerformed
-        new ScreeningScreen().setVisible(true);
-        this.dispose();
+        openScreeningScreen();
     }//GEN-LAST:event_btnScreeningActionPerformed
+
+    public void openScreeningScreen() {
+        ScreeningScreen sc = new ScreeningScreen(qp);
+        sc.setVisible(true);
+    }
 
     private void btnDocMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDocMouseEntered
         btnDoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnDoc2.png")));

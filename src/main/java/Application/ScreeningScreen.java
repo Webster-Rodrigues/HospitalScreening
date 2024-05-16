@@ -35,6 +35,19 @@ public class ScreeningScreen extends javax.swing.JFrame {
         cbxPainLevel.setBackground(new Color(0, 0, 0, 0));
         cbxSex.setBackground(new Color(0, 0, 0, 0));
     }
+    
+    public ScreeningScreen(QueuesPriority qp) {
+
+        formatDatetxt();
+        formatRGtxt();
+        initComponents();
+
+        this.qp = qp;
+
+        cbxPregnant.setBackground(new Color(0, 0, 0, 0));
+        cbxPainLevel.setBackground(new Color(0, 0, 0, 0));
+        cbxSex.setBackground(new Color(0, 0, 0, 0));
+    }
 
     private MaskFormatter formatDatetxt() {
         try {
