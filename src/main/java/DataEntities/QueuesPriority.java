@@ -21,7 +21,7 @@ public class QueuesPriority extends CustomQueue<Patient> {
         if (!validateRG(patient.getRG())) {
             customQueue.add(patient);
             isModified = true;
-            //JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
         }
         else{
             JOptionPane.showMessageDialog(null, "Esse RG já está sendo usado. Por favo tente novamente com um RG válido!");

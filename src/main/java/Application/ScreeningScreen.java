@@ -472,7 +472,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_boxSevere4ActionPerformed
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        qp.displayQueue();
+        //qp.displayQueue();
         openMainScreen();
         this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed

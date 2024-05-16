@@ -1,37 +1,59 @@
-
 package Application;
 
 import DataEntities.QueuesPriority;
 import Entities.Patient;
-
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class MainScreen extends javax.swing.JFrame {
 
     private QueuesPriority qp;
-    
+
     public MainScreen() {
         initComponents();
-        
+
     }
-    
+
     public MainScreen(QueuesPriority qp) {
         initComponents();
         this.qp = qp;
-        
+        patientLabels();
+
+    }
+
+    private void patientLabels() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        for (Patient patient : qp) {
+            JLabel labelsPatient = new javax.swing.JLabel();
+            labelsPatient.setText(patient.toString());
+            panel.add(labelsPatient);
+        }
+
+        patientsDashboard.setViewportView(panel);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scpPatientDashboard = new javax.swing.JScrollPane();
+        patientsDashboard = new javax.swing.JScrollPane();
         btnServePatient = new javax.swing.JButton();
         btnScreening = new javax.swing.JButton();
+        btnDoc = new javax.swing.JButton();
         BkgroundScreen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(scpPatientDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, 390, 450));
+
+        patientsDashboard.setBackground(new java.awt.Color(247, 252, 255));
+        patientsDashboard.setBorder(null);
+        getContentPane().add(patientsDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 130, 370, 440));
 
         btnServePatient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnChamar.png"))); // NOI18N
         btnServePatient.setContentAreaFilled(false);
@@ -49,7 +71,7 @@ public class MainScreen extends javax.swing.JFrame {
                 btnServePatientActionPerformed(evt);
             }
         });
-        getContentPane().add(btnServePatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 120, 30));
+        getContentPane().add(btnServePatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 120, 40));
 
         btnScreening.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnTriagem.png"))); // NOI18N
         btnScreening.setContentAreaFilled(false);
@@ -69,7 +91,24 @@ public class MainScreen extends javax.swing.JFrame {
         });
         getContentPane().add(btnScreening, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 120, 40));
 
-        BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/imgFundo.png"))); // NOI18N
+        btnDoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnDoc.png"))); // NOI18N
+        btnDoc.setContentAreaFilled(false);
+        btnDoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDocMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDocMouseExited(evt);
+            }
+        });
+        btnDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDocActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 120, 40));
+
+        BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/imgFundo .png"))); // NOI18N
         getContentPane().add(BkgroundScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 760));
 
         pack();
@@ -104,6 +143,23 @@ public class MainScreen extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnScreeningActionPerformed
 
+    private void btnDocMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDocMouseEntered
+        btnDoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnDoc2.png")));
+    }//GEN-LAST:event_btnDocMouseEntered
+
+    private void btnDocMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDocMouseExited
+        btnDoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnDoc.png")));
+    }//GEN-LAST:event_btnDocMouseExited
+
+    private void btnDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocActionPerformed
+        try {
+            Desktop.getDesktop().browse(new URI("https://github.com/Andrey-de-Freitas-Souza/Projeto-EDAA/blob/main/FilaPrioridade.pdf"));
+        } catch (IOException | URISyntaxException ex) {
+            ex.printStackTrace();
+        }
+
+    }//GEN-LAST:event_btnDocActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -115,16 +171,24 @@ public class MainScreen extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainScreen.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainScreen.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainScreen.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainScreen.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -138,8 +202,9 @@ public class MainScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BkgroundScreen;
+    private javax.swing.JButton btnDoc;
     private javax.swing.JButton btnScreening;
     private javax.swing.JButton btnServePatient;
-    private javax.swing.JScrollPane scpPatientDashboard;
+    private javax.swing.JScrollPane patientsDashboard;
     // End of variables declaration//GEN-END:variables
 }
