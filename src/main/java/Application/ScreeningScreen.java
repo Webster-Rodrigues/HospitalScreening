@@ -57,7 +57,8 @@ public class ScreeningScreen extends javax.swing.JFrame {
             return null;
         }
     }
-
+    
+    //revisar
     private void clearUserChoices() {
         txtName.setText("");
         jlTemp.setText("36.6");
@@ -78,6 +79,10 @@ public class ScreeningScreen extends javax.swing.JFrame {
         boxSevere10.setSelected(false);
         boxSevere11.setSelected(false);
 
+    }
+
+    public QueuesPriority getQueuesPriority() {
+        return qp;
     }
 
     @SuppressWarnings("unchecked")
@@ -298,6 +303,36 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_boxSevere1ActionPerformed
 
+    public void registerPatient() {
+        conversions conversionTools = new conversions();
+        Temp temp = new Temp();
+        TypePains tps = new TypePains();
+        QueueSymptoms listSymptoms1 = new QueueSymptoms();
+
+        String name = txtName.getText();
+        String sex = cbxSex.getSelectedItem().toString();
+        String date = ftxtDate.getText();
+        String userChoice = cbxPregnant.getSelectedItem().toString();
+        String RG = ftxtRG.getText();
+        double temperature = Double.parseDouble(jlTemp.getText());
+        temp.defineSymptom(temperature);
+        listSymptoms1.enqueue(temp);
+
+        addCheckBoxs(listSymptoms1);
+
+        String pain = cbxPainLevel.getSelectedItem().toString();
+        tps.defineSymptom(pain);
+        listSymptoms1.enqueue(tps);
+
+        int age = conversionTools.conversionForAge(date);
+        boolean isPregnant = conversionTools.conversionPregnant(userChoice);
+
+        Patient patient = new Patient(name, sex, age, isPregnant, RG, listSymptoms1);
+        qp.enqueue(patient);
+        qp.priorityPatients();
+
+    }
+
     public void addCheckBoxs(QueueSymptoms listSymptoms) {
         ArrayList<JCheckBox> checkboxes = new ArrayList<>();
         checkboxes.add(boxSevere1);
@@ -335,33 +370,31 @@ public class ScreeningScreen extends javax.swing.JFrame {
     }
 
     private void boxSevere5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere5ActionPerformed
-     
+
     }//GEN-LAST:event_boxSevere5ActionPerformed
 
     private void boxSevere6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere6ActionPerformed
-       
+
     }//GEN-LAST:event_boxSevere6ActionPerformed
 
     private void boxSevere7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere7ActionPerformed
-       
+
     }//GEN-LAST:event_boxSevere7ActionPerformed
 
     private void boxSevere8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere8ActionPerformed
-      
+
     }//GEN-LAST:event_boxSevere8ActionPerformed
 
     private void boxSevere9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere9ActionPerformed
 
-      
+
     }//GEN-LAST:event_boxSevere9ActionPerformed
 
     private void boxSevere10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere10ActionPerformed
-    
+
     }//GEN-LAST:event_boxSevere10ActionPerformed
 
     private void boxSevere11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere11ActionPerformed
-        
-
     }//GEN-LAST:event_boxSevere11ActionPerformed
 
     private void ftxtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtDateActionPerformed
@@ -369,33 +402,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_ftxtDateActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        conversions conversionTools = new conversions();
-        Temp temp = new Temp();
-        TypePains tps = new TypePains();
-        QueueSymptoms listSymptoms1 = new QueueSymptoms();
-
-        String name = txtName.getText();
-        String sex = cbxSex.getSelectedItem().toString();
-        String date = ftxtDate.getText();
-        String userChoice = cbxPregnant.getSelectedItem().toString();
-        String RG = ftxtRG.getText();
-        double temperature = Double.valueOf(jlTemp.getText());
-        temp.defineSymptom(temperature);
-        listSymptoms1.enqueue(temp);
-        
-        addCheckBoxs(listSymptoms1);
-
-        String pain = cbxPainLevel.getSelectedItem().toString();
-        tps.defineSymptom(pain);
-        listSymptoms1.enqueue(tps);
-
-        int age = conversionTools.conversionForAge(date);
-        boolean isPregnant = conversionTools.conversionPregnant(userChoice);
-
-        Patient patient = new Patient(name, sex, age, isPregnant, RG, listSymptoms1);
-        qp.enqueue(patient);
-        qp.priorityPatients();
-
+        registerPatient();
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnRegisterMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseEntered
@@ -453,25 +460,29 @@ public class ScreeningScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_ftxtRGFocusLost
 
     private void boxSevere2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere2ActionPerformed
-       
+
     }//GEN-LAST:event_boxSevere2ActionPerformed
 
     private void boxSevere3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere3ActionPerformed
-        
+
     }//GEN-LAST:event_boxSevere3ActionPerformed
 
     private void boxSevere4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSevere4ActionPerformed
-       
+
     }//GEN-LAST:event_boxSevere4ActionPerformed
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         qp.displayQueue();
-        for (Patient pt : qp) {
-            pt.getListSymptoms().displayQueue();
-        }
-
+        openMainScreen();
+        this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed
 
+    public void openMainScreen() {
+        MainScreen mainScreen = new MainScreen(qp);
+        mainScreen.setVisible(true);
+    }
+    
+    
     private void sldTempStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldTempStateChanged
         double value = sldTemp.getValue() / 10.0;
         jlTemp.setText(String.valueOf(value));

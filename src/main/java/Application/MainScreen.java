@@ -1,11 +1,23 @@
 
 package Application;
 
+import DataEntities.QueuesPriority;
+import Entities.Patient;
+
 
 public class MainScreen extends javax.swing.JFrame {
 
+    private QueuesPriority qp;
+    
     public MainScreen() {
         initComponents();
+        
+    }
+    
+    public MainScreen(QueuesPriority qp) {
+        initComponents();
+        this.qp = qp;
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -65,7 +77,10 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnServePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServePatientActionPerformed
-        
+        qp.displayQueue();
+        for (Patient pt : qp) {
+            pt.getListSymptoms().displayQueue();
+        }
     }//GEN-LAST:event_btnServePatientActionPerformed
 
     private void btnServePatientMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnServePatientMouseEntered
@@ -86,6 +101,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void btnScreeningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScreeningActionPerformed
         new ScreeningScreen().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnScreeningActionPerformed
 
     public static void main(String args[]) {
