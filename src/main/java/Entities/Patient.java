@@ -31,7 +31,7 @@ public class Patient implements IntValue {
         this.isPregnant = isPregnant;
         this.RG = RG;
         this.listSymptoms = listSymptoms;
-    }
+    }    
 
     public String getName() {
         return name;

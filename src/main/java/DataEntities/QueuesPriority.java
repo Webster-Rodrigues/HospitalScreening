@@ -22,8 +22,7 @@ public class QueuesPriority extends CustomQueue<Patient> {
             customQueue.add(patient);
             isModified = true;
             //JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Esse RG já está sendo usado. Por favo tente novamente com um RG válido!");
         }
     }
@@ -71,18 +70,18 @@ public class QueuesPriority extends CustomQueue<Patient> {
     public void bucketSortPS(CustomQueue<Patient> patients) {
         CustomQueue<Patient> customQueue = this;
 
-        PriorityStatus minPriorityStatus = PriorityStatus.values()[0];
-        PriorityStatus maxPriorityStatus = PriorityStatus.values()[0];
+        int minPriority = PriorityStatus.values()[0].getPriority();
+        int maxPriority = PriorityStatus.values()[0].getPriority();
         for (Patient patient : patients) {
-            if (patient.getPriorityStatus().ordinal() < minPriorityStatus.ordinal()) {
-                minPriorityStatus = patient.getPriorityStatus();
+            if (patient.getPriorityStatus().getPriority() < minPriority) {
+                minPriority = patient.getPriorityStatus().getPriority();
             }
-            if (patient.getPriorityStatus().ordinal() > maxPriorityStatus.ordinal()) {
-                maxPriorityStatus = patient.getPriorityStatus();
+            if (patient.getPriorityStatus().getPriority() > maxPriority) {
+                maxPriority = patient.getPriorityStatus().getPriority();
             }
         }
 
-        int bucketCount = maxPriorityStatus.ordinal() - minPriorityStatus.ordinal() + 1;
+        int bucketCount = maxPriority - minPriority + 1;
 
         List<CustomQueue<Patient>> buckets = new ArrayList<>(bucketCount);
         for (int i = 0; i < bucketCount; i++) {
@@ -90,7 +89,7 @@ public class QueuesPriority extends CustomQueue<Patient> {
         }
 
         for (Patient patient : customQueue) {
-            int index = patient.getPriorityStatus().ordinal() - minPriorityStatus.ordinal();
+            int index = patient.getPriorityStatus().getPriority() - minPriority;
             buckets.get(index).enqueue(patient);
         }
 
@@ -122,18 +121,18 @@ public class QueuesPriority extends CustomQueue<Patient> {
     public void bucketSortStatus(CustomQueue<Patient> patients) {
         CustomQueue<Patient> customQueue = this;
 
-        Status minStatus = Status.values()[0];
-        Status maxStatus = Status.values()[0];
+        int minPriority = Status.values()[0].getPriority();
+        int maxPriority = Status.values()[0].getPriority();
         for (Patient patient : patients) {
-            if (patient.getPriorityStatus().ordinal() < minStatus.ordinal()) {
-                minStatus = patient.getStatus();
+            if (patient.getStatus().getPriority() < minPriority) {
+                minPriority = patient.getStatus().getPriority();
             }
-            if (patient.getPriorityStatus().ordinal() > maxStatus.ordinal()) {
-                maxStatus = patient.getStatus();
+            if (patient.getStatus().getPriority() > maxPriority) {
+                maxPriority = patient.getStatus().getPriority();
             }
         }
 
-        int bucketCount = maxStatus.ordinal() - minStatus.ordinal() + 1;
+        int bucketCount = maxPriority - minPriority + 1;
 
         List<CustomQueue<Patient>> buckets = new ArrayList<>(bucketCount);
         for (int i = 0; i < bucketCount; i++) {
@@ -141,7 +140,7 @@ public class QueuesPriority extends CustomQueue<Patient> {
         }
 
         for (Patient patient : customQueue) {
-            int index = patient.getStatus().ordinal() - minStatus.ordinal();
+            int index = patient.getStatus().getPriority() - minPriority;
             buckets.get(index).enqueue(patient);
         }
 

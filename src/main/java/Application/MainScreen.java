@@ -118,7 +118,8 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void btnServePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServePatientActionPerformed
         qp.dequeue();
-        patientsDashboard.revalidate();
+        //patientsDashboard.revalidate();
+        System.out.println(qp.size());
     }//GEN-LAST:event_btnServePatientActionPerformed
 
     private void btnServePatientMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnServePatientMouseEntered
@@ -139,6 +140,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void btnScreeningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScreeningActionPerformed
         openScreeningScreen();
+        this.dispose();
     }//GEN-LAST:event_btnScreeningActionPerformed
 
     public void openScreeningScreen() {

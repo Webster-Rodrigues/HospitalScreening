@@ -99,6 +99,7 @@ public class Program2 {
         qp.enqueue(patient8);
 
         qp.priorityPatients();
+        
 
         System.out.println("Queue normal");
         qp.displayQueue();
