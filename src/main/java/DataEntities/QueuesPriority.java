@@ -42,9 +42,11 @@ public class QueuesPriority extends CustomQueue<Patient> {
             completeOrdination();
             isModified = false;
         }
-        System.out.println("Atendendo paciente: " + peek().getName());
-        System.out.println("Atendendo paciente: " + peek().getPriorityStatus());
-        System.out.println("Atendendo paciente: " + peek().getStatus());
+        if(!isEmpty()){
+            JOptionPane.showMessageDialog(null,"Atendendo paciente: " + peek().getName());
+            System.out.println("Atendendo paciente: " + peek().getPriorityStatus());
+            System.out.println("Atendendo paciente: " + peek().getStatus()); 
+        }
         return super.dequeue();
     }
 

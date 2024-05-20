@@ -2,11 +2,16 @@ package Application;
 
 import DataEntities.QueuesPriority;
 import Entities.Patient;
+import java.awt.BorderLayout;
 import java.awt.Desktop;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -32,12 +37,60 @@ public class MainScreen extends javax.swing.JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         for (Patient patient : qp) {
-            JLabel labelsPatient = new javax.swing.JLabel();
-            labelsPatient.setText(patient.toString());
-            panel.add(labelsPatient);
+            JPanel panelPatient = patientsPanel(patient);
+            panel.add(panelPatient);
         }
         patientsDashboard.setViewportView(panel);
     }
+    
+    private JPanel patientsPanel(Patient patient) {
+    JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource("/Imagens/PosicaoVerde.png")));
+    backgroundLabel.setLayout(new GridBagLayout());
+    GridBagConstraints gbc = new GridBagConstraints();
+
+
+    gbc.anchor = GridBagConstraints.WEST; 
+    gbc.insets = new Insets(0, 0, 0, 0);
+
+    gbc.gridx = 1; 
+    gbc.gridy = 0; 
+    gbc.insets = new Insets(13, 10, 3, 100); 
+    JLabel nameValueLabel = new JLabel(patient.getName());
+    backgroundLabel.add(nameValueLabel, gbc);
+    
+    
+    gbc.gridx = 1; 
+    gbc.gridy = 1; 
+    gbc.insets = new Insets(10, 7, 17, 80); 
+    JLabel ageValueLabel = new JLabel(String.valueOf(patient.getAge()));
+    backgroundLabel.add(ageValueLabel, gbc);
+    
+    gbc.gridx = 2; 
+    gbc.gridy = 1; 
+    gbc.insets = new Insets(5, 20, 10, 0); 
+    JLabel gravityValueLabel = new JLabel(String.valueOf(patient.getStatus().toString()));
+    backgroundLabel.add(gravityValueLabel, gbc);
+
+       
+    gbc.gridx = 2; 
+    gbc.gridy = 0; 
+    gbc.insets = new Insets(10, 0, 0, 30); 
+    JLabel sexLabel = new JLabel(patient.getSex());
+    backgroundLabel.add(sexLabel, gbc);
+
+
+    JPanel patientPanel = new JPanel(new BorderLayout());
+    patientPanel.add(backgroundLabel, BorderLayout.CENTER);
+
+    return patientPanel;
+}
+
+
+
+    
+    
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -54,7 +107,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         patientsDashboard.setBackground(new java.awt.Color(247, 252, 255));
         patientsDashboard.setBorder(null);
-        getContentPane().add(patientsDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 130, 370, 440));
+        getContentPane().add(patientsDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 110, 405, 460));
 
         btnServePatient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnChamar.png"))); // NOI18N
         btnServePatient.setContentAreaFilled(false);
@@ -119,7 +172,6 @@ public class MainScreen extends javax.swing.JFrame {
     private void btnServePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServePatientActionPerformed
         qp.dequeue();
         //patientsDashboard.revalidate();
-        System.out.println(qp.size());
     }//GEN-LAST:event_btnServePatientActionPerformed
 
     private void btnServePatientMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnServePatientMouseEntered
