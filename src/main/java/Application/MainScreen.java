@@ -2,6 +2,8 @@ package Application;
 
 import DataEntities.QueuesPriority;
 import Entities.Patient;
+import Entities.enums.Status;
+import Entities.enums.SymptomsStatus;
 import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.GridBagConstraints;
@@ -10,6 +12,8 @@ import java.awt.Insets;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -42,55 +46,65 @@ public class MainScreen extends javax.swing.JFrame {
         }
         patientsDashboard.setViewportView(panel);
     }
-    
+
     private JPanel patientsPanel(Patient patient) {
-    JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource("/Imagens/PosicaoVerde.png")));
-    backgroundLabel.setLayout(new GridBagLayout());
-    GridBagConstraints gbc = new GridBagConstraints();
+        JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource(mapIconStatus(patient.getStatus()))));
+        backgroundLabel.setLayout(new GridBagLayout());
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.WEST;
+        //gbc.insets = new Insets(0, 0, 0, 0);
 
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(13, 10, 3, 100);
+        JLabel nameValueLabel = new JLabel(patient.getName());
+        backgroundLabel.add(nameValueLabel, gbc);
 
-    gbc.anchor = GridBagConstraints.WEST; 
-    gbc.insets = new Insets(0, 0, 0, 0);
+        gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.insets = new Insets(10, 7, 17, 80);
+        JLabel ageValueLabel = new JLabel(String.valueOf(patient.getAge()));
+        backgroundLabel.add(ageValueLabel, gbc);
+        
+        gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        gbc.insets = new Insets(5, 20, 10, 0);
+        JLabel gravityValueLabel = new JLabel(String.valueOf(patient.getStatus().toString()));
+        backgroundLabel.add(gravityValueLabel, gbc);
+        
+        gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 0, 0, 30);
+        JLabel sexLabel = new JLabel(patient.getSex());
+        backgroundLabel.add(sexLabel, gbc);
 
-    gbc.gridx = 1; 
-    gbc.gridy = 0; 
-    gbc.insets = new Insets(13, 10, 3, 100); 
-    JLabel nameValueLabel = new JLabel(patient.getName());
-    backgroundLabel.add(nameValueLabel, gbc);
+        JPanel patientPanel = new JPanel(new BorderLayout());
+        patientPanel.add(backgroundLabel, BorderLayout.CENTER);
+
+        return patientPanel;
+    }
     
     
-    gbc.gridx = 1; 
-    gbc.gridy = 1; 
-    gbc.insets = new Insets(10, 7, 17, 80); 
-    JLabel ageValueLabel = new JLabel(String.valueOf(patient.getAge()));
-    backgroundLabel.add(ageValueLabel, gbc);
-    
-    gbc.gridx = 2; 
-    gbc.gridy = 1; 
-    gbc.insets = new Insets(5, 20, 10, 0); 
-    JLabel gravityValueLabel = new JLabel(String.valueOf(patient.getStatus().toString()));
-    backgroundLabel.add(gravityValueLabel, gbc);
+    private static final Map<Status, String> statusMap = new HashMap<>();
 
-       
-    gbc.gridx = 2; 
-    gbc.gridy = 0; 
-    gbc.insets = new Insets(10, 0, 0, 30); 
-    JLabel sexLabel = new JLabel(patient.getSex());
-    backgroundLabel.add(sexLabel, gbc);
+    static {
+        statusMap.put(Status.EMERGENCIA, "/Imagens/PosicaoVermelha.png");
+        statusMap.put(Status.MUITO_URGENTE,"/Imagens/PosicaoLaranja.png");
+        statusMap.put(Status.URGENTE, "/Imagens/PosicaoAmarela.png");
+        statusMap.put(Status.POUCO_URGENTE, "/Imagens/PosicaoVerde.png");
+        statusMap.put(Status.NAO_URGENTE, "/Imagens/PosicaoAzul.png");
+    }
 
-
-    JPanel patientPanel = new JPanel(new BorderLayout());
-    patientPanel.add(backgroundLabel, BorderLayout.CENTER);
-
-    return patientPanel;
-}
-
-
-
-    
-    
-    
-    
+    public String mapIconStatus(Status status) {
+        return statusMap.get(status);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
