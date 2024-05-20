@@ -52,7 +52,7 @@ public class Patient implements IntValue {
     public int getAge() {
         return age;
     }
-
+    
     public PriorityStatus getPriorityStatus() {
         return priorityStatus;
     }
@@ -90,7 +90,7 @@ public class Patient implements IntValue {
     }
 
     
-    public boolean isIsPregnant() {
+    public boolean IsPregnant() {
         return isPregnant;
     }
 

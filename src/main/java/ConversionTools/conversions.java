@@ -1,12 +1,13 @@
 package ConversionTools;
 
+import Entities.Patient;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-public class conversions {
+public class Conversions {
 
     public int conversionForAge(String date) {
         try {
@@ -38,6 +39,7 @@ public class conversions {
         }
         return pregnant;
     }
+    
     
 
 }

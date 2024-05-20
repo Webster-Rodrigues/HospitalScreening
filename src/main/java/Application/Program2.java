@@ -1,6 +1,6 @@
 package Application;
 
-import ConversionTools.conversions;
+import ConversionTools.Conversions;
 import DataEntities.QueueSymptoms;
 import DataEntities.QueuesPriority;
 import Entities.Patient;
@@ -30,7 +30,7 @@ public class Program2 {
         System.out.println(tempp);
         
         
-        conversions calculator = new conversions();
+        Conversions calculator = new Conversions();
         String dateOfBirth = "21/04/2003"; 
         int age = calculator.conversionForAge(dateOfBirth);
         System.out.println("Idade: " + age);

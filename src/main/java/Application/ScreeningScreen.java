@@ -1,6 +1,6 @@
 package Application;
 
-import ConversionTools.conversions;
+import ConversionTools.Conversions;
 import DataEntities.CustomQueue;
 import DataEntities.QueueSymptoms;
 import DataEntities.QueuesPriority;
@@ -293,6 +293,11 @@ public class ScreeningScreen extends javax.swing.JFrame {
                 ftxtRGFocusLost(evt);
             }
         });
+        ftxtRG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ftxtRGActionPerformed(evt);
+            }
+        });
         getContentPane().add(ftxtRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 360, 130, 30));
 
         jlTemp.setFont(new java.awt.Font("Sitka Subheading", 0, 24)); // NOI18N
@@ -317,7 +322,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_boxSevere1ActionPerformed
 
     public void registerPatient() {
-        conversions conversionTools = new conversions();
+        Conversions conversionTools = new Conversions();
         Temp temp = new Temp();
         TypePains tps = new TypePains();
         QueueSymptoms listSymptoms1 = new QueueSymptoms();
@@ -504,6 +509,10 @@ public class ScreeningScreen extends javax.swing.JFrame {
     private void cbxPainLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPainLevelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxPainLevelActionPerformed
+
+    private void ftxtRGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtRGActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ftxtRGActionPerformed
 
     /**
      * @param args the command line arguments

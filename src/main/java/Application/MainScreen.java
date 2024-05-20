@@ -3,8 +3,8 @@ package Application;
 import DataEntities.QueuesPriority;
 import Entities.Patient;
 import Entities.enums.Status;
-import Entities.enums.SymptomsStatus;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,6 +14,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -50,7 +51,7 @@ public class MainScreen extends javax.swing.JFrame {
     private JPanel patientsPanel(Patient patient) {
         JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource(mapIconStatus(patient.getStatus()))));
         backgroundLabel.setLayout(new GridBagLayout());
-        
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
         //gbc.insets = new Insets(0, 0, 0, 0);
@@ -68,7 +69,7 @@ public class MainScreen extends javax.swing.JFrame {
         gbc.insets = new Insets(10, 7, 17, 80);
         JLabel ageValueLabel = new JLabel(String.valueOf(patient.getAge()));
         backgroundLabel.add(ageValueLabel, gbc);
-        
+
         gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridx = 2;
@@ -76,7 +77,7 @@ public class MainScreen extends javax.swing.JFrame {
         gbc.insets = new Insets(5, 20, 10, 0);
         JLabel gravityValueLabel = new JLabel(String.valueOf(patient.getStatus().toString()));
         backgroundLabel.add(gravityValueLabel, gbc);
-        
+
         gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridx = 2;
@@ -88,15 +89,19 @@ public class MainScreen extends javax.swing.JFrame {
         JPanel patientPanel = new JPanel(new BorderLayout());
         patientPanel.add(backgroundLabel, BorderLayout.CENTER);
 
+        //nameValueLabel.setBorder(BorderFactory.createLineBorder(Color.RED));
+        //ageValueLabel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+        //gravityValueLabel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        //sexLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+
         return patientPanel;
     }
-    
-    
+
     private static final Map<Status, String> statusMap = new HashMap<>();
 
     static {
         statusMap.put(Status.EMERGENCIA, "/Imagens/PosicaoVermelha.png");
-        statusMap.put(Status.MUITO_URGENTE,"/Imagens/PosicaoLaranja.png");
+        statusMap.put(Status.MUITO_URGENTE, "/Imagens/PosicaoLaranja.png");
         statusMap.put(Status.URGENTE, "/Imagens/PosicaoAmarela.png");
         statusMap.put(Status.POUCO_URGENTE, "/Imagens/PosicaoVerde.png");
         statusMap.put(Status.NAO_URGENTE, "/Imagens/PosicaoAzul.png");
@@ -105,6 +110,7 @@ public class MainScreen extends javax.swing.JFrame {
     public String mapIconStatus(Status status) {
         return statusMap.get(status);
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -114,6 +120,7 @@ public class MainScreen extends javax.swing.JFrame {
         btnServePatient = new javax.swing.JButton();
         btnScreening = new javax.swing.JButton();
         btnDoc = new javax.swing.JButton();
+        btnFindPatient = new javax.swing.JButton();
         BkgroundScreen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -176,6 +183,14 @@ public class MainScreen extends javax.swing.JFrame {
         });
         getContentPane().add(btnDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 120, 40));
 
+        btnFindPatient.setText("TESTE");
+        btnFindPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindPatientActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnFindPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 100, 30));
+
         BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/imgFundo .png"))); // NOI18N
         getContentPane().add(BkgroundScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 760));
 
@@ -213,6 +228,11 @@ public class MainScreen extends javax.swing.JFrame {
         ScreeningScreen sc = new ScreeningScreen(qp);
         sc.setVisible(true);
     }
+    
+    public void openFindPatient() {
+        MedicalRecordsScreen fp = new MedicalRecordsScreen(qp);
+        fp.setVisible(true);
+    }
 
     private void btnDocMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDocMouseEntered
         btnDoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnDoc2.png")));
@@ -230,6 +250,11 @@ public class MainScreen extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnDocActionPerformed
+
+    private void btnFindPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindPatientActionPerformed
+        openFindPatient();
+        this.dispose();
+    }//GEN-LAST:event_btnFindPatientActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -274,6 +299,7 @@ public class MainScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BkgroundScreen;
     private javax.swing.JButton btnDoc;
+    private javax.swing.JButton btnFindPatient;
     private javax.swing.JButton btnScreening;
     private javax.swing.JButton btnServePatient;
     private javax.swing.JScrollPane patientsDashboard;

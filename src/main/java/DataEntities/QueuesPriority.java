@@ -42,10 +42,10 @@ public class QueuesPriority extends CustomQueue<Patient> {
             completeOrdination();
             isModified = false;
         }
-        if(!isEmpty()){
-            JOptionPane.showMessageDialog(null,"Atendendo paciente: " + peek().getName());
+        if (!isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Atendendo paciente: " + peek().getName());
             System.out.println("Atendendo paciente: " + peek().getPriorityStatus());
-            System.out.println("Atendendo paciente: " + peek().getStatus()); 
+            System.out.println("Atendendo paciente: " + peek().getStatus());
         }
         return super.dequeue();
     }
@@ -54,6 +54,21 @@ public class QueuesPriority extends CustomQueue<Patient> {
         bucketSortPS(this);
         bucketSortStatus(this);
         isModified = false;
+    }
+
+    public Patient findPatientRG(String RG) {
+        try {
+            for (Patient patient : customQueue) {
+                if (validateRG(RG)) {
+                    return patient;
+                }
+            }
+
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Esse paciente não existe!!");
+
+        }
+        return null;
     }
 
     private static void insertionSortPS(CustomQueue<Patient> bucket) {
