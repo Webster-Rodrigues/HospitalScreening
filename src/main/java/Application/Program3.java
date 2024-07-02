@@ -1,41 +1,16 @@
+
 package Application;
 
-import ConversionTools.Conversions;
 import DataEntities.QueueSymptoms;
 import DataEntities.QueuesPriority;
 import Entities.Patient;
 import Entities.Symptoms;
-import Entities.Temp;
-import Entities.TypePains;
 import Entities.enums.SymptomsStatus;
 
-
-
-
-public class Program2 {
-
-    public static void main(String[] args) {
-        TypePains tp = new TypePains();
-        String st = "Dores Severas";
-        
-        
-        tp.defineSymptom(st);
-        System.out.println(tp);
-        
-        Temp tempp = new Temp();
-        
-        double test = 39.6;
-        tempp.defineSymptom(test);
-        
-        System.out.println(tempp);
-        
-        
-        Conversions calculator = new Conversions();
-        String dateOfBirth = "21/04/2003"; 
-        int age = calculator.conversionForAge(dateOfBirth);
-        System.out.println("Idade: " + age);
-
-        QueueSymptoms filaSintomas1 = new QueueSymptoms();
+public class Program3 {
+     public static void main(String[] args) {
+         
+         QueueSymptoms filaSintomas1 = new QueueSymptoms();
         QueueSymptoms filaSintomas2 = new QueueSymptoms();
         QueueSymptoms filaSintomas3 = new QueueSymptoms();
         QueueSymptoms filaSintomas4 = new QueueSymptoms();
@@ -67,14 +42,14 @@ public class Program2 {
         //filaSintomas3.push(sm7);
         //filaSintomas3.push(sm4);
 
-        filaSintomas4.enqueue(tempp);
+        //filaSintomas4.enqueue(tempp);
         filaSintomas4.enqueue(sm3);//GRAVE
         //filaSintomas4.push(sm7);
         filaSintomas4.enqueue(sm4);
 
         filaSintomas5.enqueue(sm2);
         filaSintomas5.enqueue(sm1);//GRAVISSÍMO
-        filaSintomas5.enqueue(tp);
+        //filaSintomas5.push(sm7);
         //filaSintomas5.push(sm4);
 
         Patient patient1 = new Patient("André", "Masculino", 25, false, "456", filaSintomas5);
@@ -100,54 +75,25 @@ public class Program2 {
         
 
         System.out.println("Queue normal");
-        //qp.bucketSortScore(qp);
         qp.displayQueue();
         
-        
-        
-        System.out.println("Atendendo o paciente ---Alice---");
-        qp.dequeue();
+        System.out.println("Queue ordenada");
+        qp.completeOrdination();
         qp.displayQueue();
-
-        System.out.println("Atendendo o paciente ---Luiza---");
         qp.dequeue();
-
-        System.out.println("Atendendo o paciente ---André---");
         qp.dequeue();
-
-        System.out.println("Atendendo o paciente ---Laura---");
         qp.dequeue();
-
-        System.out.println("Atendendo o paciente ---Leo---");
-        qp.dequeue();
-
-        System.out.println("Atendendo o paciente ---Lucas---");
-        qp.dequeue();
-
-        System.out.println("Atendendo o paciente ---Vitória---");
-        qp.dequeue();
-
-        System.out.println("Atendendo o paciente ---João---");
-        qp.dequeue();
-
-        System.out.println("Atendendo o paciente ---Allan---");
-        qp.dequeue();
-
         
-        /*Patient patient001 = new Patient("Dora", "Feminino", 40,"179", Status.POUCO_URGENTE,  PriorityStatus.GRAVIDA, filaSintomas2);
-        qp.enqueue(patient001);
-        qps.addPatients(qp);
-        
-        
-        for(Patient pt : test){
-            pt.setStatusPatients(pt);
-            System.out.println("O status do paciente: " + pt.getName() + ", Foi definido como: " + pt.getStatus());
-        }
-        System.out.println();
-        for(Patient pt : test){
-            pt.calculatePriority();
-            System.out.println("A prioridade do paciente: " + pt.getName() + ", Foi definida como: " + pt.getPriorityStatus());
-        }*/
-    }
-
+         System.out.println();
+         qp.displayQueue();
+         
+         
+         
+         
+         
+         
+         
+         
+     }
+    
 }

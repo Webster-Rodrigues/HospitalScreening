@@ -147,7 +147,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
         cbxPregnant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
         cbxPregnant.setBorder(null);
-        getContentPane().add(cbxPregnant, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 310, 130, 30));
+        getContentPane().add(cbxPregnant, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 310, 130, 30));
 
         sldTemp.setMaximum(455);
         sldTemp.setMinimum(205);
@@ -158,7 +158,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
                 sldTempStateChanged(evt);
             }
         });
-        getContentPane().add(sldTemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 130, 20));
+        getContentPane().add(sldTemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 130, 20));
 
         boxSevere2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,7 +228,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
                 boxSevere10ActionPerformed(evt);
             }
         });
-        getContentPane().add(boxSevere10, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 522, 20, 40));
+        getContentPane().add(boxSevere10, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 520, 20, 40));
 
         boxSevere11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,10 +248,10 @@ public class ScreeningScreen extends javax.swing.JFrame {
                 ftxtDateActionPerformed(evt);
             }
         });
-        getContentPane().add(ftxtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 218, 120, 30));
+        getContentPane().add(ftxtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 220, 120, 30));
 
         cbxSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
-        getContentPane().add(cbxSex, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 310, 150, 30));
+        getContentPane().add(cbxSex, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 310, 150, 30));
 
         btnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnVoltar.png"))); // NOI18N
         btnReturn.setContentAreaFilled(false);
@@ -268,7 +268,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
                 btnReturnActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 600, 270, 70));
+        getContentPane().add(btnReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 680, 270, 70));
 
         btnRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnRegistrar.png"))); // NOI18N
         btnRegister.setContentAreaFilled(false);
@@ -285,7 +285,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
                 btnRegisterActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(819, 515, 270, -1));
+        getContentPane().add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 605, 270, 70));
 
         ftxtRG.setBorder(null);
         ftxtRG.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -298,7 +298,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
                 ftxtRGActionPerformed(evt);
             }
         });
-        getContentPane().add(ftxtRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 360, 130, 30));
+        getContentPane().add(ftxtRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 360, 130, 30));
 
         jlTemp.setFont(new java.awt.Font("Sitka Subheading", 0, 24)); // NOI18N
         jlTemp.setForeground(new java.awt.Color(0, 0, 0));
@@ -307,7 +307,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
         getContentPane().add(jlTemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 70, 30));
 
         BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaTriagem.png"))); // NOI18N
-        getContentPane().add(BkgroundScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1093, -1));
+        getContentPane().add(BkgroundScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, -6, 1100, 780));
 
         pack();
         setLocationRelativeTo(null);
@@ -347,7 +347,6 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
         Patient patient = new Patient(name, sex, age, isPregnant, RG, listSymptoms1);
         qp.enqueue(patient);
-        qp.priorityPatients();
 
     }
 
@@ -491,6 +490,9 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         //qp.displayQueue();
+        /*for (Patient patient: qp){
+            patient.displayStackPatient();
+        }*/
         openMainScreen();
         this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed

@@ -13,7 +13,7 @@ public class Temp extends Symptoms{
     private TempStatus tempStatus; 
     
      public Temp(){
-        super("Temperatura", null);
+        super("Temperatura");
         
     }
     
@@ -45,26 +45,23 @@ public class Temp extends Symptoms{
     
     }
     
-    private static final Map<TempStatus, SymptomsStatus> statusMap = new HashMap<>();
+    private static final Map<TempStatus, SymptomsStatus> mapTempStatus = new HashMap<>();
 
     static {
-        statusMap.put(TempStatus.HIPERTERMIA, SymptomsStatus.GRAVISSIMO);
-        statusMap.put(TempStatus.HIPOTERMIA, SymptomsStatus.GRAVISSIMO);
-        statusMap.put(TempStatus.FEBRE_ALTA, SymptomsStatus.GRAVE);
-        statusMap.put(TempStatus.FEBRE, SymptomsStatus.NORMAL);
-        statusMap.put(TempStatus.NORMAL, SymptomsStatus.MUITO_LEVE);
+        mapTempStatus.put(TempStatus.HIPERTERMIA, SymptomsStatus.GRAVISSIMO);
+        mapTempStatus.put(TempStatus.HIPOTERMIA, SymptomsStatus.GRAVISSIMO);
+        mapTempStatus.put(TempStatus.FEBRE_ALTA, SymptomsStatus.GRAVE);
+        mapTempStatus.put(TempStatus.FEBRE, SymptomsStatus.NORMAL);
+        mapTempStatus.put(TempStatus.NORMAL, SymptomsStatus.MUITO_LEVE);
     }
 
     public void mapTempStatus (TempStatus tempStatus) {
-         super.setStatus(statusMap.get(tempStatus));
+         super.setStatus(mapTempStatus.get(tempStatus));
     }
     
     @Override
     public String toString(){
          return "Sintoma: " + getNameSymptoms()+ ", Categoria: " + getStatus() + ", Definição: " + tempStatus;
     }
-    
-    
-    
-   
+
 }

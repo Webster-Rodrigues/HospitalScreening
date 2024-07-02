@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.ToIntFunction;
 
-public class CustomQueue<T extends IntValue> implements CustomQueueShape<T>, Comparator<T>, Iterable<T> {
+public class CustomQueue<T> implements CustomQueueShape<T>, Comparator<T>, Iterable<T> {
 
     List<T> customQueue;
 

@@ -2,9 +2,11 @@
 package Entities.enums;
 
 public enum SymptomsStatus {
-    GRAVISSIMO,
-    GRAVE,
-    NORMAL,
+    MUITO_LEVE,
     LEVE,
-    MUITO_LEVE;
+    NORMAL,
+    GRAVE,
+    GRAVISSIMO;
+    
+   
 }

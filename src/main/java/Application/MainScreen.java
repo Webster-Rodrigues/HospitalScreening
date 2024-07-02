@@ -4,8 +4,10 @@ import DataEntities.QueuesPriority;
 import Entities.Patient;
 import Entities.enums.Status;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -15,10 +17,10 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import net.miginfocom.swing.MigLayout;
 
 public class MainScreen extends javax.swing.JFrame {
 
@@ -28,6 +30,7 @@ public class MainScreen extends javax.swing.JFrame {
         initComponents();
 
         qp = new QueuesPriority();
+        patientLabels();
 
     }
 
@@ -39,62 +42,64 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     private void patientLabels() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setLayout(new MigLayout("wrap 1", "[grow]", "[]"));
+        panel.setOpaque(false);
         for (Patient patient : qp) {
-            JPanel panelPatient = patientsPanel(patient);
-            panel.add(panelPatient);
+            panel.add(createPanelPatients(patient));
+
         }
-        patientsDashboard.setViewportView(panel);
+        panelPatientsScroll.setViewportView(panel);
     }
 
-    private JPanel patientsPanel(Patient patient) {
+    private JPanel createPanelPatients(Patient patient) {
         JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource(mapIconStatus(patient.getStatus()))));
         backgroundLabel.setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
-        //gbc.insets = new Insets(0, 0, 0, 0);
 
+        Font smallerFont = new Font("Dialog", Font.PLAIN, 12);
+
+        gbc.insets = new Insets(5, 15, 7, 15);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        JPanel namePanel = createLabelPanel(patient.getName(), new Dimension(100, 10), smallerFont);
+        backgroundLabel.add(namePanel, gbc);
+
+        gbc.insets = new Insets(5, 20, 7, 18);
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.insets = new Insets(13, 10, 3, 100);
-        JLabel nameValueLabel = new JLabel(patient.getName());
-        backgroundLabel.add(nameValueLabel, gbc);
+        JPanel sexPanel = createLabelPanel(patient.getSex(), new Dimension(100, 10), smallerFont);
+        backgroundLabel.add(sexPanel, gbc);
 
-        gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.insets = new Insets(3, 13, 8, 28);
+        JPanel agePanel = createLabelPanel(String.valueOf(patient.getAge()) + " anos", new Dimension(100, 10), smallerFont);
+        backgroundLabel.add(agePanel, gbc);
+
+        gbc.insets = new Insets(3, 40, 7, 5);
         gbc.gridx = 1;
         gbc.gridy = 1;
-        gbc.insets = new Insets(10, 7, 17, 80);
-        JLabel ageValueLabel = new JLabel(String.valueOf(patient.getAge()));
-        backgroundLabel.add(ageValueLabel, gbc);
-
-        gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.gridx = 2;
-        gbc.gridy = 1;
-        gbc.insets = new Insets(5, 20, 10, 0);
-        JLabel gravityValueLabel = new JLabel(String.valueOf(patient.getStatus().toString()));
-        backgroundLabel.add(gravityValueLabel, gbc);
-
-        gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        gbc.insets = new Insets(10, 0, 0, 30);
-        JLabel sexLabel = new JLabel(patient.getSex());
-        backgroundLabel.add(sexLabel, gbc);
+        JPanel gravityPanel = createLabelPanel(patient.getStatus().toString(), new Dimension(105, 10), smallerFont);
+        backgroundLabel.add(gravityPanel, gbc);
 
         JPanel patientPanel = new JPanel(new BorderLayout());
         patientPanel.add(backgroundLabel, BorderLayout.CENTER);
 
-        //nameValueLabel.setBorder(BorderFactory.createLineBorder(Color.RED));
-        //ageValueLabel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
-        //gravityValueLabel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-        //sexLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-
         return patientPanel;
+    }
+
+    private JPanel createLabelPanel(String text, Dimension size, Font font) {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JLabel label = new JLabel(text);
+        label.setPreferredSize(size);
+        label.setFont(font);
+        label.setOpaque(false);
+        label.setBorder(BorderFactory.createEmptyBorder());
+        panel.add(label);
+        panel.setOpaque(false);
+        return panel;
     }
 
     private static final Map<Status, String> statusMap = new HashMap<>();
@@ -110,13 +115,13 @@ public class MainScreen extends javax.swing.JFrame {
     public String mapIconStatus(Status status) {
         return statusMap.get(status);
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        patientsDashboard = new javax.swing.JScrollPane();
+        panelPatientsScroll = new javax.swing.JScrollPane();
+        panel = new javax.swing.JPanel();
         btnServePatient = new javax.swing.JButton();
         btnScreening = new javax.swing.JButton();
         btnDoc = new javax.swing.JButton();
@@ -126,9 +131,13 @@ public class MainScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        patientsDashboard.setBackground(new java.awt.Color(247, 252, 255));
-        patientsDashboard.setBorder(null);
-        getContentPane().add(patientsDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 110, 405, 460));
+        panelPatientsScroll.setBackground(new java.awt.Color(247, 252, 255));
+        panelPatientsScroll.setBorder(null);
+
+        panel.setBackground(new java.awt.Color(247, 252, 255));
+        panelPatientsScroll.setViewportView(panel);
+
+        getContentPane().add(panelPatientsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 170, 405, 370));
 
         btnServePatient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnChamar.png"))); // NOI18N
         btnServePatient.setContentAreaFilled(false);
@@ -228,7 +237,7 @@ public class MainScreen extends javax.swing.JFrame {
         ScreeningScreen sc = new ScreeningScreen(qp);
         sc.setVisible(true);
     }
-    
+
     public void openFindPatient() {
         MedicalRecordsScreen fp = new MedicalRecordsScreen(qp);
         fp.setVisible(true);
@@ -302,6 +311,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnFindPatient;
     private javax.swing.JButton btnScreening;
     private javax.swing.JButton btnServePatient;
-    private javax.swing.JScrollPane patientsDashboard;
+    private javax.swing.JPanel panel;
+    private javax.swing.JScrollPane panelPatientsScroll;
     // End of variables declaration//GEN-END:variables
 }

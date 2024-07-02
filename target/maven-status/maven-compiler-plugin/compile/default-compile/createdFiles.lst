@@ -38,11 +38,13 @@ Application\MainScreen$5.class
 Application\ScreeningScreen$5.class
 Application\MainScreen$2.class
 Entities\enums\SymptomsStatus.class
+.netbeans_automatic_build
 Application\ScreeningScreen$14.class
 Application\ScreeningScreen$2.class
 Application\MedicalRecordsScreen$2.class
 Application\MainScreen$1.class
 Application\ScreeningScreen$12.class
+Application\Program3.class
 Entities\enums\TempStatus.class
 Application\ScreeningScreen.class
 Entities\enums\PriorityStatus.class
@@ -53,5 +55,4 @@ Application\ScreeningScreen$23.class
 Application\MainScreen$8.class
 DataEntities\QueueSymptoms.class
 Application\ScreeningScreen$20.class
-DataEntities\IntValue.class
 Application\MedicalRecordsScreen$6.class

@@ -11,7 +11,7 @@ public class TypePains extends Symptoms{
     private PainStatus painStatus;
     
     public TypePains(){
-        super("Dores",null);
+        super("Dores");
     }
 
     public PainStatus getPainStatus() {
@@ -40,17 +40,17 @@ public class TypePains extends Symptoms{
     
     }
     
-    private static final Map<PainStatus, SymptomsStatus> statusMap = new HashMap<>();
+    private static final Map<PainStatus, SymptomsStatus> mapPain = new HashMap<>();
 
     static {
-        statusMap.put(PainStatus.DORES_SEVERAS, SymptomsStatus.GRAVISSIMO);
-        statusMap.put(PainStatus.DORES_MODERADAS, SymptomsStatus.NORMAL);
-        statusMap.put(PainStatus.DORES_LEVES, SymptomsStatus.LEVE);
-        statusMap.put(PainStatus.SEM_DORES, SymptomsStatus.MUITO_LEVE);  
+        mapPain.put(PainStatus.DORES_SEVERAS, SymptomsStatus.GRAVISSIMO);
+        mapPain.put(PainStatus.DORES_MODERADAS, SymptomsStatus.NORMAL);
+        mapPain.put(PainStatus.DORES_LEVES, SymptomsStatus.LEVE);
+        mapPain.put(PainStatus.SEM_DORES, SymptomsStatus.MUITO_LEVE);  
     }
 
     public void mapPainStatus (PainStatus painStatus) {
-         super.setStatus(statusMap.get(painStatus));
+         super.setStatus(mapPain.get(painStatus));
     }
     
     

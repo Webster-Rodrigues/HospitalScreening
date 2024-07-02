@@ -1,6 +1,5 @@
 package ConversionTools;
 
-import Entities.Patient;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,7 +38,6 @@ public class Conversions {
         }
         return pregnant;
     }
-    
     
 
 }
