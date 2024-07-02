@@ -1,7 +1,6 @@
 package DataEntities;
 
 import Entities.Patient;
-import Entities.enums.PriorityStatus;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -51,7 +50,7 @@ public class QueuesPriority extends CustomQueue<Patient> {
     }
 
     public void completeOrdination() {
-        bucketSortPS(this);
+        //bucketSortPS(this);
         bucketSortScore(this);
         isModified = false;
     }
@@ -83,45 +82,7 @@ public class QueuesPriority extends CustomQueue<Patient> {
             bucket.set(j + 1, key);
         }
     }
-
-    public void bucketSortPS(CustomQueue<Patient> patients) {
-        CustomQueue<Patient> customQueue = this;
-
-        int minPriority = PriorityStatus.values()[0].getPriority();
-        int maxPriority = PriorityStatus.values()[0].getPriority();
-        for (Patient patient : patients) {
-            if (patient.getPriorityStatus().getPriority() < minPriority) {
-                minPriority = patient.getPriorityStatus().getPriority();
-            }
-            if (patient.getPriorityStatus().getPriority() > maxPriority) {
-                maxPriority = patient.getPriorityStatus().getPriority();
-            }
-        }
-
-        int bucketCount = maxPriority - minPriority + 1;
-
-        List<CustomQueue<Patient>> buckets = new ArrayList<>(bucketCount);
-        for (int i = 0; i < bucketCount; i++) {
-            buckets.add(new CustomQueue());
-        }
-
-        for (Patient patient : customQueue) {
-            int index = patient.getPriorityStatus().getPriority() - minPriority;
-            buckets.get(index).enqueue(patient);
-        }
-
-        for (CustomQueue<Patient> bucket : buckets) {
-            insertionSortPS(bucket);
-        }
-
-        int position = 0;
-        for (CustomQueue<Patient> bucket : buckets) {
-            for (Patient patient : bucket) {
-                customQueue.set(position++, patient);
-            }
-        }
-    }
-
+   
     private static void insertionSortScore(CustomQueue<Patient> bucket) {
         for (int i = 1; i < bucket.size(); i++) {
             Patient key = bucket.get(i);
@@ -170,10 +131,52 @@ public class QueuesPriority extends CustomQueue<Patient> {
         int position = 0;
         for (int i = buckets.size() - 1; i >= 0; i--) {
             CustomQueue<Patient> bucket = buckets.get(i);
+            insertionSortPS(bucket);
             insertionSortScore(bucket);
             for (Patient patient : bucket) {
                 patients.set(position++, patient);
             }
         }
     }
+    
+     /*
+    Armazenado pois ainda está em fase de teste utilizar apenas um bucketSort
+    public void bucketSortPS(CustomQueue<Patient> patients) {
+        CustomQueue<Patient> customQueue = this;
+
+        int minPriority = PriorityStatus.values()[0].getPriority();
+        int maxPriority = PriorityStatus.values()[0].getPriority();
+        for (Patient patient : patients) {
+            if (patient.getPriorityStatus().getPriority() < minPriority) {
+                minPriority = patient.getPriorityStatus().getPriority();
+            }
+            if (patient.getPriorityStatus().getPriority() > maxPriority) {
+                maxPriority = patient.getPriorityStatus().getPriority();
+            }
+        }
+
+        int bucketCount = maxPriority - minPriority + 1;
+
+        List<CustomQueue<Patient>> buckets = new ArrayList<>(bucketCount);
+        for (int i = 0; i < bucketCount; i++) {
+            buckets.add(new CustomQueue());
+        }
+
+        for (Patient patient : customQueue) {
+            int index = patient.getPriorityStatus().getPriority() - minPriority;
+            buckets.get(index).enqueue(patient);
+        }
+
+        for (CustomQueue<Patient> bucket : buckets) {
+            insertionSortPS(bucket);
+        }
+
+        int position = 0;
+        for (CustomQueue<Patient> bucket : buckets) {
+            for (Patient patient : bucket) {
+                customQueue.set(position++, patient);
+            }
+        }
+    }*/
+
 }

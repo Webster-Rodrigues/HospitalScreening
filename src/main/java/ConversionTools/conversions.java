@@ -27,7 +27,6 @@ public class Conversions {
             JOptionPane.showMessageDialog(null, "Formato inserido não é possível ser convertido! Tente um formato válido");
             return 000;
         }
-
     }
     
     public boolean conversionPregnant(String userChoice){

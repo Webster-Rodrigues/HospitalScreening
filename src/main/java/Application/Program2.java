@@ -74,7 +74,7 @@ public class Program2 {
 
         filaSintomas5.enqueue(sm2);
         filaSintomas5.enqueue(sm1);//GRAVISSÍMO
-        filaSintomas5.enqueue(tp);
+        //filaSintomas5.enqueue(tp);
         //filaSintomas5.push(sm4);
 
         Patient patient1 = new Patient("André", "Masculino", 25, false, "456", filaSintomas5);
@@ -107,7 +107,7 @@ public class Program2 {
         
         System.out.println("Atendendo o paciente ---Alice---");
         qp.dequeue();
-        qp.displayQueue();
+        //qp.displayQueue();
 
         System.out.println("Atendendo o paciente ---Luiza---");
         qp.dequeue();

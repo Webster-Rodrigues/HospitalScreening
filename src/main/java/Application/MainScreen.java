@@ -137,7 +137,7 @@ public class MainScreen extends javax.swing.JFrame {
         panel.setBackground(new java.awt.Color(247, 252, 255));
         panelPatientsScroll.setViewportView(panel);
 
-        getContentPane().add(panelPatientsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 170, 405, 370));
+        getContentPane().add(panelPatientsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 170, 390, 370));
 
         btnServePatient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnChamar.png"))); // NOI18N
         btnServePatient.setContentAreaFilled(false);
@@ -209,7 +209,10 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void btnServePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServePatientActionPerformed
         qp.dequeue();
-        //patientsDashboard.revalidate();
+        panel.removeAll();
+        patientLabels();  
+        panel.revalidate();  
+        panel.repaint(); 
     }//GEN-LAST:event_btnServePatientActionPerformed
 
     private void btnServePatientMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnServePatientMouseEntered
