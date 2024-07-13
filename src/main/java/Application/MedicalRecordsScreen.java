@@ -22,8 +22,8 @@ public class MedicalRecordsScreen extends javax.swing.JFrame {
         this.qp = qp;
     }
 
-    public void findPatient() {
-        Patient patient = qp.findPatientRG(ftxtSearchRG.getText());
+    public void findPatient(Patient patient) {
+        
 
         if (patient != null) {
             txtName.setText(patient.getName());
@@ -196,7 +196,7 @@ public class MedicalRecordsScreen extends javax.swing.JFrame {
 
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        findPatient();
+        //findPatient();
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void ftxtSearchRGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtSearchRGActionPerformed
