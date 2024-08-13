@@ -19,13 +19,13 @@ public class Program2 {
         String st = "Dores Severas";
         
         
-        tp.defineSymptom(st);
+        tp.setPainStatus(st);
         System.out.println(tp);
         
-        Temp tempp = new Temp();
+         Temp tempp = new Temp();
         
-        double test = 39.6;
-        tempp.defineSymptom(test);
+        double test = 36.8;
+        tempp.setTemperatureSymptoms(test);
         
         System.out.println(tempp);
         

@@ -38,5 +38,17 @@ public class Conversions {
         return pregnant;
     }
     
+    
+    public String conversionBoolean(Boolean Pregnant){
+        String conversion;
+        if(Pregnant == true){
+            conversion = "Sim";
+        }
+        else{
+            conversion = "Não";
+        }
+        return conversion;
+    }
+    
 
 }

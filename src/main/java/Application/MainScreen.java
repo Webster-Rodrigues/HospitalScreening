@@ -48,90 +48,85 @@ public class MainScreen extends javax.swing.JFrame {
         panel.setOpaque(false);
         for (Patient patient : qp) {
             panel.add(createPanelPatients(patient));
-
         }
-        panelPatientsScroll.setViewportView(panel);  
+        panelPatientsScroll.getViewport().setOpaque(false);
+        panelPatientsScroll.getViewport().setBorder(null);
+        panelPatientsScroll.setBorder(null);
+        panelPatientsScroll.setOpaque(false);
+        panelPatientsScroll.setViewportView(panel);
+        //panel.add(panelPatientsScroll);
     }
 
     private JPanel createPanelPatients(Patient patient) {
-        JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource(mapIconStatus(patient.getStatus()))));
-        backgroundLabel.setLayout(new GridBagLayout());
+    JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource(mapIconStatus(patient.getStatus()))));
+    backgroundLabel.setLayout(new MigLayout("insets 0, gap 0")); 
+    backgroundLabel.setOpaque(false);
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.WEST;
+    Font font = new Font("Dialog", Font.PLAIN, 12);
+    
+    JPanel namePanel = createLabelPanel(patient.getName(), new Dimension(180, 20), font);
+    namePanel.setOpaque(false);
+                                   //GUIA: top, left, bottom, right
+    backgroundLabel.add(namePanel, "cell 0 0, pad 2 48 0 0, growx, wmax 200"); 
 
-        Font smallerFont = new Font("Dialog", Font.PLAIN, 12);
+    JPanel sexPanel = createLabelPanel(patient.getSex(), new Dimension(150, 20), font);
+    sexPanel.setOpaque(false);
+    backgroundLabel.add(sexPanel, "cell 1 0, pad  2 69 0 0, growx, wmax 150");
 
-        gbc.insets = new Insets(5, 15, 7, 15);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        JPanel namePanel = createLabelPanel(patient.getName(), new Dimension(100, 10), smallerFont);
-        backgroundLabel.add(namePanel, gbc);
+    JPanel agePanel = createLabelPanel(String.valueOf(patient.getAge()) + " anos", new Dimension(90, 20), font);
+    agePanel.setOpaque(false);
+    backgroundLabel.add(agePanel, "cell 0 1, pad 2 46 0 0, growx, wmax 90"); 
 
-        gbc.insets = new Insets(5, 20, 7, 18);
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        JPanel sexPanel = createLabelPanel(patient.getSex(), new Dimension(100, 10), smallerFont);
-        backgroundLabel.add(sexPanel, gbc);
+    JPanel gravityPanel = createLabelPanel(patient.getStatus().toString(), new Dimension(200, 20), font);
+    gravityPanel.setOpaque(false);
+    backgroundLabel.add(gravityPanel, "cell 1 1, pad 2 97 0 0, growx, wmax 250"); 
 
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.insets = new Insets(3, 13, 8, 28);
-        JPanel agePanel = createLabelPanel(String.valueOf(patient.getAge()) + " anos", new Dimension(100, 10), smallerFont);
-        backgroundLabel.add(agePanel, gbc);
+    JPanel patientPanel = new JPanel(new BorderLayout());
+    patientPanel.add(backgroundLabel, BorderLayout.CENTER);
 
-        gbc.insets = new Insets(3, 40, 7, 5);
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        JPanel gravityPanel = createLabelPanel(patient.getStatus().toString(), new Dimension(105, 10), smallerFont);
-        backgroundLabel.add(gravityPanel, gbc);
+    patientPanel.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            ScreenPatientFile ms = new ScreenPatientFile(qp);
+            ms.setVisible(true);
+            ms.findPatient(patient);
+            closeScreening();
+        }
 
-        JPanel patientPanel = new JPanel(new BorderLayout());
-        patientPanel.add(backgroundLabel, BorderLayout.CENTER);
+        @Override
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            backgroundLabel.setIcon(new ImageIcon(getClass().getResource(mapIconStatus(patient.getStatus()))));
+        }
 
-        patientPanel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                MedicalRecordsScreen ms = new MedicalRecordsScreen(qp);
-                ms.setVisible(true);
-                ms.findPatient(patient);  
-                closeScreening();
-            }
-            
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt){
-                backgroundLabel.setIcon(new ImageIcon(getClass().getResource(mapIconStatus(patient.getStatus()))));
-            }
-            
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt){
-                backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconSelectedStatusMap(patient.getStatus()))));
-            }
-        });
-        
-        return patientPanel;
-    }
+        @Override
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            backgroundLabel.setIcon(new ImageIcon(getClass().getResource(iconSelectedStatusMap(patient.getStatus()))));
+        }
+    });
+
+    return patientPanel;
+}
 
     private JPanel createLabelPanel(String text, Dimension size, Font font) {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panel.setOpaque(false); 
         JLabel label = new JLabel(text);
         label.setPreferredSize(size);
         label.setFont(font);
-        label.setOpaque(false);
+        label.setOpaque(false); 
         label.setBorder(BorderFactory.createEmptyBorder());
         panel.add(label);
-        panel.setOpaque(false);
         return panel;
     }
 
     private static final Map<Status, String> mapIconStatus = new HashMap<>();
 
     static {
-        mapIconStatus.put(Status.EMERGENCIA, "/Imagens/PosicaoVermelha.png");
-        mapIconStatus.put(Status.MUITO_URGENTE, "/Imagens/PosicaoLaranja.png");
-        mapIconStatus.put(Status.URGENTE, "/Imagens/PosicaoAmarela.png");
-        mapIconStatus.put(Status.POUCO_URGENTE, "/Imagens/PosicaoVerde.png");
-        mapIconStatus.put(Status.NAO_URGENTE, "/Imagens/PosicaoAzul.png");
+        mapIconStatus.put(Status.EMERGENCIA, "/Imagens/EtiquetaVermelha.png");
+        mapIconStatus.put(Status.MUITO_URGENTE, "/Imagens/EtiquetaLaranja.png");
+        mapIconStatus.put(Status.URGENTE, "/Imagens/EtiquetaAmarelo.png");
+        mapIconStatus.put(Status.POUCO_URGENTE, "/Imagens/EtiquetaVerde.png");
+        mapIconStatus.put(Status.NAO_URGENTE, "/Imagens/EtiquetaAzul.png");
     }
 
     public String mapIconStatus(Status status) {
@@ -142,14 +137,14 @@ public class MainScreen extends javax.swing.JFrame {
     private static final Map<Status, String> mapIconSelectedStatus = new HashMap<>();
 
     static {
-        mapIconSelectedStatus.put(Status.EMERGENCIA, "/Imagens/PosicaoVermelha.png");
-        mapIconSelectedStatus.put(Status.MUITO_URGENTE, "/Imagens/InconTest.png");
-        mapIconSelectedStatus.put(Status.URGENTE, "/Imagens/PosicaoAmarela.png");
-        mapIconSelectedStatus.put(Status.POUCO_URGENTE, "/Imagens/PosicaoVerde.png");
-        mapIconSelectedStatus.put(Status.NAO_URGENTE, "/Imagens/PosicaoAzul.png");
+        mapIconSelectedStatus.put(Status.EMERGENCIA, "/Imagens/EtiquetaClickVermelha.png");
+        mapIconSelectedStatus.put(Status.MUITO_URGENTE, "/Imagens/EtiquetaClickLaranja.png");
+        mapIconSelectedStatus.put(Status.URGENTE, "/Imagens/EtiquetaClickAmarelo.png");
+        mapIconSelectedStatus.put(Status.POUCO_URGENTE, "/Imagens/EtiquetaClickVerde.png");
+        mapIconSelectedStatus.put(Status.NAO_URGENTE, "/Imagens/EtiquetaClickAzul.png");
     }
 
-    public String  iconSelectedStatusMap(Status status) {
+    public String iconSelectedStatusMap(Status status) {
         return mapIconSelectedStatus.get(status);
     }
 
@@ -167,14 +162,15 @@ public class MainScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelPatientsScroll.setBackground(new java.awt.Color(247, 252, 255));
+        panelPatientsScroll.setBackground(new java.awt.Color(255, 255, 255));
         panelPatientsScroll.setBorder(null);
+        panelPatientsScroll.setViewportBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        panelPatientsScroll.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        panel.setBackground(new java.awt.Color(247, 252, 255));
-        panel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panel.setBackground(new java.awt.Color(255, 255, 255));
         panelPatientsScroll.setViewportView(panel);
 
-        getContentPane().add(panelPatientsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 150, 404, 390));
+        getContentPane().add(panelPatientsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, 505, 438));
 
         btnServePatient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnChamar.png"))); // NOI18N
         btnServePatient.setContentAreaFilled(false);
@@ -230,8 +226,8 @@ public class MainScreen extends javax.swing.JFrame {
         });
         getContentPane().add(btnDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 120, 40));
 
-        BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/imgFundo .png"))); // NOI18N
-        getContentPane().add(BkgroundScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 760));
+        BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/imgFundo.png"))); // NOI18N
+        getContentPane().add(BkgroundScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1130, 760));
 
         pack();
         setLocationRelativeTo(null);

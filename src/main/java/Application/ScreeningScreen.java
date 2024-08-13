@@ -128,13 +128,14 @@ public class ScreeningScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtName.setBorder(null);
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
             }
         });
-        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 390, 30));
+        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 182, 328, 30));
 
         cbxPainLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sem Dores", "Dores Leves", "Dores Moderadas", "Dores Severas" }));
         cbxPainLevel.setBorder(null);
@@ -143,11 +144,11 @@ public class ScreeningScreen extends javax.swing.JFrame {
                 cbxPainLevelActionPerformed(evt);
             }
         });
-        getContentPane().add(cbxPainLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 190, 30));
+        getContentPane().add(cbxPainLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 273, 140, 30));
 
         cbxPregnant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
         cbxPregnant.setBorder(null);
-        getContentPane().add(cbxPregnant, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 310, 130, 30));
+        getContentPane().add(cbxPregnant, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 273, 90, 30));
 
         sldTemp.setMaximum(455);
         sldTemp.setMinimum(205);
@@ -158,84 +159,84 @@ public class ScreeningScreen extends javax.swing.JFrame {
                 sldTempStateChanged(evt);
             }
         });
-        getContentPane().add(sldTemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 130, 20));
+        getContentPane().add(sldTemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 320, 130, 20));
 
         boxSevere2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxSevere2ActionPerformed(evt);
             }
         });
-        getContentPane().add(boxSevere2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 487, 20, 40));
+        getContentPane().add(boxSevere2, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 478, 20, 40));
 
         boxSevere3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxSevere3ActionPerformed(evt);
             }
         });
-        getContentPane().add(boxSevere3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 520, 20, 40));
+        getContentPane().add(boxSevere3, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 509, 20, 40));
 
         boxSevere4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxSevere4ActionPerformed(evt);
             }
         });
-        getContentPane().add(boxSevere4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, 20, 40));
+        getContentPane().add(boxSevere4, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 541, 20, 40));
 
         boxSevere1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxSevere1ActionPerformed(evt);
             }
         });
-        getContentPane().add(boxSevere1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 455, 20, 40));
+        getContentPane().add(boxSevere1, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 445, 20, 40));
 
         boxSevere5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxSevere5ActionPerformed(evt);
             }
         });
-        getContentPane().add(boxSevere5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 580, 20, 40));
+        getContentPane().add(boxSevere5, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 573, 20, 40));
 
         boxSevere6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxSevere6ActionPerformed(evt);
             }
         });
-        getContentPane().add(boxSevere6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 704, 20, 40));
+        getContentPane().add(boxSevere6, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 698, 20, 40));
 
         boxSevere7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxSevere7ActionPerformed(evt);
             }
         });
-        getContentPane().add(boxSevere7, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 662, 20, 40));
+        getContentPane().add(boxSevere7, new org.netbeans.lib.awtextra.AbsoluteConstraints(479, 664, -1, 40));
 
         boxSevere8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxSevere8ActionPerformed(evt);
             }
         });
-        getContentPane().add(boxSevere8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 456, 20, 40));
+        getContentPane().add(boxSevere8, new org.netbeans.lib.awtextra.AbsoluteConstraints(479, 446, 20, 40));
 
         boxSevere9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxSevere9ActionPerformed(evt);
             }
         });
-        getContentPane().add(boxSevere9, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 489, 20, 40));
+        getContentPane().add(boxSevere9, new org.netbeans.lib.awtextra.AbsoluteConstraints(479, 477, 20, 40));
 
         boxSevere10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxSevere10ActionPerformed(evt);
             }
         });
-        getContentPane().add(boxSevere10, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 520, 20, 40));
+        getContentPane().add(boxSevere10, new org.netbeans.lib.awtextra.AbsoluteConstraints(479, 510, 20, 40));
 
         boxSevere11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxSevere11ActionPerformed(evt);
             }
         });
-        getContentPane().add(boxSevere11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 672, 20, 40));
+        getContentPane().add(boxSevere11, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 665, 20, 40));
 
         ftxtDate.setBorder(null);
         ftxtDate.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -248,10 +249,10 @@ public class ScreeningScreen extends javax.swing.JFrame {
                 ftxtDateActionPerformed(evt);
             }
         });
-        getContentPane().add(ftxtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 220, 120, 30));
+        getContentPane().add(ftxtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 182, 100, 30));
 
         cbxSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
-        getContentPane().add(cbxSex, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 310, 150, 30));
+        getContentPane().add(cbxSex, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 273, 110, 30));
 
         btnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnVoltar.png"))); // NOI18N
         btnReturn.setContentAreaFilled(false);
@@ -298,16 +299,16 @@ public class ScreeningScreen extends javax.swing.JFrame {
                 ftxtRGActionPerformed(evt);
             }
         });
-        getContentPane().add(ftxtRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 360, 130, 30));
+        getContentPane().add(ftxtRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(718, 182, 108, 30));
 
         jlTemp.setFont(new java.awt.Font("Sitka Subheading", 0, 24)); // NOI18N
         jlTemp.setForeground(new java.awt.Color(0, 0, 0));
         jlTemp.setText(" 36.5");
         jlTemp.setToolTipText("");
-        getContentPane().add(jlTemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 70, 30));
+        getContentPane().add(jlTemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 273, 70, 30));
 
         BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/TelaTriagem.png"))); // NOI18N
-        getContentPane().add(BkgroundScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, -6, 1100, 780));
+        getContentPane().add(BkgroundScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, -16, 1110, 790));
 
         pack();
         setLocationRelativeTo(null);
@@ -333,13 +334,13 @@ public class ScreeningScreen extends javax.swing.JFrame {
         String userChoice = cbxPregnant.getSelectedItem().toString();
         String RG = ftxtRG.getText();
         double temperature = Double.parseDouble(jlTemp.getText());
-        temp.defineSymptom(temperature);
+        temp.setTemperatureSymptoms(temperature);
         listSymptoms1.enqueue(temp);
 
         addCheckBoxs(listSymptoms1);
 
         String pain = cbxPainLevel.getSelectedItem().toString();
-        tps.defineSymptom(pain);
+        tps.setPainStatus(pain);
         listSymptoms1.enqueue(tps);
 
         int age = conversionTools.conversionForAge(date);
