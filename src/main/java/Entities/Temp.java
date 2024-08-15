@@ -20,7 +20,7 @@ public class Temp extends Symptoms{
         this.setNameSymptoms("FEBRE");
     }
     else if (valueTemp >= 36.0 && valueTemp <= 37.5) {
-        this.setNameSymptoms("NORMAL");
+        this.setNameSymptoms("TEMPERATURA NORMAL");
     }
     else{
         this.setNameSymptoms("HIPOTERMIA");
@@ -36,7 +36,7 @@ public class Temp extends Symptoms{
         mapTempStatus.put("HIPOTERMIA", SymptomsStatus.GRAVISSIMO);
         mapTempStatus.put("FEBRE ALTA", SymptomsStatus.GRAVE);
         mapTempStatus.put("FEBRE", SymptomsStatus.NORMAL);
-        mapTempStatus.put("NORMAL", SymptomsStatus.MUITO_LEVE);
+        mapTempStatus.put("TEMPERATURA NORMAL", SymptomsStatus.MUITO_LEVE);
     }
 
     public void mapTempStatus (String tempStatus) {

@@ -8,9 +8,6 @@ import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -54,58 +51,58 @@ public class MainScreen extends javax.swing.JFrame {
         panelPatientsScroll.setBorder(null);
         panelPatientsScroll.setOpaque(false);
         panelPatientsScroll.setViewportView(panel);
-        //panel.add(panelPatientsScroll);
     }
 
     private JPanel createPanelPatients(Patient patient) {
-    JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource(mapIconStatus(patient.getStatus()))));
-    backgroundLabel.setLayout(new MigLayout("insets 0, gap 0")); 
-    backgroundLabel.setOpaque(false);
+        JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource(mapIconStatus(patient.getStatus()))));
+        backgroundLabel.setLayout(new MigLayout("insets 0, gap 0"));
+        backgroundLabel.setOpaque(false);
 
-    Font font = new Font("Dialog", Font.PLAIN, 12);
-    
-    JPanel namePanel = createLabelPanel(patient.getName(), new Dimension(180, 20), font);
-    namePanel.setOpaque(false);
-                                   //GUIA: top, left, bottom, right
-    backgroundLabel.add(namePanel, "cell 0 0, pad 2 48 0 0, growx, wmax 200"); 
+        Font font = new Font("Dialog", Font.PLAIN, 12);
 
-    JPanel sexPanel = createLabelPanel(patient.getSex(), new Dimension(150, 20), font);
-    sexPanel.setOpaque(false);
-    backgroundLabel.add(sexPanel, "cell 1 0, pad  2 69 0 0, growx, wmax 150");
+        JPanel namePanel = createLabelPanel(patient.getName(), new Dimension(180, 20), font);
+        namePanel.setOpaque(false);
+        //GUIA: top, left, bottom, right
+        backgroundLabel.add(namePanel, "cell 0 0, pad 2 48 0 0, growx, wmax 200");
 
-    JPanel agePanel = createLabelPanel(String.valueOf(patient.getAge()) + " anos", new Dimension(90, 20), font);
-    agePanel.setOpaque(false);
-    backgroundLabel.add(agePanel, "cell 0 1, pad 2 46 0 0, growx, wmax 90"); 
+        JPanel sexPanel = createLabelPanel(patient.getSex(), new Dimension(150, 20), font);
+        sexPanel.setOpaque(false);
+        backgroundLabel.add(sexPanel, "cell 1 0, pad  2 69 0 0, growx, wmax 150");
 
-    JPanel gravityPanel = createLabelPanel(patient.getStatus().toString(), new Dimension(200, 20), font);
-    gravityPanel.setOpaque(false);
-    backgroundLabel.add(gravityPanel, "cell 1 1, pad 2 97 0 0, growx, wmax 250"); 
+        JPanel agePanel = createLabelPanel(String.valueOf(patient.getAge()) + " anos", new Dimension(90, 20), font);
+        agePanel.setOpaque(false);
+        backgroundLabel.add(agePanel, "cell 0 1, pad 2 46 0 0, growx, wmax 90");
 
-    JPanel patientPanel = new JPanel(new BorderLayout());
-    patientPanel.add(backgroundLabel, BorderLayout.CENTER);
+        JPanel gravityPanel = createLabelPanel(patient.getStatus().toString(), new Dimension(200, 20), font);
+        gravityPanel.setOpaque(false);
+        backgroundLabel.add(gravityPanel, "cell 1 1, pad 2 97 0 0, growx, wmax 250");
 
-    patientPanel.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            ScreenPatientFile ms = new ScreenPatientFile(qp);
-            ms.setVisible(true);
-            ms.findPatient(patient);
-            closeScreening();
-        }
+        JPanel patientPanel = new JPanel(new BorderLayout());
+        patientPanel.add(backgroundLabel, BorderLayout.CENTER);
 
-        @Override
-        public void mouseExited(java.awt.event.MouseEvent evt) {
-            backgroundLabel.setIcon(new ImageIcon(getClass().getResource(mapIconStatus(patient.getStatus()))));
-        }
+        patientPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ScreenPatientFile ms = new ScreenPatientFile(qp, patient.getListSymptoms());
+                ms.setVisible(true);
+                ms.findPatient(patient);
 
-        @Override
-        public void mouseEntered(java.awt.event.MouseEvent evt) {
-            backgroundLabel.setIcon(new ImageIcon(getClass().getResource(iconSelectedStatusMap(patient.getStatus()))));
-        }
-    });
+                closeScreening();
+            }
 
-    return patientPanel;
-}
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                backgroundLabel.setIcon(new ImageIcon(getClass().getResource(mapIconStatus(patient.getStatus()))));
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                backgroundLabel.setIcon(new ImageIcon(getClass().getResource(iconSelectedStatusMap(patient.getStatus()))));
+            }
+        });
+
+        return patientPanel;
+    }
 
     private JPanel createLabelPanel(String text, Dimension size, Font font) {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -237,7 +234,6 @@ public class MainScreen extends javax.swing.JFrame {
         qp.dequeue();
         panel.removeAll();
         patientLabels();
-        panel.revalidate();
         panel.repaint();
     }//GEN-LAST:event_btnServePatientActionPerformed
 

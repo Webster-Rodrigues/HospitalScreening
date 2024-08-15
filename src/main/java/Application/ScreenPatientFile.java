@@ -5,41 +5,45 @@ import DataEntities.QueueSymptoms;
 import DataEntities.QueuesPriority;
 import Entities.Patient;
 import Entities.Symptoms;
+import Entities.enums.SymptomsStatus;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
+import net.miginfocom.swing.MigLayout;
 
 public class ScreenPatientFile extends javax.swing.JFrame {
 
     private QueuesPriority qp;
+    private QueueSymptoms qs;
 
     public ScreenPatientFile() {
         formatRGtxt();
         initComponents();
-    }
+        symptomLabels(qs);
+        
+    } 
 
-    public ScreenPatientFile(QueuesPriority qp) {
+    public ScreenPatientFile(QueuesPriority qp, QueueSymptoms qs) {
         formatRGtxt();
         initComponents();
+        this.qs = qs;
         this.qp = qp;
+        symptomLabels(qs);
+        
     }
 
     public void findPatient(Patient patient) {
-        
-
         if (patient != null) {
             Conversions conversionTools = new Conversions();
             labelName.setText(patient.getName());
@@ -49,8 +53,8 @@ public class ScreenPatientFile extends javax.swing.JFrame {
             labelStatus.setText(patient.getStatus().toString());
             labelSex.setText(patient.getSex());
             labelAge.setText(String.valueOf(patient.getAge()));
-        } 
-        else {
+
+        } else {
             JOptionPane.showMessageDialog(null, "Esse paciente não existe!!");
         }
     }
@@ -65,83 +69,101 @@ public class ScreenPatientFile extends javax.swing.JFrame {
             return null;
         }
     }
-    
-    
+
     private JPanel createPanelSymptoms(Symptoms symptoms) {
-        JLabel backgroundLabel = new JLabel();
-        backgroundLabel.setLayout(new GridBagLayout());
+        JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource(mapIconStatusSymptoms(symptoms.getStatus()))));
+        backgroundLabel.setLayout(new MigLayout("insets 0, gap 0"));
         backgroundLabel.setOpaque(false);
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.WEST;
+        Font font = new Font("Dialog", Font.PLAIN, 11);
 
-        Font font = new Font("Dialog", Font.PLAIN, 12);
+        JPanel nameSymptomsPanel = createSymptomLabelPanel(symptoms.getNameSymptoms(), new Dimension(300, 20), font);
+        nameSymptomsPanel.setOpaque(false);
+        //GUIA: top, left, bottom, right
+        backgroundLabel.add(nameSymptomsPanel, "cell 0 0, pad 1 100 0 0, growx");
 
-        gbc.insets = new Insets(5, 15, 7, 15);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        JPanel namePanel = createSymptomLabelPanel(symptoms.getNameSymptoms(), new Dimension(100, 10), font);
-        namePanel.setOpaque(false);
-        backgroundLabel.add(namePanel, gbc);
+        JPanel statusSymptomsPanel = createSymptomLabelPanel(symptoms.getStatus().toString(), new Dimension(150, 20), font);
+        statusSymptomsPanel.setOpaque(false);
+        backgroundLabel.add(statusSymptomsPanel, "cell 0 1, pad  1 63 0 0, growx");
 
-        gbc.insets = new Insets(5, 20, 7, 18);
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        JPanel sexPanel = createSymptomLabelPanel(symptoms.getNameSymptoms(), new Dimension(100, 10), font);
-        sexPanel.setOpaque(false);
-        backgroundLabel.add(sexPanel, gbc);
+        JPanel SymptomPanel = new JPanel(new BorderLayout());
+        SymptomPanel.add(backgroundLabel, BorderLayout.CENTER);
 
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.insets = new Insets(3, 13, 8, 28);
-        JPanel agePanel = createSymptomLabelPanel(String.valueOf(symptoms.getNameSymptoms()) + " anos", new Dimension(100, 10), font);
-        agePanel.setOpaque(false);
-        backgroundLabel.add(agePanel, gbc);
+        /*SymptomPanel.addMouseListener(new MouseAdapter() {
 
-        gbc.insets = new Insets(3, 40, 7, 5);
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        JPanel gravityPanel = createSymptomLabelPanel(symptoms.getNameSymptoms(), new Dimension(105, 10), font);
-        gravityPanel.setOpaque(false);
-        backgroundLabel.add(gravityPanel, gbc);
-
-        JPanel patientPanel = new JPanel(new BorderLayout());
-       
-        patientPanel.add(backgroundLabel, BorderLayout.CENTER);
-
-        patientPanel.addMouseListener(new MouseAdapter() {        
             @Override
-            public void mouseExited(java.awt.event.MouseEvent evt){
-                //backgroundLabel.setIcon(new ImageIcon(getClass().getResource(mapIconStatus(patient.getStatus()))));
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                backgroundLabel.setIcon(new ImageIcon(getClass().getResource(mapIconStatusSymptoms(symptoms.getStatus()))));
             }
-            
+
             @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt){
-                //backgroundLabel.setIcon(new ImageIcon(getClass().getResource("/Imagens/InconTest.png")));
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                backgroundLabel.setIcon(new ImageIcon(getClass().getResource(mapIconSelectedSymptoms(symptoms.getStatus()))));
             }
         });
-        
-        return patientPanel;
+*/
+        return SymptomPanel;
     }
-    
-    
-    
+
     private JPanel createSymptomLabelPanel(String text, Dimension size, Font font) {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panel.setOpaque(false); 
+        panel.setOpaque(false);
         JLabel label = new JLabel(text);
         label.setPreferredSize(size);
         label.setFont(font);
-        label.setOpaque(false); 
+        label.setOpaque(false);
         label.setBorder(BorderFactory.createEmptyBorder());
         panel.add(label);
         return panel;
+    }
+
+    private static final Map<SymptomsStatus, String> mapIconSymptoms = new HashMap<>();
+
+    static {
+        mapIconSymptoms.put(SymptomsStatus.GRAVISSIMO, "/Imagens/EtiquetaSintomasVermelha.png");
+        mapIconSymptoms.put(SymptomsStatus.GRAVE, "/Imagens/EtiquetaSintomasLaranja.png");
+        mapIconSymptoms.put(SymptomsStatus.NORMAL, "/Imagens/EtiquetaSintomasAmarelo.png");
+        mapIconSymptoms.put(SymptomsStatus.LEVE, "/Imagens/EtiquetaSintomasVerde.png");
+        mapIconSymptoms.put(SymptomsStatus.MUITO_LEVE, "/Imagens/EtiquetaSintomasAzul.png");
+    }
+
+    public String mapIconStatusSymptoms(SymptomsStatus status) {
+        return mapIconSymptoms.get(status);
+    }
+
+    private static final Map<SymptomsStatus, String> mapIconSymptomsSelected = new HashMap<>();
+
+    static {
+        mapIconSymptomsSelected.put(SymptomsStatus.GRAVISSIMO, "/Imagens/EtiquetaSintomasClickVermelha.png");
+        mapIconSymptomsSelected.put(SymptomsStatus.GRAVE, "/Imagens/EtiquetaSintomasClickLaranja.png");
+        mapIconSymptomsSelected.put(SymptomsStatus.NORMAL, "/Imagens/EtiquetaSintomasClickAmarelo.png");
+        mapIconSymptomsSelected.put(SymptomsStatus.LEVE, "/Imagens/EtiquetaSintomasClickVerde.png");
+        mapIconSymptomsSelected.put(SymptomsStatus.MUITO_LEVE, "/Imagens/EtiquetaSintomasClickAzul.png");
+    }
+
+    public String mapIconSelectedSymptoms(SymptomsStatus status) {
+        return mapIconSymptomsSelected.get(status);
+    }
+
+    public void symptomLabels(QueueSymptoms qs) {
+        symptomsPanel.setLayout(new MigLayout("wrap 1", "[grow]", "[]"));
+        symptomsPanel.setOpaque(false);
+        for (Symptoms symptoms : qs) {
+            symptomsPanel.add(createPanelSymptoms(symptoms));
+        }
+        symptomsPanelScroll.getViewport().setOpaque(false);
+        symptomsPanelScroll.getViewport().setBorder(null);
+        symptomsPanelScroll.setBorder(null);
+        symptomsPanelScroll.setOpaque(false);
+        symptomsPanelScroll.setViewportView(symptomsPanel);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        symptomsPanelScroll = new javax.swing.JScrollPane();
+        symptomsPanel = new javax.swing.JPanel();
         labelName = new javax.swing.JLabel();
         labelSex = new javax.swing.JLabel();
         labelPregnant = new javax.swing.JLabel();
@@ -156,6 +178,15 @@ public class ScreenPatientFile extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        symptomsPanelScroll.setBackground(new java.awt.Color(255, 255, 255));
+        symptomsPanelScroll.setBorder(null);
+        symptomsPanelScroll.setViewportBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        symptomsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        symptomsPanelScroll.setViewportView(symptomsPanel);
+
+        getContentPane().add(symptomsPanelScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 370, 330));
 
         labelName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         getContentPane().add(labelName, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 134, 300, 30));
@@ -197,7 +228,7 @@ public class ScreenPatientFile extends javax.swing.JFrame {
         getContentPane().add(btnReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 22, 135, 40));
         getContentPane().add(labelPhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 133, 190, 150));
 
-        BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ScreenPatientFile.png"))); // NOI18N
+        BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ScreenPatientFile_Inicial.png"))); // NOI18N
         getContentPane().add(BkgroundScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 920));
 
         pack();
@@ -205,7 +236,8 @@ public class ScreenPatientFile extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        // TODO add your handling code here:
+        openMainScreen();
+        this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void btnReturnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReturnMouseEntered
@@ -220,7 +252,6 @@ public class ScreenPatientFile extends javax.swing.JFrame {
         MainScreen mainScreen = new MainScreen(qp);
         mainScreen.setVisible(true);
     }
-
 
     /**
      * @param args the command line arguments
@@ -331,5 +362,7 @@ public class ScreenPatientFile extends javax.swing.JFrame {
     private javax.swing.JLabel labelRG;
     private javax.swing.JLabel labelSex;
     private javax.swing.JLabel labelStatus;
+    private javax.swing.JPanel symptomsPanel;
+    private javax.swing.JScrollPane symptomsPanelScroll;
     // End of variables declaration//GEN-END:variables
 }
