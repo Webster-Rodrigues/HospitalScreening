@@ -6,41 +6,54 @@ import DataEntities.QueuesPriority;
 import Entities.Patient;
 import Entities.Symptoms;
 import Entities.enums.SymptomsStatus;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.MaskFormatter;
 import net.miginfocom.swing.MigLayout;
 
 public class ScreenPatientFile extends javax.swing.JFrame {
 
     private QueuesPriority qp;
-    private QueueSymptoms qs;
+    private Patient patient;
+    private boolean isEditing = false;
+    private List<JButton> listDeleteButtons = new ArrayList<>();
+    private FileInputStream fis; // intancia obj para o fluxo de bytes
+    private int photoSize;
 
     public ScreenPatientFile() {
         formatRGtxt();
         initComponents();
-        symptomLabels(qs);
-        
-    } 
 
-    public ScreenPatientFile(QueuesPriority qp, QueueSymptoms qs) {
+    }
+
+    public ScreenPatientFile(QueuesPriority qp, Patient patient) {
         formatRGtxt();
         initComponents();
-        this.qs = qs;
+        this.patient = patient;
         this.qp = qp;
-        symptomLabels(qs);
-        
+        symptomLabels(patient);
+
     }
 
     public void findPatient(Patient patient) {
@@ -53,6 +66,9 @@ public class ScreenPatientFile extends javax.swing.JFrame {
             labelStatus.setText(patient.getStatus().toString());
             labelSex.setText(patient.getSex());
             labelAge.setText(String.valueOf(patient.getAge()));
+            if (patient.getPhotoPatient() != null) {
+                labelPhoto.setIcon(new ImageIcon(patient.getPhotoPatient()));
+            }
 
         } else {
             JOptionPane.showMessageDialog(null, "Esse paciente não existe!!");
@@ -70,39 +86,61 @@ public class ScreenPatientFile extends javax.swing.JFrame {
         }
     }
 
-    private JPanel createPanelSymptoms(Symptoms symptoms) {
-        JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource(mapIconStatusSymptoms(symptoms.getStatus()))));
-        backgroundLabel.setLayout(new MigLayout("insets 0, gap 0"));
-        backgroundLabel.setOpaque(false);
+    // Contêiner dos sintomas
+    private JPanel createPanelSymptoms(QueueSymptoms qs) {
+        JPanel symptomListPanel = new JPanel(new MigLayout("wrap 1, insets 0, gapy 5", "[grow, fill]", "[]"));
 
-        Font font = new Font("Dialog", Font.PLAIN, 11);
+        for (Symptoms symptoms : qs) {
+            JPanel symptomPanel = new JPanel(new MigLayout("insets 0, gap 0", "[grow][]")); 
 
-        JPanel nameSymptomsPanel = createSymptomLabelPanel(symptoms.getNameSymptoms(), new Dimension(300, 20), font);
-        nameSymptomsPanel.setOpaque(false);
-        //GUIA: top, left, bottom, right
-        backgroundLabel.add(nameSymptomsPanel, "cell 0 0, pad 1 100 0 0, growx");
+            JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource(mapIconStatusSymptoms(symptoms.getStatus()))));
+            backgroundLabel.setLayout(new MigLayout("insets 0, gap 0"));
+            backgroundLabel.setOpaque(false);
 
-        JPanel statusSymptomsPanel = createSymptomLabelPanel(symptoms.getStatus().toString(), new Dimension(150, 20), font);
-        statusSymptomsPanel.setOpaque(false);
-        backgroundLabel.add(statusSymptomsPanel, "cell 0 1, pad  1 63 0 0, growx");
+            Font font = new Font("Dialog", Font.PLAIN, 11);
 
-        JPanel SymptomPanel = new JPanel(new BorderLayout());
-        SymptomPanel.add(backgroundLabel, BorderLayout.CENTER);
+            JPanel nameSymptomsPanel = createSymptomLabelPanel(symptoms.getNameSymptoms(), new Dimension(300, 20), font);
+            nameSymptomsPanel.setOpaque(false);
+            //GUIA: top, left, bottom, right
+            backgroundLabel.add(nameSymptomsPanel, "cell 0 0, pad 1 100 0 0, growx");
 
-        /*SymptomPanel.addMouseListener(new MouseAdapter() {
+            JPanel statusSymptomsPanel = createSymptomLabelPanel(symptoms.getStatus().toString(), new Dimension(150, 20), font);
+            statusSymptomsPanel.setOpaque(false);
+            backgroundLabel.add(statusSymptomsPanel, "cell 0 1, pad 1 63 0 0, growx");
 
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                backgroundLabel.setIcon(new ImageIcon(getClass().getResource(mapIconStatusSymptoms(symptoms.getStatus()))));
-            }
+            // Config do botão para deletar sintomas
+            JButton btnDeleteSymptoms = new JButton();
+            btnDeleteSymptoms.setBorder(null);
+            btnDeleteSymptoms.setEnabled(false);
+            btnDeleteSymptoms.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("REMOVIDO TESTE");
+                    qs.dequeue();
+                } 
+            });
 
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                backgroundLabel.setIcon(new ImageIcon(getClass().getResource(mapIconSelectedSymptoms(symptoms.getStatus()))));
-            }
-        });
-*/
-        return SymptomPanel;
+            symptomPanel.add(backgroundLabel, "cell 0 0, growx");
+            symptomPanel.add(btnDeleteSymptoms, "cell 1 0, align right, pad 6 0 0 0");
+
+            symptomPanel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseExited(MouseEvent evt) {
+                    backgroundLabel.setIcon(new ImageIcon(getClass().getResource(mapIconStatusSymptoms(symptoms.getStatus()))));
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent evt) {
+                    backgroundLabel.setIcon(new ImageIcon(getClass().getResource(mapIconSelectedSymptoms(symptoms.getStatus()))));
+                }
+            });
+
+            listDeleteButtons.add(btnDeleteSymptoms);
+
+           
+            symptomListPanel.add(symptomPanel);
+        }
+        return symptomListPanel;
     }
 
     private JPanel createSymptomLabelPanel(String text, Dimension size, Font font) {
@@ -145,17 +183,60 @@ public class ScreenPatientFile extends javax.swing.JFrame {
         return mapIconSymptomsSelected.get(status);
     }
 
-    public void symptomLabels(QueueSymptoms qs) {
+    public void symptomLabels(Patient patient) {
         symptomsPanel.setLayout(new MigLayout("wrap 1", "[grow]", "[]"));
         symptomsPanel.setOpaque(false);
-        for (Symptoms symptoms : qs) {
-            symptomsPanel.add(createPanelSymptoms(symptoms));
-        }
+        symptomsPanel.add(createPanelSymptoms(patient.getListSymptoms()));
         symptomsPanelScroll.getViewport().setOpaque(false);
         symptomsPanelScroll.getViewport().setBorder(null);
         symptomsPanelScroll.setBorder(null);
         symptomsPanelScroll.setOpaque(false);
         symptomsPanelScroll.setViewportView(symptomsPanel);
+    }
+
+    //modo de edição
+    private void toggleMode() {
+        isEditing = !isEditing;
+        for (JButton btn : listDeleteButtons) {
+            if (isEditing) {
+                btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnDelSymptoms.png")));
+                btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                btn.setBorder(null);
+                btn.setContentAreaFilled(false);
+                btn.setEnabled(true);
+                btn.setVisible(true);
+            } else {
+                btn.setIcon(null);
+                btn.setEnabled(false);
+                btn.setVisible(false);
+
+            }
+
+        }
+    }
+
+    private void uploadPhoto() {
+        //Como o Java independe da plataforma, ele gera o seu próprio explorador de arquivos
+        JFileChooser jfc = new JFileChooser();
+        jfc.setDialogTitle("Selecione a foto de perfil");
+        //Filtro de arquivos que podem ser selecionados
+        jfc.setFileFilter(new FileNameExtensionFilter("Arquivo de iamgens(*.PNG, *.JPG, *.JPEG)", "png", "jpg", "jpeg"));
+        int userChoice = jfc.showOpenDialog(this);
+
+        if (userChoice == JFileChooser.APPROVE_OPTION) {
+            try {
+                fis = new FileInputStream(jfc.getSelectedFile());
+                photoSize = (int) jfc.getSelectedFile().length();
+                //Realiza a leitura da imagem selecionada por meio do jfc(explorador de arquivos do Java) e redimensiona a imagem ao tamanho do panel
+                Image photo = ImageIO.read(jfc.getSelectedFile()).getScaledInstance(labelPhoto.getWidth(), labelPhoto.getHeight(), Image.SCALE_SMOOTH);
+                labelPhoto.setIcon(new ImageIcon(photo));
+                labelPhoto.updateUI();
+                patient.setPhotoPatient(photo);
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -173,6 +254,9 @@ public class ScreenPatientFile extends javax.swing.JFrame {
         labelRG = new javax.swing.JLabel();
         btnReturn = new javax.swing.JButton();
         labelPhoto = new javax.swing.JLabel();
+        btnEditSymptoms = new javax.swing.JButton();
+        btnDeletePhoto = new javax.swing.JButton();
+        btnUploadPhoto = new javax.swing.JButton();
         BkgroundScreen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -228,6 +312,37 @@ public class ScreenPatientFile extends javax.swing.JFrame {
         getContentPane().add(btnReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 22, 135, 40));
         getContentPane().add(labelPhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 133, 190, 150));
 
+        btnEditSymptoms.setToolTipText("");
+        btnEditSymptoms.setBorder(null);
+        btnEditSymptoms.setBorderPainted(false);
+        btnEditSymptoms.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditSymptoms.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditSymptomsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEditSymptoms, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 820, 60, 60));
+
+        btnDeletePhoto.setBorder(null);
+        btnDeletePhoto.setContentAreaFilled(false);
+        btnDeletePhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDeletePhoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletePhotoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnDeletePhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 317, 42, 41));
+
+        btnUploadPhoto.setBorder(null);
+        btnUploadPhoto.setContentAreaFilled(false);
+        btnUploadPhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUploadPhoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUploadPhotoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnUploadPhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 317, 42, 40));
+
         BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ScreenPatientFile_Inicial.png"))); // NOI18N
         getContentPane().add(BkgroundScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 920));
 
@@ -248,6 +363,19 @@ public class ScreenPatientFile extends javax.swing.JFrame {
         btnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnVoltarMenor.png")));
     }//GEN-LAST:event_btnReturnMouseExited
 
+
+    private void btnEditSymptomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditSymptomsActionPerformed
+        toggleMode();
+    }//GEN-LAST:event_btnEditSymptomsActionPerformed
+
+    private void btnUploadPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadPhotoActionPerformed
+        uploadPhoto();
+    }//GEN-LAST:event_btnUploadPhotoActionPerformed
+
+    private void btnDeletePhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletePhotoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeletePhotoActionPerformed
+
     public void openMainScreen() {
         MainScreen mainScreen = new MainScreen(qp);
         mainScreen.setVisible(true);
@@ -267,16 +395,24 @@ public class ScreenPatientFile extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ScreenPatientFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ScreenPatientFile.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ScreenPatientFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ScreenPatientFile.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ScreenPatientFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ScreenPatientFile.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ScreenPatientFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ScreenPatientFile.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -353,7 +489,10 @@ public class ScreenPatientFile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BkgroundScreen;
+    private javax.swing.JButton btnDeletePhoto;
+    private javax.swing.JButton btnEditSymptoms;
     private javax.swing.JButton btnReturn;
+    private javax.swing.JButton btnUploadPhoto;
     private javax.swing.JLabel labelAge;
     private javax.swing.JLabel labelName;
     private javax.swing.JLabel labelPhoto;

@@ -52,7 +52,7 @@ public class MainScreen extends javax.swing.JFrame {
         panelPatientsScroll.setOpaque(false);
         panelPatientsScroll.setViewportView(panel);
     }
-
+    //Contêiner dos pacientes
     private JPanel createPanelPatients(Patient patient) {
         JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource(mapIconStatus(patient.getStatus()))));
         backgroundLabel.setLayout(new MigLayout("insets 0, gap 0"));
@@ -83,7 +83,7 @@ public class MainScreen extends javax.swing.JFrame {
         patientPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ScreenPatientFile ms = new ScreenPatientFile(qp, patient.getListSymptoms());
+                ScreenPatientFile ms = new ScreenPatientFile(qp, patient);
                 ms.setVisible(true);
                 ms.findPatient(patient);
 
@@ -103,7 +103,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         return patientPanel;
     }
-
+    //padronizando os contêiners
     private JPanel createLabelPanel(String text, Dimension size, Font font) {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panel.setOpaque(false); 

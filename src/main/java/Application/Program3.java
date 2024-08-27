@@ -87,7 +87,85 @@ public class Program3 {
          System.out.println();
          qp.displayQueue();
          
+         /* //Contêiner dos sintomas
+    private JPanel createPanelSymptoms(Symptoms symptoms) {
+        JPanel SymptomPanel = new JPanel(new MigLayout("insets 0, gap 0"));
+        JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource(mapIconStatusSymptoms(symptoms.getStatus()))));
+        backgroundLabel.setLayout(new MigLayout("insets 0, gap 0"));
+        backgroundLabel.setOpaque(false);
+
+        Font font = new Font("Dialog", Font.PLAIN, 11);
+
+        JPanel nameSymptomsPanel = createSymptomLabelPanel(symptoms.getNameSymptoms(), new Dimension(300, 20), font);
+        nameSymptomsPanel.setOpaque(false);
+        //GUIA: top, left, bottom, right
+        backgroundLabel.add(nameSymptomsPanel, "cell 0 0, pad 1 100 0 0, growx");
+
+        JPanel statusSymptomsPanel = createSymptomLabelPanel(symptoms.getStatus().toString(), new Dimension(150, 20), font);
+        statusSymptomsPanel.setOpaque(false);
+        backgroundLabel.add(statusSymptomsPanel, "cell 0 1, pad  1 63 0 0, growx");
+
+        //Config do botão para deletar sintomas
+        JButton btnDeleteSymptoms = new javax.swing.JButton();
+
+        //btnDeleteSymptoms.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnDelSymptoms.png"))); setar imagem nele com btn invisível gera bug visual
+        btnDeleteSymptoms.setBorder(null);
+        btnDeleteSymptoms.setEnabled(false);
+        btnDeleteSymptoms.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("REMOVIDO TESTE");
+            }
+        });
+
+        SymptomPanel.add(backgroundLabel, "cell 0 0, growx");
+        SymptomPanel.add(btnDeleteSymptoms, "cell 1 0, pad 6 0 0 0");
+
+        SymptomPanel.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                backgroundLabel.setIcon(new ImageIcon(getClass().getResource(mapIconStatusSymptoms(symptoms.getStatus()))));
+
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                backgroundLabel.setIcon(new ImageIcon(getClass().getResource(mapIconSelectedSymptoms(symptoms.getStatus()))));
+            }
+
+        });
+
+        listDeleteButtons.add(btnDeleteSymptoms);
+
+        return SymptomPanel;
+    }
+
+    private JPanel createSymptomLabelPanel(String text, Dimension size, Font font) {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panel.setOpaque(false);
+        JLabel label = new JLabel(text);
+        label.setPreferredSize(size);
+        label.setFont(font);
+        label.setOpaque(false);
+        label.setBorder(BorderFactory.createEmptyBorder());
+        panel.add(label);
+        return panel;
+    }
          
+         
+         public void symptomLabels(Patient patient) {
+        symptomsPanel.setLayout(new MigLayout("wrap 1", "[grow]", "[]"));
+        symptomsPanel.setOpaque(false);
+        for (Symptoms symptoms : patient.getListSymptoms()) {
+            symptomsPanel.add(createPanelSymptoms(symptoms));
+        }
+        symptomsPanelScroll.getViewport().setOpaque(false);
+        symptomsPanelScroll.getViewport().setBorder(null);
+        symptomsPanelScroll.setBorder(null);
+        symptomsPanelScroll.setOpaque(false);
+        symptomsPanelScroll.setViewportView(symptomsPanel);
+    }*/
          
          
          

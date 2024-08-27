@@ -3,6 +3,7 @@ package Entities;
 import DataEntities.QueueSymptoms;
 import Entities.enums.PriorityStatus;
 import Entities.enums.Status;
+import java.awt.Image;
 import java.util.Objects;
 
 public class Patient {
@@ -16,6 +17,7 @@ public class Patient {
     private PriorityStatus priorityStatus;
     private QueueSymptoms listSymptoms;
     private int score;
+    private Image photoPatient;
 
     public Patient() {
 
@@ -104,6 +106,15 @@ public class Patient {
     public void setIsPregnant(boolean isPregnant) {
         this.isPregnant = isPregnant;
     }
+
+    public Image getPhotoPatient() {
+        return photoPatient;
+    }
+
+    public void setPhotoPatient(Image photoPatient) {
+        this.photoPatient = photoPatient;
+    }
+
 
     @Override
     public int hashCode() {

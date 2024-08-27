@@ -31,9 +31,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
         qp = new QueuesPriority();
 
-        cbxPregnant.setBackground(new Color(0, 0, 0, 0));
-        cbxPainLevel.setBackground(new Color(0, 0, 0, 0));
-        cbxSex.setBackground(new Color(0, 0, 0, 0));
+        
     }
     
     public ScreeningScreen(QueuesPriority qp) {
@@ -44,11 +42,8 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
         this.qp = qp;
 
-        cbxPregnant.setBackground(new Color(0, 0, 0, 0));
-        cbxPainLevel.setBackground(new Color(0, 0, 0, 0));
-        cbxSex.setBackground(new Color(0, 0, 0, 0));
     }
-
+    //Máscaras de formatação para RG e data
     private MaskFormatter formatDatetxt() {
         try {
             MaskFormatter mfdate = new MaskFormatter("##/##/####");
@@ -145,10 +140,12 @@ public class ScreeningScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cbxPainLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 273, 140, 30));
+        cbxPainLevel.setBackground(new Color(0, 0, 0, 0));
 
-        cbxPregnant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
+        cbxPregnant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Não", "Sim" }));
         cbxPregnant.setBorder(null);
         getContentPane().add(cbxPregnant, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 273, 90, 30));
+        cbxPregnant.setBackground(new Color(0, 0, 0, 0));
 
         sldTemp.setMaximum(455);
         sldTemp.setMinimum(205);
@@ -253,6 +250,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
         cbxSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
         getContentPane().add(cbxSex, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 273, 110, 30));
+        cbxSex.setBackground(new Color(0, 0, 0, 0));
 
         btnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnVoltar.png"))); // NOI18N
         btnReturn.setContentAreaFilled(false);
@@ -490,10 +488,6 @@ public class ScreeningScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_boxSevere4ActionPerformed
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        //qp.displayQueue();
-        /*for (Patient patient: qp){
-            patient.displayStackPatient();
-        }*/
         openMainScreen();
         this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed
