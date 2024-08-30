@@ -9,14 +9,19 @@ Application\ScreeningScreen$22.class
 Application\ScreeningScreen$1.class
 Application\ScreeningScreen$17.class
 DataEntities\QueuesPriority.class
+Application\ScreenPatientFile$7.class
 Application\ScreeningScreen$21.class
 Application\ScreeningScreen$9.class
+Application\ScreenPatientFile$9.class
 Application\MainScreen$2.class
 Entities\enums\SymptomsStatus.class
+.netbeans_automatic_build
 Application\ScreeningScreen$14.class
 Application\ScreeningScreen$2.class
 Application\MainScreen$1.class
+Application\ScreenPatientFile$8.class
 Entities\enums\TempStatus.class
+Application\ScreenPatientFile$11.class
 Application\ScreeningScreen$15.class
 Application\ScreeningScreen$3.class
 Application\ScreenPatientFile.class
@@ -24,6 +29,7 @@ Application\MainScreen$8.class
 Application\ScreeningScreen$20.class
 Application\ScreenPatientFile$2.class
 Application\ScreeningScreen$13.class
+Application\ScreenPatientFile$10.class
 Entities\Temp.class
 Application\ScreeningScreen$16.class
 Entities\TypePains.class

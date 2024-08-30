@@ -91,7 +91,7 @@ public class ScreenPatientFile extends javax.swing.JFrame {
         JPanel symptomListPanel = new JPanel(new MigLayout("wrap 1, insets 0, gapy 5", "[grow, fill]", "[]"));
 
         for (Symptoms symptoms : qs) {
-            JPanel symptomPanel = new JPanel(new MigLayout("insets 0, gap 0", "[grow][]")); 
+            JPanel symptomPanel = new JPanel(new MigLayout("insets 0, gap 0", "[grow][]"));
 
             JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource(mapIconStatusSymptoms(symptoms.getStatus()))));
             backgroundLabel.setLayout(new MigLayout("insets 0, gap 0"));
@@ -116,8 +116,9 @@ public class ScreenPatientFile extends javax.swing.JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("REMOVIDO TESTE");
-                    qs.dequeue();
-                } 
+                    qs.remove(symptoms);
+                    //precisa recalcular o score do paciente
+                }
             });
 
             symptomPanel.add(backgroundLabel, "cell 0 0, growx");
@@ -137,7 +138,6 @@ public class ScreenPatientFile extends javax.swing.JFrame {
 
             listDeleteButtons.add(btnDeleteSymptoms);
 
-           
             symptomListPanel.add(symptomPanel);
         }
         return symptomListPanel;
@@ -239,6 +239,12 @@ public class ScreenPatientFile extends javax.swing.JFrame {
         }
     }
 
+    private void deletePhoto() {
+        labelPhoto.setIcon(null);
+        labelPhoto.updateUI();
+        patient.setPhotoPatient(null);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -312,36 +318,62 @@ public class ScreenPatientFile extends javax.swing.JFrame {
         getContentPane().add(btnReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 22, 135, 40));
         getContentPane().add(labelPhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 133, 190, 150));
 
+        btnEditSymptoms.setBackground(new java.awt.Color(187, 187, 187));
+        btnEditSymptoms.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/iconEditar.png"))); // NOI18N
         btnEditSymptoms.setToolTipText("");
         btnEditSymptoms.setBorder(null);
-        btnEditSymptoms.setBorderPainted(false);
+        btnEditSymptoms.setContentAreaFilled(false);
         btnEditSymptoms.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditSymptoms.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEditSymptomsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEditSymptomsMouseExited(evt);
+            }
+        });
         btnEditSymptoms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditSymptomsActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEditSymptoms, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 820, 60, 60));
+        getContentPane().add(btnEditSymptoms, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 812, 70, 70));
 
         btnDeletePhoto.setBorder(null);
         btnDeletePhoto.setContentAreaFilled(false);
         btnDeletePhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDeletePhoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDeletePhotoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDeletePhotoMouseExited(evt);
+            }
+        });
         btnDeletePhoto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeletePhotoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDeletePhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 317, 42, 41));
+        getContentPane().add(btnDeletePhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 317, 45, 43));
 
         btnUploadPhoto.setBorder(null);
         btnUploadPhoto.setContentAreaFilled(false);
         btnUploadPhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUploadPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnUploadPhotoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnUploadPhotoMouseExited(evt);
+            }
+        });
         btnUploadPhoto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUploadPhotoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnUploadPhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 317, 42, 40));
+        getContentPane().add(btnUploadPhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 317, 45, 40));
 
         BkgroundScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ScreenPatientFile_Inicial.png"))); // NOI18N
         getContentPane().add(BkgroundScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 920));
@@ -372,9 +404,33 @@ public class ScreenPatientFile extends javax.swing.JFrame {
         uploadPhoto();
     }//GEN-LAST:event_btnUploadPhotoActionPerformed
 
+    private void btnUploadPhotoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUploadPhotoMouseEntered
+        btnUploadPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/addPhotoSelected.png")));
+    }//GEN-LAST:event_btnUploadPhotoMouseEntered
+
+    private void btnUploadPhotoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUploadPhotoMouseExited
+        btnUploadPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/addPhoto.png")));
+    }//GEN-LAST:event_btnUploadPhotoMouseExited
+
+    private void btnDeletePhotoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletePhotoMouseEntered
+        btnDeletePhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnDelPhotoSelected.png")));
+    }//GEN-LAST:event_btnDeletePhotoMouseEntered
+
+    private void btnDeletePhotoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletePhotoMouseExited
+        btnDeletePhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnDelPhoto.png")));
+    }//GEN-LAST:event_btnDeletePhotoMouseExited
+
     private void btnDeletePhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletePhotoActionPerformed
-        // TODO add your handling code here:
+        deletePhoto();
     }//GEN-LAST:event_btnDeletePhotoActionPerformed
+
+    private void btnEditSymptomsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditSymptomsMouseEntered
+        btnEditSymptoms.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/iconEditarClick.png")));
+    }//GEN-LAST:event_btnEditSymptomsMouseEntered
+
+    private void btnEditSymptomsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditSymptomsMouseExited
+        btnEditSymptoms.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/iconEditar.png")));
+    }//GEN-LAST:event_btnEditSymptomsMouseExited
 
     public void openMainScreen() {
         MainScreen mainScreen = new MainScreen(qp);

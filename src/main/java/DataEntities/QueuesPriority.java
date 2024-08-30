@@ -36,6 +36,7 @@ public class QueuesPriority extends CustomQueue<Patient> {
 
     @Override
     public Patient dequeue() {
+        //Valida para saber se a fila foi modificada, para não ordenar algo já ordenado
         if (isModified) {
             completeOrdination();
             isModified = false;

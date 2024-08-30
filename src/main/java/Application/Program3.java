@@ -88,6 +88,16 @@ public class Program3 {
          qp.displayQueue();
          
          /* //Contêiner dos sintomas
+         @Override
+    public void mousePressed(java.awt.event.MouseEvent evt) {
+        btnDeletePhoto.setBorderPainted(true); // Exibe a borda temporariamente
+    }
+
+    @Override
+    public void mouseReleased(java.awt.event.MouseEvent evt) {
+        btnDeletePhoto.setBorderPainted(false); // Remove a borda novamente
+    }
+})
     private JPanel createPanelSymptoms(Symptoms symptoms) {
         JPanel SymptomPanel = new JPanel(new MigLayout("insets 0, gap 0"));
         JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource(mapIconStatusSymptoms(symptoms.getStatus()))));

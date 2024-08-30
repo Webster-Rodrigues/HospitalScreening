@@ -16,7 +16,6 @@ public class QueueSymptoms extends CustomQueue<Symptoms> {
             customQueue.add(symptoms);
         }
     }
-    
 
     public int calculateTotalScore() {
         int totalScore = 0;
@@ -25,5 +24,8 @@ public class QueueSymptoms extends CustomQueue<Symptoms> {
         }
         return totalScore;
     }
-   
+
+    public boolean remove(Object o) {
+        return customQueue.remove(o);
+    }
 }

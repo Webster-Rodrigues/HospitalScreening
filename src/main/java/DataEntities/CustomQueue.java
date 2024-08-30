@@ -113,9 +113,6 @@ public class CustomQueue<T> implements CustomQueueShape<T>, Comparator<T>, Itera
         return customQueue.hashCode();
     }
     
-    @Override
-    public boolean remove(Object o ){
-        return customQueue.remove(o);        
-    }
+    
     
 }

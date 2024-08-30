@@ -35,7 +35,6 @@ public interface CustomQueueShape<T> {
 
     @Override
     int hashCode();
-    
-    boolean remove(Object o);
+
     
 }
