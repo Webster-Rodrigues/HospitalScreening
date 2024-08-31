@@ -31,9 +31,8 @@ public class ScreeningScreen extends javax.swing.JFrame {
 
         qp = new QueuesPriority();
 
-        
     }
-    
+
     public ScreeningScreen(QueuesPriority qp) {
 
         formatDatetxt();
@@ -43,6 +42,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
         this.qp = qp;
 
     }
+
     //Máscaras de formatação para RG e data
     private MaskFormatter formatDatetxt() {
         try {
@@ -65,10 +65,10 @@ public class ScreeningScreen extends javax.swing.JFrame {
             return null;
         }
     }
-    
+
     //revisar
     private void clearUserChoices() {
-        txtName.setText("");
+        txtName.setText(null);
         jlTemp.setText("36.6");
         ftxtDate.setValue(null);
         ftxtRG.setValue(null);
@@ -141,11 +141,13 @@ public class ScreeningScreen extends javax.swing.JFrame {
         });
         getContentPane().add(cbxPainLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 273, 140, 30));
         cbxPainLevel.setBackground(new Color(0, 0, 0, 0));
+        cbxPainLevel.setSelectedItem(null);
 
         cbxPregnant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Não", "Sim" }));
         cbxPregnant.setBorder(null);
         getContentPane().add(cbxPregnant, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 273, 90, 30));
         cbxPregnant.setBackground(new Color(0, 0, 0, 0));
+        cbxPregnant.setSelectedItem(null);
 
         sldTemp.setMaximum(455);
         sldTemp.setMinimum(205);
@@ -251,6 +253,7 @@ public class ScreeningScreen extends javax.swing.JFrame {
         cbxSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
         getContentPane().add(cbxSex, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 273, 110, 30));
         cbxSex.setBackground(new Color(0, 0, 0, 0));
+        cbxSex.setSelectedItem(null);
 
         btnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnVoltar.png"))); // NOI18N
         btnReturn.setContentAreaFilled(false);
@@ -331,22 +334,39 @@ public class ScreeningScreen extends javax.swing.JFrame {
         String date = ftxtDate.getText();
         String userChoice = cbxPregnant.getSelectedItem().toString();
         String RG = ftxtRG.getText();
-        double temperature = Double.parseDouble(jlTemp.getText());
-        temp.setTemperatureSymptoms(temperature);
-        listSymptoms1.enqueue(temp);
-
-        addCheckBoxs(listSymptoms1);
-
         String pain = cbxPainLevel.getSelectedItem().toString();
-        tps.setPainStatus(pain);
-        listSymptoms1.enqueue(tps);
 
-        int age = conversionTools.conversionForAge(date);
-        boolean isPregnant = conversionTools.conversionPregnant(userChoice);
+        if (isNullOrEmpty(name) || isNullOrEmpty(RG) || isNullOrEmpty(date) || sex == null || pain == null) {
+            JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos corretamente!");
+            return;
+        }
+        try {
 
-        Patient patient = new Patient(name, sex, age, isPregnant, RG, listSymptoms1);
-        qp.enqueue(patient);
+            double temperature = Double.parseDouble(jlTemp.getText());
+            temp.setTemperatureSymptoms(temperature);
+            listSymptoms1.enqueue(temp);
 
+            addCheckBoxs(listSymptoms1);
+
+            tps.setPainStatus(pain);
+            listSymptoms1.enqueue(tps);
+
+            int age = conversionTools.conversionForAge(date);
+            boolean isPregnant = conversionTools.conversionPregnant(userChoice);
+
+            Patient patient = new Patient(name, sex, age, isPregnant, RG, listSymptoms1);
+            qp.enqueue(patient);
+
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos corretamente!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao registrar paciente: " + e.getMessage());
+        }
+
+    }
+
+    private boolean isNullOrEmpty(String str) {
+        return str == null || str.trim().isEmpty();
     }
 
     public void addCheckBoxs(QueueSymptoms listSymptoms) {
@@ -418,7 +438,16 @@ public class ScreeningScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_ftxtDateActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        registerPatient();
+        try {
+            registerPatient();
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Existem campos vazios. Por favor, preencha todos os campos");
+
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, "Erro ao cadastrar paciente " + e.getMessage());
+        }
+
+
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnRegisterMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseEntered
@@ -496,8 +525,8 @@ public class ScreeningScreen extends javax.swing.JFrame {
         MainScreen mainScreen = new MainScreen(qp);
         mainScreen.setVisible(true);
     }
-    
-    
+
+
     private void sldTempStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldTempStateChanged
         double value = sldTemp.getValue() / 10.0;
         jlTemp.setText(String.valueOf(value));

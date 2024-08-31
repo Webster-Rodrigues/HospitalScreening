@@ -71,7 +71,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         JPanel agePanel = createLabelPanel(String.valueOf(patient.getAge()) + " anos", new Dimension(90, 20), font);
         agePanel.setOpaque(false);
-        backgroundLabel.add(agePanel, "cell 0 1, pad 2 46 0 0, growx, wmax 90");
+        backgroundLabel.add(agePanel, "cell 0 1, pad 2 46 0 0, growx, wmax 150");
 
         JPanel gravityPanel = createLabelPanel(patient.getStatus().toString(), new Dimension(200, 20), font);
         gravityPanel.setOpaque(false);

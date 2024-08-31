@@ -61,7 +61,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxPainLevelActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="cbxPainLevel.setBackground(new Color(0, 0, 0, 0));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="cbxPainLevel.setBackground(new Color(0, 0, 0, 0));&#xa;cbxPainLevel.setSelectedItem(null);"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
       <Constraints>
@@ -83,7 +83,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="cbxPregnant.setBackground(new Color(0, 0, 0, 0));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="cbxPregnant.setBackground(new Color(0, 0, 0, 0));&#xa;cbxPregnant.setSelectedItem(null);"/>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;String&gt;()"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -250,7 +250,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="cbxSex.setBackground(new Color(0, 0, 0, 0));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="cbxSex.setBackground(new Color(0, 0, 0, 0));&#xa;cbxSex.setSelectedItem(null);"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
       <Constraints>

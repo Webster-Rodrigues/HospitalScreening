@@ -19,7 +19,7 @@ public class QueuesPriority extends CustomQueue<Patient> {
         if (!validateRG(patient.getRG())) {
             super.enqueue(patient);
             isModified = true;
-            //JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
         } else {
             JOptionPane.showMessageDialog(null, "Esse RG já está sendo usado. Por favo tente novamente com um RG válido!");
         }
@@ -83,7 +83,7 @@ public class QueuesPriority extends CustomQueue<Patient> {
             bucket.set(j + 1, key);
         }
     }
-   
+
     private static void insertionSortScore(CustomQueue<Patient> bucket) {
         for (int i = 1; i < bucket.size(); i++) {
             Patient key = bucket.get(i);
@@ -139,8 +139,8 @@ public class QueuesPriority extends CustomQueue<Patient> {
             }
         }
     }
-    
-     /*
+
+    /*
     Armazenado pois ainda está em fase de teste utilizar apenas um bucketSort
     public void bucketSortPS(CustomQueue<Patient> patients) {
         CustomQueue<Patient> customQueue = this;
@@ -179,5 +179,4 @@ public class QueuesPriority extends CustomQueue<Patient> {
             }
         }
     }*/
-
 }

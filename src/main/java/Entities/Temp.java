@@ -2,7 +2,6 @@
 package Entities;
 
 import Entities.enums.SymptomsStatus;
-import Entities.enums.TempStatus;
 import java.util.HashMap;
 import java.util.Map;
 

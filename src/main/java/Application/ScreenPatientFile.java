@@ -115,9 +115,16 @@ public class ScreenPatientFile extends javax.swing.JFrame {
             btnDeleteSymptoms.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("REMOVIDO TESTE");
-                    qs.remove(symptoms);
-                    //precisa recalcular o score do paciente
+                    int answer = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir esse sintoma? ");
+                    if (answer == 0) {
+                        JOptionPane.showMessageDialog(null, "Sintoma: '" + symptoms.getNameSymptoms() + "'. Removido com sucesso!");
+                        qs.remove(symptoms);
+                        patient.setScore(qs.calculateTotalScore());
+                        patient.priorityPatient();
+                        removeSymptomPanel();
+                        updateDeleteButtonsVisibility();
+                    }
+
                 }
             });
 
@@ -140,6 +147,8 @@ public class ScreenPatientFile extends javax.swing.JFrame {
 
             symptomListPanel.add(symptomPanel);
         }
+
+        updateDeleteButtonsVisibility();
         return symptomListPanel;
     }
 
@@ -243,6 +252,32 @@ public class ScreenPatientFile extends javax.swing.JFrame {
         labelPhoto.setIcon(null);
         labelPhoto.updateUI();
         patient.setPhotoPatient(null);
+    }
+
+    private void removeSymptomPanel() {
+        symptomsPanel.removeAll();
+        symptomLabels(patient);
+        symptomsPanel.revalidate();
+        symptomsPanel.repaint();
+        updateDeleteButtonsVisibility();
+    }
+
+    private void updateDeleteButtonsVisibility() {
+        //Método para firmar a visibilidade dos botões. Sem ele causa um bug visual, onde o usuário mesmo estando no modo de edição não tem acesso aos botões de exclusão 
+        for (JButton btn : listDeleteButtons) {
+            if (isEditing) {
+                btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnDelSymptoms.png")));
+                btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                btn.setBorder(null);
+                btn.setContentAreaFilled(false);
+                btn.setEnabled(true);
+                btn.setVisible(true);
+            } else {
+                btn.setIcon(null);
+                btn.setEnabled(false);
+                btn.setVisible(false);
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -385,6 +420,7 @@ public class ScreenPatientFile extends javax.swing.JFrame {
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         openMainScreen();
         this.dispose();
+        qp.completeOrdination();
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void btnReturnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReturnMouseEntered
@@ -398,6 +434,7 @@ public class ScreenPatientFile extends javax.swing.JFrame {
 
     private void btnEditSymptomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditSymptomsActionPerformed
         toggleMode();
+
     }//GEN-LAST:event_btnEditSymptomsActionPerformed
 
     private void btnUploadPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadPhotoActionPerformed

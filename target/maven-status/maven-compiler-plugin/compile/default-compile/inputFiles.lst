@@ -2,9 +2,7 @@ C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Application\M
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\DataEntities\CustomQueue.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\DataEntities\CustomQueueShape.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Entities\enums\Status.java
-C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Application\Program2.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Application\ScreenPatientFile.java
-C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Application\Program3.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\ConversionTools\Conversions.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Entities\enums\PriorityStatus.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Entities\Symptoms.java
@@ -13,7 +11,5 @@ C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Entities\Temp
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Entities\enums\SymptomsStatus.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Application\ScreeningScreen.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\DataEntities\QueuesPriority.java
-C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Entities\enums\TempStatus.java
-C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Entities\enums\PainStatus.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\Entities\TypePains.java
 C:\Users\WEBSTER\Documents\NetBeansProjects\Hospital\src\main\java\DataEntities\QueueSymptoms.java

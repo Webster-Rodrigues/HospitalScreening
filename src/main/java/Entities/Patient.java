@@ -20,7 +20,6 @@ public class Patient {
     private Image photoPatient;
 
     public Patient() {
-
     }
 
     public Patient(String name, String sex, int age, boolean isPregnant, String RG, QueueSymptoms listSymptoms) {
